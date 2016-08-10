@@ -11,7 +11,7 @@ import org.nutz.mvc.filter.CheckSession;
 public class IndexModule {
 
     @At("/")
-    @Ok("fm:fm.index") // 模板文件的路径为  /WEB-INF/fm/index.ftl
+    @Ok("fm:index") // 模板文件的路径为  /WEB-INF/index.ftl
     public void index() {
     }
 
