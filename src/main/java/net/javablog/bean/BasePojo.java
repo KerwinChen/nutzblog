@@ -7,7 +7,7 @@ import org.nutz.json.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 
-public abstract class BasePojo  implements Serializable{
+public abstract class BasePojo implements Serializable {
 
     @Column("ct")
     protected Date createTime;
@@ -33,4 +33,6 @@ public abstract class BasePojo  implements Serializable{
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+
 }

@@ -1,6 +1,5 @@
 package net.javablog.util;
 
-import net.javablog.bean.User;
 import org.nutz.lang.Lang;
 import org.nutz.lang.random.R;
 import org.nutz.lang.util.NutMap;
@@ -75,11 +74,8 @@ public class Toolkit {
         return re;
     }
 
-    public static String randomPasswd(User usr) {
+    public static String randomPasswd( ) {
         String passwd = R.sg(10).next();
-        String slat = R.sg(48).next();
-        usr.setSalt(slat);
-        usr.setPassword(passwordEncode(passwd, slat));
         return passwd;
     }
 

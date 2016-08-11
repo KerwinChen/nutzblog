@@ -1,7 +1,7 @@
 package net.javablog;
 
-import net.javablog.bean.User;
-import net.javablog.service.UserService;
+import net.javablog.bean.tb_user;
+import net.javablog.service.tb_userService;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
 import org.nutz.integration.quartz.NutQuartzCronJobFactory;
@@ -20,16 +20,12 @@ public class MainSetup implements Setup {
     public void init(NutConfig conf) {
         Ioc ioc = conf.getIoc();
         Dao dao = ioc.get(Dao.class);
-
-        Daos.createTablesInPackage(dao, "net.javablog", false);
-        Daos.migration(dao, User.class, true, false);
-
+        Daos.createTablesInPackage(dao, tb_user.class, false);
 
         // 初始化默认根用户
-        // 初始化默认根用户
-        if (dao.count(User.class) == 0) {
-            UserService us = ioc.get(UserService.class);
-            us.add("admin", "123456");
+        if (dao.count(tb_user.class) == 0) {
+            tb_userService us = ioc.get(tb_userService.class);
+            us.add("admin", "admin888");
         }
 
 
