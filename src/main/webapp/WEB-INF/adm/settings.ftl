@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/adm/assets/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!-- page specific plugin styles -->
-
     <!-- text fonts -->
     <link rel="stylesheet" href="/adm/assets/css/fonts.googleapis.com.css">
 
@@ -211,9 +210,8 @@
                         </li>
 
                         <li class="divider"></li>
-
                         <li>
-                            <a id="a_logout" href="javascript:void(0)">
+                            <a id="a_logout" href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -253,8 +251,6 @@
                         <div class="nav-wrap">
                             <ul class="nav nav-list"
                                 style="position: relative; top: 0px; transition-property: top; transition-duration: 0.15s;">
-
-
                                 <li class="highlight">
                                     <a href="#" class="dropdown-toggle">
                                         <i class="menu-icon fa fa-desktop"></i>
@@ -264,15 +260,15 @@
                                         <b class="arrow fa fa-angle-down"></b>
                                     </a>
                                     <b class="arrow"></b>
-                                    <ul class="submenu nav-show" style="display: none;">
-                                        <li class="">
+                                    <ul class="submenu">
+                                        <li>
                                             <a href="/adm/listblog">
                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                 博客列表
                                             </a>
                                             <b class="arrow"></b>
                                         </li>
-                                        <li class="">
+                                        <li>
                                             <a href="/adm/wblog">
                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                 写博客
@@ -336,7 +332,7 @@
                                     </ul>
                                 </li>
 
-                                <li class="highlight">
+                                <li class="highlight active">
                                     <a href="/adm/settings">
                                         <i class="menu-icon fa fa-tachometer"></i>
                                         <span class="menu-text"> 选项设置 </span>
@@ -385,15 +381,17 @@
                         <i class="ace-icon fa fa-home home-icon"></i>
                         <a href="/adm/index">Home</a>
                     </li>
+                    <li>
+                        <a href="#">博客管理</a>
+                    </li>
+                    <li class="active">选项设置</li>
                 </ul>
             </div>
-
-
             <div class="page-content">
                 <!-- /.ace-settings-container -->
                 <div class="page-header">
                     <h1>
-                        Welcome
+                        选项设置
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                         </small>
@@ -404,7 +402,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="tabbable">
-                            首页
+                            选项设置
                         </div>
                     </div>
                     <!-- /.col -->
@@ -415,7 +413,6 @@
         </div>
     </div>
     <!-- /.main-content -->
-
 
     <div class="footer">
         <div class="footer-inner">
@@ -469,7 +466,6 @@
 <script src="/adm/assets/js/ace.min.js"></script>
 <!-- inline scripts related to this page -->
 <script src="/adm/assets/js/common.js"></script>
-
 <script aria-hidden="true" type="application/x-lastpass" id="hiddenlpsubmitdiv" style="display: none;"></script>
 
 </body>

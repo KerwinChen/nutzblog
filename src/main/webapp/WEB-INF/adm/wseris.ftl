@@ -213,7 +213,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a id="a_logout" href="javascript:void(0)">
+                            <a id="a_logout" href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -253,8 +253,6 @@
                         <div class="nav-wrap">
                             <ul class="nav nav-list"
                                 style="position: relative; top: 0px; transition-property: top; transition-duration: 0.15s;">
-
-
                                 <li class="highlight">
                                     <a href="#" class="dropdown-toggle">
                                         <i class="menu-icon fa fa-desktop"></i>
@@ -264,7 +262,7 @@
                                         <b class="arrow fa fa-angle-down"></b>
                                     </a>
                                     <b class="arrow"></b>
-                                    <ul class="submenu nav-show" style="display: none;">
+                                    <ul class="submenu">
                                         <li class="">
                                             <a href="/adm/listblog">
                                                 <i class="menu-icon fa fa-caret-right"></i>
@@ -282,7 +280,7 @@
                                     </ul>
                                 </li>
 
-                                <li class="highlight">
+                                <li class="highlight open">
                                     <a href="#" class="dropdown-toggle">
                                         <i class="menu-icon fa fa-desktop"></i>
                                         <span class="menu-text">
@@ -291,15 +289,15 @@
                                         <b class="arrow fa fa-angle-down"></b>
                                     </a>
                                     <b class="arrow"></b>
-                                    <ul class="submenu nav-show" style="display: none;">
-                                        <li class="">
+                                    <ul class="submenu nav-show">
+                                        <li>
                                             <a href="/adm/listseris">
                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                 教程列表
                                             </a>
                                             <b class="arrow"></b>
                                         </li>
-                                        <li class="">
+                                        <li class="active">
                                             <a href="/adm/wseris">
                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                 写教程
@@ -385,6 +383,10 @@
                         <i class="ace-icon fa fa-home home-icon"></i>
                         <a href="/adm/index">Home</a>
                     </li>
+                    <li>
+                        <a href="#">系列教程管理</a>
+                    </li>
+                    <li class="active">写系列教程</li>
                 </ul>
             </div>
 
@@ -393,7 +395,7 @@
                 <!-- /.ace-settings-container -->
                 <div class="page-header">
                     <h1>
-                        Welcome
+                        写系列教程
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                         </small>
@@ -403,9 +405,12 @@
 
                 <div class="row">
                     <div class="col-xs-12">
+
                         <div class="tabbable">
-                            首页
+                            写系列教程
                         </div>
+
+
                     </div>
                     <!-- /.col -->
                 </div>
@@ -415,7 +420,6 @@
         </div>
     </div>
     <!-- /.main-content -->
-
 
     <div class="footer">
         <div class="footer-inner">
@@ -446,6 +450,7 @@
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
     </a>
+
 </div>
 <!-- /.main-container -->
 

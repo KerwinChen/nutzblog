@@ -211,9 +211,8 @@
                         </li>
 
                         <li class="divider"></li>
-
                         <li>
-                            <a id="a_logout" href="javascript:void(0)">
+                            <a id="a_logout" href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -253,9 +252,7 @@
                         <div class="nav-wrap">
                             <ul class="nav nav-list"
                                 style="position: relative; top: 0px; transition-property: top; transition-duration: 0.15s;">
-
-
-                                <li class="highlight">
+                                <li class="highlight  open">
                                     <a href="#" class="dropdown-toggle">
                                         <i class="menu-icon fa fa-desktop"></i>
                                         <span class="menu-text">
@@ -264,15 +261,15 @@
                                         <b class="arrow fa fa-angle-down"></b>
                                     </a>
                                     <b class="arrow"></b>
-                                    <ul class="submenu nav-show" style="display: none;">
-                                        <li class="">
+                                    <ul class="submenu">
+                                        <li>
                                             <a href="/adm/listblog">
                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                 博客列表
                                             </a>
                                             <b class="arrow"></b>
                                         </li>
-                                        <li class="">
+                                        <li class="active">
                                             <a href="/adm/wblog">
                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                 写博客
@@ -385,15 +382,17 @@
                         <i class="ace-icon fa fa-home home-icon"></i>
                         <a href="/adm/index">Home</a>
                     </li>
+                    <li>
+                        <a href="#">博客管理</a>
+                    </li>
+                    <li class="active">写博客</li>
                 </ul>
             </div>
-
-
             <div class="page-content">
                 <!-- /.ace-settings-container -->
                 <div class="page-header">
                     <h1>
-                        Welcome
+                        写博客
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                         </small>
@@ -404,7 +403,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="tabbable">
-                            首页
+                            写博客
                         </div>
                     </div>
                     <!-- /.col -->
@@ -415,7 +414,6 @@
         </div>
     </div>
     <!-- /.main-content -->
-
 
     <div class="footer">
         <div class="footer-inner">
