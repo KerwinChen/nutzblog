@@ -9,7 +9,7 @@ import org.nutz.service.IdNameEntityService;
 import java.util.Date;
 
 @IocBean(fields = "dao")
-public class tb_userService extends BaseService<tb_user> {
+public class UserService extends BaseService<tb_user> {
 
     public tb_user add(String name, String password) {
         tb_user user = new tb_user();

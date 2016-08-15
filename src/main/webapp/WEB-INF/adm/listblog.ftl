@@ -21,28 +21,48 @@
             </div>
             <div class="page-content">
                 <!-- /.ace-settings-container -->
-                <div class="page-header">
-                    <h1>
-                        博客列表
-                        <small>
-                            <i class="ace-icon fa fa-angle-double-right"></i>
-                        </small>
-                    </h1>
-                </div>
+            <#--<div class="page-header">-->
+            <#--<h1>-->
+            <#--博客列表-->
+            <#--<small>-->
+            <#--<i class="ace-icon fa fa-angle-double-right"></i>-->
+            <#--</small>-->
+            <#--</h1>-->
+            <#--</div>-->
                 <!-- /.page-header -->
 
                 <div class="row">
-                    <div class="col-xs-12">
-
-                        <div class="tabbable">
-                            博客列表
-                        </div>
-
-
+                    <div class="col-md-12">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" id="txt_q" placeholder="标题">
+                            </div>
+                            <button id="btn_q" class="btn btn-info btn-xs">
+                                搜索
+                            </button>
+                        </form>
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table  table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>单文章的标题</th>
+                                <th>时间</th>
+                                <th>管理</th>
+                            </tr>
+                            </thead>
+                            <tbody id="list_tbody">
+                            </tbody>
+                        </table>
+                        <div class="row" id="pager">
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- /.page-content -->
         </div>
@@ -51,5 +71,52 @@
 </div>
 
 <#include  "common/endjs.ftl">
+
+<script id="template_list" type="text/html">
+    {{each datas as value i}}
+    <tr>
+        <td>{{value._id}}</td>
+        <td>{{value._title}}</td>
+        <td>2015-06-23 11:25</td>
+        <td>
+            <a href="javascript:del({{value._id}});">删除</a>
+            <a target="_self" href="/adm/single_mgr/showaddup/?_id={{value._id}}">编辑</a>
+            <a target="_blank" href="/page/{{value._id}}/{{value._titleen}}.html">预览</a>
+            <a target="_blank" href="/html_single/{{value._id}}">[生成html]</a>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+
+<script>
+    function del(id) {
+        if (confirm("确定删除吗?")) {
+            $.get("/adm/single_mgr/del/?id=" + id + "", function (data) {
+                window.location.reload();
+            });
+        }
+    }
+
+    $(function () {
+        page(1);
+        $("#btn_q").bind("click", function () {
+            page(1);
+        });
+    });
+
+    function page(pageno) {
+        var txt_q = $("#txt_q").val();
+        $.post("/adm/single_mgr/doshowlist/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "", {"txt_q": txt_q}, function (data) {
+            console.log(data);
+            var html = template('template_list', data);
+            $("#list_tbody").html(html);
+            $("#pager").html(data["pages"]);
+
+        })
+    }
+
+
+</script>
 </body>
 </html>

@@ -19555,13 +19555,13 @@ input.typeahead.scrollable ~ .tt-menu {
 }
 
 .tags {
-    display: inline-block;
+    /*display: inline-block;*/
     padding: 4px 6px;
     color: #777;
     vertical-align: middle;
     background-color: #FFF;
     border: 1px solid #D5D5D5;
-    width: 206px
+    /*width: 206px*/
 }
 
 .tags:hover {

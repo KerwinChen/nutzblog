@@ -11,5 +11,7 @@
 <script src="/adm/assets/js/ace.min.js"></script>
 <!-- inline scripts related to this page -->
 <script src="/adm/assets/js/common.js"></script>
+<script src="/static/js/template.js"></script>
 
 <script aria-hidden="true" type="application/x-lastpass" id="hiddenlpsubmitdiv" style="display: none;"></script>
+

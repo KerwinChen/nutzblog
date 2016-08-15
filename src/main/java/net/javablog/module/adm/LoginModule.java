@@ -1,12 +1,11 @@
 package net.javablog.module.adm;
 
 import net.javablog.bean.tb_user;
-import net.javablog.service.tb_userService;
+import net.javablog.service.UserService;
 import net.javablog.util.CurrentUserUtils;
 import net.javablog.util.Rs;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
-import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
 import org.nutz.mvc.filter.CheckSession;
 
@@ -17,7 +16,7 @@ import org.nutz.mvc.filter.CheckSession;
 public class LoginModule {
 
     @Inject
-    private tb_userService tb_userService;
+    private UserService tb_userService;
 
     @At
     @Ok("fm:adm.login") // 模板文件的路径为  /WEB-INF/adm/login

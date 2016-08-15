@@ -1,7 +1,7 @@
 package net.javablog;
 
 import net.javablog.bean.tb_user;
-import net.javablog.service.tb_userService;
+import net.javablog.service.UserService;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
 import org.nutz.integration.quartz.NutQuartzCronJobFactory;
@@ -24,7 +24,7 @@ public class MainSetup implements Setup {
 
         // 初始化默认根用户
         if (dao.count(tb_user.class) == 0) {
-            tb_userService us = ioc.get(tb_userService.class);
+            UserService us = ioc.get(UserService.class);
             us.add("admin", "admin888");
         }
 

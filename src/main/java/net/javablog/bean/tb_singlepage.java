@@ -78,8 +78,9 @@ public class tb_singlepage extends BasePojo  implements Serializable {
 
 
     @Column
+    @ColDefine(width = 500)
     @Comment("用户关联字段")
-    private int _userid;
+    private String _username;
 
 
     @Default("0")
@@ -105,7 +106,13 @@ public class tb_singlepage extends BasePojo  implements Serializable {
     @Comment("是否是草稿")
     private boolean _isdraft;
 
+    public String get_username() {
+        return _username;
+    }
 
+    public void set_username(String _username) {
+        this._username = _username;
+    }
 
     private int copy_id;
 
@@ -239,13 +246,7 @@ public class tb_singlepage extends BasePojo  implements Serializable {
         this._tags = _tags;
     }
 
-    public int get_userid() {
-        return _userid;
-    }
 
-    public void set_userid(int _userid) {
-        this._userid = _userid;
-    }
 
 
     public int get_serisid() {
