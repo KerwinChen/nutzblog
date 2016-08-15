@@ -163,6 +163,80 @@
 
 
     });
+
+
+    var manyfile = false;
+    function fileupload_apk(id) {
+        $("#" + id).find("input[type='file']").fileupload({
+            url: "/adm/upload_apk",
+//                dataType: 'json', //如果不返回json数据，需要注释掉。
+            add: function (e, data) {
+
+                $("#" + id).find(".showimg").attr("imgid", ""); //存储img图片信息
+                var uploadErrors = [];
+                var filename = data.originalFiles[0]['name'];
+                if (filename.substring(filename.length - 3, filename.length) != "apk") {
+                    uploadErrors.push('只能上传apk后缀的文件');
+                }
+
+                if (!manyfile) {
+                    if (data.originalFiles.length > 1) {
+                        uploadErrors.push('只能上传1个文件');
+                        manyfile = true;
+                    }
+                }
+                if (data.originalFiles[0]['size'] && data.originalFiles[0]['size'] > 1024 * 1024 * 100) {
+                    uploadErrors.push('上传文件不能大于100MB');
+                }
+                if (uploadErrors.length > 0) {
+                    alert(uploadErrors.join("\n"));
+                }
+                else {
+                    $("#" + id).find('.progress').show();
+                    $("#" + id).attr("disabled", "disabled");
+                    data.submit();
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $("#" + id).find('.progress-bar').css(
+                        'width',
+                        progress + '%'
+                ).text(progress + '%');
+            },
+            done: function (e, data) {
+                data = data.result;
+                var imgid = data["apk"]["apk_path"];
+                $("#" + id).find(".showimg").html("<a  target='_blank' href=\"" + imgid + "\">查看</a>");
+                $("#" + id).find(".showimg").attr("imgid", imgid);
+                $("#" + id).removeAttr("disabled");
+                setTimeout("hideprocess(\"" + id + "\")", 3000);
+
+                //设置显示其他字段
+                $(".apkshow").show();
+                $("#txt_icon_path").attr("src", data["apk"]["icon_path"]);
+                $("#txt_name").val(data["apk"]["name"]);
+
+                $("#txt_apk_filesize").val(data["apk"]["apk_filesize"]);
+                $("#txt_apk_md5").val(data["apk"]["apk_md5"]);
+                $("#txt_apk_package").val(data["apk"]["apk_package"]);
+                $("#txt_apk_versioncode").val(data["apk"]["apk_versioncode"]);
+                $("#txt_apk_versionname").val(data["apk"]["apk_versionname"]);
+                $("#txt_apk_type").val(data["apk"]["apk_type"]);
+
+                $("#encrypt_md5").val(data["apk"]["encrypt_md5"]);
+                $("#encrypt_apkdownurl").val(data["apk"]["encrypt_apkdownurl"]);
+                $("#encrypt_method").val(data["apk"]["encrypt_method"]);
+                $("#percent").val(data["apk"]["percent"]);
+
+
+                var win = art.dialog.top;
+                win.artDialog.list['dia_ad_recommend'].size(360, 650).position("50%", "50%");
+
+            }
+        });
+    }
+
 </script>
 
 </body>
