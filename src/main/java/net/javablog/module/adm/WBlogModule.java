@@ -2,6 +2,7 @@ package net.javablog.module.adm;
 
 import net.javablog.util.CurrentUserUtils;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.By;
 import org.nutz.mvc.annotation.Filters;
@@ -15,7 +16,11 @@ public class WBlogModule {
 
     @At("/adm/wblog")
     @Ok("fm:adm.wblog")
-    public void wblog() {
+    public NutMap wblog() {
+        NutMap out = new NutMap();
+        out.put("sidebar_openposition", "#li1");
+        out.put("sidebar_activeposition", "#li1li2");
+        return out;
     }
     
 }
