@@ -50,6 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-1 control-label">简短名</label>
+
                                 <div class="col-sm-11">
                                     <input type="input" class="form-control" name="_titleinlogo" id="_titleinlogo"
                                            class="required"
@@ -68,7 +69,8 @@
                                 <label class="col-sm-1 control-label">选择标签</label>
 
                                 <div class="col-sm-11">
-                                    <input type="text" name="tags" id="form-field-tags" value="Tag Input Control"
+                                    <input type="text" name="tags" id="form-field-tags"
+                                           value="${obj.item._tags!""}"
                                            placeholder="Enter tags ..."/>
                                 </div>
                             </div>
@@ -96,7 +98,6 @@
 
                                 </div>
                             </div>
-
 
                         <#--内容区域-->
                             <div class="form-group">
@@ -131,11 +132,18 @@
 
         var tag_input = $('#form-field-tags');
         try {
+
+            var tags = new Array();
+        <#list  obj.tags as item>
+        <#--tags.push("${item._pname} - ${item._name}");-->
+            tags.push("${item._name}");
+        </#list>
+
+
             tag_input.tag(
                     {
                         placeholder: tag_input.attr('placeholder'),
-                        //enable typeahead by specifying the source array
-                        source: ace.vars['US_STATES'],//defined in ace.js >> ace.enable_search_ahead
+                        source: tags,//defined in ace.js >> ace.enable_search_ahead
                         /**
                          //or fetch data from database, fetch those that match "query"
                          source: function(query, process) {
@@ -149,11 +157,11 @@
             )
 
             //programmatically add/remove a tag
-            var $tag_obj = $('#form-field-tags').data('tag');
-            $tag_obj.add('Programmatically Added');
+//            var $tag_obj = $('#form-field-tags').data('tag');
+//            $tag_obj.add('Programmatically Added');
+//            var index = $tag_obj.inValues('some tag');
+//            $tag_obj.remove(index);
 
-            var index = $tag_obj.inValues('some tag');
-            $tag_obj.remove(index);
         }
         catch (e) {
             //display a textarea for old IE, because it doesn't support this plugin or another one I tried!

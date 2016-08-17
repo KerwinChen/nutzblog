@@ -1,13 +1,17 @@
 package net.javablog.module.adm;
 
 import net.javablog.bean.tb_singlepage;
+import net.javablog.bean.tb_tag;
 import net.javablog.service.BlogService;
+import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
 import org.nutz.mvc.filter.CheckSession;
+
+import java.util.List;
 
 
 @IocBean
@@ -16,6 +20,9 @@ public class WBlogModule {
 
     @Inject
     private BlogService blogService;
+
+    @Inject
+    private TagService tagService;
 
     @At("/adm/wblog")
     @Ok("fm:adm.wblog")
@@ -30,6 +37,10 @@ public class WBlogModule {
             tb = blogService.fetch(id);
         }
         out.put("item", tb);
+
+        List<tb_tag> tags = tagService.query();
+        out.put("tags", tags);
+
         return out;
     }
 
