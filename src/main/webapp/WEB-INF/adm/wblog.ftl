@@ -78,24 +78,21 @@
                             <div class="form-group">
                                 <label class="col-sm-1 control-label">置顶大图</label>
 
-                                <div class="col-sm-11">
+                                <div class="col-sm-11" id="fileupload_group">
                         <span class="btn btn-success btn-sm fileinput-button">
                             <i class="glyphicon glyphicon-plus"></i>
                             <span>上传</span>
                             <!-- The file input field used as target for the file upload widget -->
-                            <input class="btn btn-primary" id="fileupload" type="file" name="files[]" multiple="">
+                            <input class="btn btn-primary" id="fileupload" type="file" name="f" multiple="">
                         </span>
                                     <button id="btn_selectimg" type="button" class="btn btn-sm  btn-info">选择图片</button>
                                     <br>
-
-                                    <div id="progress" class="progress" style="display: none;margin-bottom: 0px;">
+                                    <div id="progress" class="progress" style="display: none;margin: 2px auto">
                                         <div class="progress-bar progress-bar-success"></div>
                                     </div>
-                                    <div id="imgid" imgid="${obj.item._toppic!""}">
-                                        <a target="_blank"
-                                           href="${obj.item._toppic!""}">${obj.item._toppic!""}</a>
+                                    <div class="showimg" id="imgid" imgid="${obj.item._toppic!""}" style="margin: 2px auto">
+                                        <a target="_blank" href="${obj.item._toppic!""}">${obj.item._toppic!""}</a>
                                     </div>
-
                                 </div>
                             </div>
 
@@ -126,65 +123,19 @@
 <#include  "common/endjs.ftl">
 
 
-
 <script>
-    $(function () {
-
-        var tag_input = $('#form-field-tags');
-        try {
-
-            var tags = new Array();
-        <#list  obj.tags as item>
-        <#--tags.push("${item._pname} - ${item._name}");-->
-            tags.push("${item._name}");
-        </#list>
-
-
-            tag_input.tag(
-                    {
-                        placeholder: tag_input.attr('placeholder'),
-                        source: tags,//defined in ace.js >> ace.enable_search_ahead
-                        /**
-                         //or fetch data from database, fetch those that match "query"
-                         source: function(query, process) {
-						  $.ajax({url: 'remote_source.php?q='+encodeURIComponent(query)})
-						  .done(function(result_items){
-							process(result_items);
-						  });
-						}
-                         */
-                    }
-            )
-
-            //programmatically add/remove a tag
-//            var $tag_obj = $('#form-field-tags').data('tag');
-//            $tag_obj.add('Programmatically Added');
-//            var index = $tag_obj.inValues('some tag');
-//            $tag_obj.remove(index);
-
-        }
-        catch (e) {
-            //display a textarea for old IE, because it doesn't support this plugin or another one I tried!
-            tag_input.after('<textarea id="' + tag_input.attr('id') + '" name="' + tag_input.attr('name') + '" rows="3">' + tag_input.val() + '</textarea>').remove();
-            //autosize($('#form-field-tags'));
-        }
-
-
-    });
-
 
     var manyfile = false;
-    function fileupload_apk(id) {
+    function fileupload(id) {
         $("#" + id).find("input[type='file']").fileupload({
-            url: "/adm/upload_apk",
-//                dataType: 'json', //如果不返回json数据，需要注释掉。
+            url: "/adm/upload",
+//            dataType: 'json', //如果不返回json数据，需要注释掉。
             add: function (e, data) {
-
-                $("#" + id).find(".showimg").attr("imgid", ""); //存储img图片信息
+                $("#" + id).find(".showimg").attr("imgid", "");
                 var uploadErrors = [];
                 var filename = data.originalFiles[0]['name'];
-                if (filename.substring(filename.length - 3, filename.length) != "apk") {
-                    uploadErrors.push('只能上传apk后缀的文件');
+                if (filename.substring(filename.length - 3, filename.length) != "jpg" && filename.substring(filename.length - 3, filename.length) != "png") {
+                    uploadErrors.push('只能上传jpg,png后缀的文件');
                 }
 
                 if (!manyfile) {
@@ -193,9 +144,11 @@
                         manyfile = true;
                     }
                 }
-                if (data.originalFiles[0]['size'] && data.originalFiles[0]['size'] > 1024 * 1024 * 100) {
-                    uploadErrors.push('上传文件不能大于100MB');
+
+                if (data.originalFiles[0]['size'] && data.originalFiles[0]['size'] > 1024 * 1024 * 10) {
+                    uploadErrors.push('上传文件不能大于10MB');
                 }
+
                 if (uploadErrors.length > 0) {
                     alert(uploadErrors.join("\n"));
                 }
@@ -213,37 +166,80 @@
                 ).text(progress + '%');
             },
             done: function (e, data) {
-                data = data.result;
-                var imgid = data["apk"]["apk_path"];
-                $("#" + id).find(".showimg").html("<a  target='_blank' href=\"" + imgid + "\">查看</a>");
+                data = data["result"];
+                var imgid = data["imgid"];
+                $("#" + id).find(".showimg").html("<a  target='_blank' href=\"/down/" + imgid + "/\">查看</a>");
                 $("#" + id).find(".showimg").attr("imgid", imgid);
                 $("#" + id).removeAttr("disabled");
                 setTimeout("hideprocess(\"" + id + "\")", 3000);
 
-                //设置显示其他字段
-                $(".apkshow").show();
-                $("#txt_icon_path").attr("src", data["apk"]["icon_path"]);
-                $("#txt_name").val(data["apk"]["name"]);
 
-                $("#txt_apk_filesize").val(data["apk"]["apk_filesize"]);
-                $("#txt_apk_md5").val(data["apk"]["apk_md5"]);
-                $("#txt_apk_package").val(data["apk"]["apk_package"]);
-                $("#txt_apk_versioncode").val(data["apk"]["apk_versioncode"]);
-                $("#txt_apk_versionname").val(data["apk"]["apk_versionname"]);
-                $("#txt_apk_type").val(data["apk"]["apk_type"]);
-
-                $("#encrypt_md5").val(data["apk"]["encrypt_md5"]);
-                $("#encrypt_apkdownurl").val(data["apk"]["encrypt_apkdownurl"]);
-                $("#encrypt_method").val(data["apk"]["encrypt_method"]);
-                $("#percent").val(data["apk"]["percent"]);
-
-
-                var win = art.dialog.top;
-                win.artDialog.list['dia_ad_recommend'].size(360, 650).position("50%", "50%");
+//                var win = art.dialog.top;
+//                win.artDialog.list['dia_ad_recommend'].size(360, 650).position("50%", "50%");
 
             }
         });
     }
+
+
+    function hideprocess() {
+        //上传完毕，5秒钟后消失。并且使得进度条
+        $('#progress').hide();
+        //进度值减为0
+        $('.progress-bar').css(
+                'width', '0%'
+        );
+    }
+
+
+    function tag_init() {
+        var tag_input = $('#form-field-tags');
+        try {
+            var tags = new Array();
+        <#list  obj.tags as item>
+        <#--tags.push("${item._pname} - ${item._name}");-->
+            tags.push("${item._name}");
+        </#list>
+
+
+            tag_input.tag(
+                    {
+                        placeholder: tag_input.attr('placeholder'),
+                        source: tags,//defined in ace.js >> ace.enable_search_ahead
+                        /**
+                         //or fetch data from database, fetch those that match "query"
+                         source: function(query, process) {
+                                      $.ajax({url: 'remote_source.php?q='+encodeURIComponent(query)})
+                                      .done(function(result_items){
+                                        process(result_items);
+                                      });
+                                    }
+                         */
+                    }
+            )
+
+            //programmatically add/remove a tag
+//            var $tag_obj = $('#form-field-tags').data('tag');
+//            $tag_obj.add('Programmatically Added');
+//            var index = $tag_obj.inValues('some tag');
+//            $tag_obj.remove(index);
+
+        }
+        catch (e) {
+            //display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+            tag_input.after('<textarea id="' + tag_input.attr('id') + '" name="' + tag_input.attr('name') + '" rows="3">' + tag_input.val() + '</textarea>').remove();
+            //autosize($('#form-field-tags'));
+        }
+    }
+    $(function () {
+
+        tag_init();
+
+        //设置哪个 btn_upload 为上传控件
+        fileupload("fileupload_group");
+
+    });
+
 
 </script>
 
