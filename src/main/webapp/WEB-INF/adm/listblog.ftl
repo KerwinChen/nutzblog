@@ -102,7 +102,10 @@
         page(1);
         $("#btn_q").bind("click", function () {
             page(1);
+            return false;
         });
+
+
     });
 
     function page(pageno) {
