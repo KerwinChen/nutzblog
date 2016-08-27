@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <input type="text" class="form-control input-sm" id="txt_q" placeholder="标题">
                             </div>
-                            <button id="btn_q" class="btn btn-info btn-xs">
+                            <button id="btn_q" type="button" class="btn btn-info btn-xs">
                                 搜索
                             </button>
                         </form>
@@ -102,7 +102,6 @@
         page(1);
         $("#btn_q").bind("click", function () {
             page(1);
-            return false;
         });
 
 
