@@ -7760,7 +7760,8 @@ button.btn:active {
 
 .dropdown-menu {
     border-radius: 0 !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .2)
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    z-index: 1993;
 }
 
 .dropdown-menu > li > a {
@@ -12786,7 +12787,10 @@ tr.detail-row > td {
     float: left;
     overflow: hidden;
     margin: 2px;
-    border: 2px solid #333
+    /*border: 2px solid #333*/
+    border: 1px solid #CCC;
+    padding: 3px;
+    margin: 6px;
 }
 
 .ace-thumbnails > li > :first-child:focus {
@@ -12908,7 +12912,7 @@ tr.detail-row > td {
     color: #FFF;
     font-size: 18px;
     font-weight: 400;
-    padding: 0 4px
+    padding: 0 16px
 }
 
 .ace-thumbnails > li > .tools > a:hover, .ace-thumbnails > li > :first-child .inner a:hover {
@@ -18847,7 +18851,7 @@ input.tt-hint, input.tt-query, input.typeahead {
     line-height: 24px;
     border: 1px solid #CCC;
     border-radius: 0;
-    outline: 0
+    outline: 0;
 }
 
 .form-group input.tt-hint, input.tt-hint {

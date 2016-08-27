@@ -50,7 +50,7 @@
                             <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>单文章的标题</th>
+                                <th>标题</th>
                                 <th>时间</th>
                                 <th>管理</th>
                             </tr>
@@ -80,7 +80,7 @@
         <td>2015-06-23 11:25</td>
         <td>
             <a href="javascript:del({{value._id}});">删除</a>
-            <a target="_self" href="/adm/single_mgr/showaddup/?_id={{value._id}}">编辑</a>
+            <a target="_self" href="/adm/wblog/?_id={{value._id}}">编辑</a>
             <a target="_blank" href="/page/{{value._id}}/{{value._titleen}}.html">预览</a>
             <a target="_blank" href="/html_single/{{value._id}}">[生成html]</a>
         </td>

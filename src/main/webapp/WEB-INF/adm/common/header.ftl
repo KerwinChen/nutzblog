@@ -31,6 +31,7 @@
     <!-- inline styles related to this page -->
     <!-- ace settings handler -->
     <script src="/adm/assets/js/ace-extra.min.js"></script>
+
     <style>@keyframes nodeInserted {
                from {
                    outline-color: #fff
@@ -162,13 +163,9 @@
     <script src="/adm/assets/js/respond.min.js"></script>
     <![endif]-->
 
-    <!--[if !IE]> -->
-    <script src="/adm/assets/js/jquery-2.1.4.min.js"></script>
-    <!-- <![endif]-->
 
-    <!--[if IE]>
     <script src="/adm/assets/js/jquery-1.11.3.min.js"></script>
-    <![endif]-->
+
 
     <script>
         $(function () {

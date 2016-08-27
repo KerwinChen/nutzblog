@@ -56,30 +56,30 @@ public class PagerUT {
         if (curr_page > 0) {
             long perpage = curr_page == 1 ? 1 : curr_page - 1;
             if (curr_page == 1) {
-                multipage += " <li class='disabled'><a  href=" + String.format(pageurl, perpage) + ">上一页</a></li>  ";
-                multipage += "<li class='active'><a>1</a></li>";
+                multipage += " <li class='paginate_button previous disabled'><a  href=" + String.format(pageurl, perpage) + ">上一页</a></li>  ";
+                multipage += "<li class='paginate_button active'><a>1</a></li>";
             } else {
-                multipage += "<li><a  class='pageitem' no='" + perpage + "' href=" + String.format(pageurl, perpage) + ">上一页</a></li>  ";
-                multipage += " <li><a  class='pageitem' no='1'   href=" + String.format(pageurl, "1") + ">1</a></li>  ";
+                multipage += "<li><a  class='paginate_button previous' no='" + perpage + "' href=" + String.format(pageurl, perpage) + ">上一页</a></li>  ";
+                multipage += " <li><a  class='paginate_button' no='1'   href=" + String.format(pageurl, "1") + ">1</a></li>  ";
             }
         }
 
         //两个省略号中间的部分
         for (long i = from; i <= to; i++) {
             if (i != curr_page) {
-                multipage += "<li><a  class='pageitem' no='" + i + "'  href=" + String.format(pageurl, i) + ">" + i + "</a></li>";
+                multipage += "<li><a  class='paginate_button' no='" + i + "'  href=" + String.format(pageurl, i) + ">" + i + "</a></li>";
             } else {
-                multipage += " <li class='active'><a>" + curr_page + "</a></li> ";
+                multipage += " <li class='paginate_button active'><a>" + curr_page + "</a></li> ";
             }
         }
 
         //最后的链接
         if (curr_page < pagenums) {
-            multipage += "<li><a   class='pageitem'  no='" + pagenums + "'  href=" + String.format(pageurl, pagenums) + ">" + pagenums + "</a></li> ";
-            multipage += "<li><a  class='pageitem' no='" + (curr_page + 1) + "' href=" + String.format(pageurl, curr_page + 1) + ">下一页</a></li> ";
+            multipage += "<li><a   class='paginate_button'  no='" + pagenums + "'  href=" + String.format(pageurl, pagenums) + ">" + pagenums + "</a></li> ";
+            multipage += "<li><a  class='paginate_button' no='" + (curr_page + 1) + "' href=" + String.format(pageurl, curr_page + 1) + ">下一页</a></li> ";
         } else if (curr_page == pagenums) {
-            multipage += "<li class='active'><a  href=" + String.format(pageurl, pagenums) + ">" + pagenums + "</a><li>";
-            multipage += "<li class='disabled'><a href=" + String.format(pageurl, curr_page) + ">下一页</a></li>";
+            multipage += "<li class='paginate_button active'><a  href=" + String.format(pageurl, pagenums) + ">" + pagenums + "</a><li>";
+            multipage += "<li class='paginate_button next disabled'><a href=" + String.format(pageurl, curr_page) + ">下一页</a></li>";
         }
         return multipage;
     }

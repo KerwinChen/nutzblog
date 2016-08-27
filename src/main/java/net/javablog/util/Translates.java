@@ -44,10 +44,9 @@ public class Translates {
 
             out = response.getContent();
             if (response.getStatus() == 200) {
-                Map<String, Map> m = Json.fromJsonAsMap(Map.class, out);
+                Object m = Json.fromJson(out);
 
-                Map<String, Object> m1 = m.get("trans_result");
-
+                Map m1 = (Map) ((Map<String, Object>) m).get("trans_result");
                 List m2 = (List) m1.get("data");
                 Map m3 = (Map) m2.get(0);
                 out = m3.get("dst").toString();

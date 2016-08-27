@@ -17,7 +17,7 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo">
+                        <img class="nav-user-photo" src="/adm/assets/images/avatars/user.jpg" alt="Jason's Photo">
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">

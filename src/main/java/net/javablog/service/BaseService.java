@@ -24,8 +24,12 @@ public class BaseService<T> extends IdEntityService<T> {
     }
 
     public List getObjListByPage(Sql listsql, int pageno) {
+        return getObjListByPage(listsql, pageno, DEFAULT_PAGE_SIZE);
+    }
+
+    public List getObjListByPage(Sql listsql, int pageno, int pagesize) {
         Pager pager = new Pager();
-        pager.setPageSize(DEFAULT_PAGE_SIZE);
+        pager.setPageSize(pagesize);
         pager.setPageNumber(pageno);
 
         listsql.setCallback(Sqls.callback.records());
@@ -35,7 +39,20 @@ public class BaseService<T> extends IdEntityService<T> {
         return list;
     }
 
+
     public String getPageHtmlByPage(Sql countsql, int pageno) {
+        return getPageHtmlByPage(countsql, "", pageno, DEFAULT_PAGE_SIZE);
+    }
+
+    public String getPageHtmlByPage(Sql countsql, int pageno, int pagesize) {
+        return getPageHtmlByPage(countsql, "", pageno, pagesize);
+    }
+
+    public String getPageHtmlByPage(Sql countsql, String args, int pageno) {
+        return getPageHtmlByPage(countsql, args, pageno, DEFAULT_PAGE_SIZE);
+    }
+
+    public String getPageHtmlByPage(Sql countsql, String args, int pageno, int pagesize) {
         countsql.setPager(null);
         countsql.setCallback(Sqls.callback.longValue());
         dao().execute(countsql);
@@ -44,9 +61,8 @@ public class BaseService<T> extends IdEntityService<T> {
         if (!Lang.isEmpty(allcount_obj)) {
             allcount = Long.valueOf(allcount_obj.toString());
         }
-
-        String args = "a=1";
-        return PagerUT.pages(DEFAULT_PAGE_SIZE, allcount, pageno, "javascript:page(%s,'" + args + "');", 3);
+        return PagerUT.pages(pagesize, allcount, pageno, "javascript:page(%s,'" + args + "');", 3);
     }
+
 
 }
