@@ -43,6 +43,7 @@ public class WBlogModule {
 
         tbin.setUpdateTime(new Date());
         if (tbin.get_id() <= 0) {
+            tbin.setCreateTime(new Date());
             blogService.insert(tbin);
         } else {
             blogService.update(tbin);

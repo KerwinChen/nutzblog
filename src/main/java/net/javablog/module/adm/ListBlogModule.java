@@ -135,8 +135,6 @@ public class ListBlogModule {
     public NutMap doshowlist(@Param("pageno") int pageno, @Param("txt_q") String txt_q, @Param("isdraft") int isdraft) {
 
         NutMap out = new NutMap();
-        Pager pager = new Pager();
-
         if (pageno <= 0) {
             pageno = 1;
         }

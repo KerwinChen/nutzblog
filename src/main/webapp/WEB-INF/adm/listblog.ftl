@@ -77,7 +77,7 @@
     <tr>
         <td>{{value._id}}</td>
         <td>{{value._title}}</td>
-        <td>2015-06-23 11:25</td>
+        <td>{{value.ut}}</td>
         <td>
             <a href="javascript:del({{value._id}});">删除</a>
             <a target="_self" href="/adm/wblog/?_id={{value._id}}">编辑</a>
@@ -114,7 +114,6 @@
             var html = template('template_list', data);
             $("#list_tbody").html(html);
             $("#pager").html(data["pages"]);
-
         })
     }
 

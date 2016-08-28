@@ -214,19 +214,30 @@
 
         //弹出选择图片 iframe
         $('#btn_selectimg').bind('click', function () {
-            art.dialog.open('/adm/upload/selectimg',
-                    {
-                        id: "win-selectpage",
-                        title: '选择图片',
-                        width: 870,
-                        height: 620,
-                        left: '50%',
-                        top: '5%',
-                        fixed: false,
-                        drag: true,
-                        resize: true
+//            art.dialog.open('/adm/upload/selectimg',
+//                    {
+//                        id: "win-selectpage",
+//                        title: '选择图片',
+//                        width: 870,
+//                        height: 620,
+//                        left: '50%',
+//                        top: '5%',
+//                        fixed: false,
+//                        drag: true,
+//                        resize: true
+//                    });
+                    layer.open({
+                        title: "选择图片",
+                        type: 2,
+//                        area: ['870px', '100px'],
+                        area: ['900px', '90%'],
+                        offset: ['5%', ''],
+                        content: ['/adm/upload/selectimg', 'no']
                     });
-        });
+
+                }
+        );
+
 
         //编辑器
         var testEditor;

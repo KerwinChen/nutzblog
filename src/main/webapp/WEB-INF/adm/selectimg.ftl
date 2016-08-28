@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>选择图片</title>
     <!-- Bootstrap core CSS -->
     <link href="/adm/assets/css/ace.min.css" rel="stylesheet">
     <link href="/adm/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -32,9 +32,9 @@
 
 </head>
 <body>
-<div class="container-fuld">
+<div class="container-fulid">
     <div class="row">
-        <div class="col-md-12" style="margin: 6px">
+        <div class="col-md-11 col-md-offset-1" style="margin-left: 31px; padding-top: 20px;">
             <input style="float: left;width: 300px" class="form-control" type="input" name="filterkey"
                    id="filterkey" class="required">
             <button style="margin-left: 10px" id="btn_search" type="button" class="btn btn-default margintop10">搜索
@@ -42,14 +42,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div style="text-align: center;margin-left: 12px;">
             <ul id="list_tbody" class="ace-thumbnails">
-
             </ul>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12" style="margin: 0px 6px">
+        <div class="col-md-11 col-md-offset-1" style="margin-left: 31px; ">
             <div>
                 <ul id="pager" class="pagination">
 
@@ -93,7 +92,7 @@
                     var v = data["datas"][i];
                     html = html + "<li>\n" +
                             "		<a href=\"javascript:void(0);\" data-rel=\"colorbox\">\n" +
-                            "				<img alt=\"150x150\" width=\"150px\" height=\"150px\"\n" +
+                            "				<img  width=\"120px\" height=\"120px\"\n" +
                             "						 src=\"" + v["_downurl"] + "\">\n" +
                             "				<div   filename='" + v["_name"] + "'  filekey='" + v["_filekey"] + "' downurl='" + v["_downurl"] + "'  class=\"text\">\n" +
                             "						<div class=\"inner\">" + v["_name"] + "</div>\n" +
@@ -113,9 +112,7 @@
 
 
             // 关闭当前页，返回到父页数据
-            var win = art.dialog.top;
-            var imgid = $(win.document.getElementById('imgid'));
-
+            var index = parent.layer.getFrameIndex(window.name);
 
             $("#list_tbody li .text").each(function (item, idx) {
                         $(this).bind("click", function () {
@@ -125,11 +122,10 @@
                             var rsvalue = "  <a target=\"_blank\"  href=\"/view/" + filekey + "/\">查看 " + filename + "</a>";
 
                             layer.msg("选中 " + filename, {time: 1000, icon: 1}, function () {
-                                var win = art.dialog.top;
-                                $(imgid).empty();
-                                $(imgid).attr("imgid", filekey);
-                                $(imgid).append(rsvalue);
-                                art.dialog.close();
+                                parent.$("#imgid").empty();
+                                parent.$("#imgid").attr("imgid", filekey);
+                                parent.$("#imgid").append(rsvalue);
+                                parent.layer.close(index);
                             });
 
 

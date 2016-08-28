@@ -145,8 +145,8 @@ public class UploadModule {
         Sql sqllist = Sqls.create("select * from tb_files $condition").setCondition(criteria);
         Sql sqlcount = Sqls.create("select count(*) from tb_files $condition").setCondition(criteria);
 
-        List datas = fileService.getObjListByPage(sqllist, pageno,15);
-        String page = fileService.getPageHtmlByPage(sqlcount, args, pageno,15);
+        List datas = fileService.getObjListByPage(sqllist, pageno,18);
+        String page = fileService.getPageHtmlByPage(sqlcount, args, pageno,18);
 
         map.setv("datas", datas);
         map.setv("pages", page);
