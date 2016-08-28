@@ -14,11 +14,20 @@
                         <a href="/adm/index">Home</a>
                     </li>
                     <li>
-                        <a href="#">系列教程</a>
+                        <a href="#">系列教程列表</a>
                     </li>
+                    <li>
+                        <a href="#">${obj.s._seristitle}</a>
+                    </li>
+                    <li class="active">添加/修改博客</li>
                 </ul>
             </div>
             <div class="page-content">
+                <div class="page-header">
+                    <a href="/adm/listseris">返回教程列表</a>
+                    <a href="/adm/seris_mgr/showaddup_inlist?seris_id=${obj.s._id}">在该系列教程下新增文章</a>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <form class="form-inline">
@@ -52,6 +61,7 @@
                 </div>
 
             </div>
+            <!-- /.page-content -->
         </div>
     </div>
 <#include "../common/footer.ftl">
@@ -63,12 +73,11 @@
     {{each datas as value i}}
     <tr>
         <td>{{value._id}}</td>
-        <td>{{value._seristitle}}</td>
+        <td>{{value._title}}</td>
         <td>{{value.ut}}</td>
         <td>
             <a href="javascript:del({{value._id}});">删除</a>
-            <a target="_self" href="/adm/wseris/?_id={{value._id}}">编辑</a>
-            <a target="_self" href="/adm/seris_mgr/showlist_in/?_id={{value._id}}">管理文章列表</a>
+            <a target="_self" href="/adm/wblog/?_id={{value._id}}">编辑</a>
             <a target="_blank" href="/page/{{value._id}}/{{value._titleen}}.html">预览</a>
             <a target="_blank" href="/html_single/{{value._id}}">[生成html]</a>
         </td>
@@ -80,7 +89,7 @@
 <script>
     function del(id) {
         if (confirm("确定删除吗?")) {
-            $.get("/adm/seris_mgr/del/?_id=" + id + "", function (rs) {
+            $.get("/adm/single_mgr/del/?id=" + id + "", function (rs) {
                 if (rs == "ok") {
                     window.location.reload();
                 } else {
@@ -99,7 +108,7 @@
 
     function page(pageno) {
         var txt_q = $("#txt_q").val();
-        $.post("/adm/seris_mgr/doshowlist/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "", {"txt_q": txt_q}, function (data) {
+        $.post("/adm/seris_mgr/doshowlist_in/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "", {"txt_q": txt_q}, function (data) {
             console.log(data);
             var html = template('template_list', data);
             $("#list_tbody").html(html);
@@ -107,7 +116,7 @@
         })
     }
 
-</script>
 
+</script>
 </body>
 </html>

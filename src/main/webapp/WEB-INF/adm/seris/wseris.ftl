@@ -27,7 +27,8 @@
                             <input type="hidden" value="${obj.item._id}" id="_id">
 
                             <div class="col-sm-11">
-                                <input type="input" class="form-control" name="_title" id="_title" class="required"
+                                <input type="input" class="form-control" name="_seristitle" id="_seristitle"
+                                       class="required"
                                        value="${obj.item._seristitle!''}">
                             </div>
                         </div>
@@ -35,10 +36,9 @@
                         <div class="form-group clearfix">
                             <label class="col-sm-1 control-label">内容</label>
                             <div class="col-sm-11">
-                                <textarea name="_seristitle" id="_seristitle" rows="5" class="autosize-transition form-control"
+                                <textarea name="_serisintro" id="_serisintro" rows="5"
+                                          class="autosize-transition form-control"
                                           style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 112px;">${obj.item._seristitle!''}</textarea>
-
-
                             </div>
                         </div>
 
@@ -62,6 +62,32 @@
 
     $(function () {
         autosize($('textarea'));
+
+
+        $("#btn_submit").bind("click", function () {
+            var _seristitle = $("#_seristitle").val();
+            var _serisintro = $("#_serisintro").val();
+
+            if (!_serisintro || !_seristitle) {
+                alert("内容不完整");
+                return;
+            }
+            var data = {};
+            data._id = $("#_id").val();
+            data._seristitle = _seristitle;
+            data._serisintro = _serisintro;
+
+//            var jsondata = $.toJSON(data);
+
+            $.post("/adm/seris_mgr/doaddup/?t=" + new Date().getTime(), data, function (rs) {
+                console.log("返回结果" + rs);
+                window.location.href = "/adm/listseris";
+            });
+
+
+        });
+
+
     });
 
 </script>
