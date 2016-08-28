@@ -1,5 +1,5 @@
 <html lang="en">
-<#include "common/header.ftl">
+<#include "../common/header.ftl">
 <#--tools-->
 <script src="/adm/assets/js/jquery.json.min.js"></script>
 <script src="/adm/assets/js/autosize.min.js"></script>
@@ -21,10 +21,10 @@
 <script src="/adm/assets/js/editor.md/editormd.min.js"></script>
 
 <body class="no-skin">
-<#include "common/navbar.ftl">
+<#include "../common/navbar.ftl">
 
 <div class="main-container ace-save-state" id="main-container">
-<#include "common/sidebar.ftl">
+<#include "../common/sidebar.ftl">
     <div class="main-content">
         <div class="main-content-inner">
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -124,10 +124,10 @@
 
         </div>
     </div>
-<#include "common/footer.ftl">
+<#include "../common/footer.ftl">
 </div>
 
-<#include  "common/endjs.ftl">
+<#include  "../common/endjs.ftl">
 
 
 <script>

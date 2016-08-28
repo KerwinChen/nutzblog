@@ -15,7 +15,7 @@ import org.nutz.mvc.filter.CheckSession;
 public class WNoteModule {
 
     @At("/adm/wnote")
-    @Ok("fm:adm.wnote")
+    @Ok("fm:adm.note.wnote")
     public NutMap wnote() {
         NutMap out = new NutMap();
         out.put("sidebar_openposition", "#li3");

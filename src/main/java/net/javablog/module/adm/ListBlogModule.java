@@ -39,7 +39,7 @@ public class ListBlogModule {
     private TagService tagService;
 
     @At("/adm/listblog")
-    @Ok("fm:adm.listblog")
+    @Ok("fm:adm.blog.listblog")
     public NutMap listblog() {
         NutMap out = new NutMap();
         out.put("sidebar_openposition", "#li1");
@@ -60,7 +60,6 @@ public class ListBlogModule {
     @Ok("json")
     public NutMap doaddup(@Param("::") final tb_singlepage tbin) {
         NutMap map = new NutMap();
-
 
         tbin.set_isdraft(false);
         tbin.set_titleen(Translates.trans(tbin.get_title()));

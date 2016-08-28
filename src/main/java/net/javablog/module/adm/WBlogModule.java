@@ -81,7 +81,7 @@ public class WBlogModule {
 
 
     @At("/adm/wblog")
-    @Ok("fm:adm.wblog")
+    @Ok("fm:adm.blog.wblog")
     public NutMap wblog(@Param(value = "_id", df = "0") int id) {
         NutMap out = new NutMap();
         out.put("sidebar_openposition", "#li1");

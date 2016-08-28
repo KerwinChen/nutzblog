@@ -1,10 +1,10 @@
 <html lang="en">
-<#include "common/header.ftl">
+<#include "../common/header.ftl">
 <body class="no-skin">
-<#include "common/navbar.ftl">
+<#include "../common/navbar.ftl">
 
 <div class="main-container ace-save-state" id="main-container">
-<#include "common/sidebar.ftl">
+<#include "../common/sidebar.ftl">
     <div class="main-content">
         <div class="main-content-inner">
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -47,9 +47,9 @@
             <!-- /.page-content -->
         </div>
     </div>
-<#include "common/footer.ftl">
+<#include "../common/footer.ftl">
 </div>
 
-<#include  "common/endjs.ftl">
+<#include  "../common/endjs.ftl">
 </body>
 </html>
