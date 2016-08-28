@@ -40,10 +40,16 @@ public class ListBlogModule {
 
     @At("/adm/listblog")
     @Ok("fm:adm.blog.listblog")
-    public NutMap listblog() {
+    public NutMap listblog(@Param(value = "_serisid", df = "0") int serisid, @Param(value = "_bookid", df = "0") int book_id) {
         NutMap out = new NutMap();
         out.put("sidebar_openposition", "#li1");
         out.put("sidebar_activeposition", "#li1li1");
+
+        if (book_id > 0) {
+            out.put("sidebar_openposition", "#li3");
+            out.put("sidebar_activeposition", "#li3li1");
+        }
+
         return out;
     }
 

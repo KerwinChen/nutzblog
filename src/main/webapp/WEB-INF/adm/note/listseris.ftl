@@ -13,40 +13,22 @@
                         <i class="ace-icon fa fa-home home-icon"></i>
                         <a href="/adm/index">Home</a>
                     </li>
-
-                <#if (obj.b._id) gt 0>
                     <li>
-                        <a target="_self"
-                           href="/adm/books_mgr/showlist_in/?_id=${obj.b._id}">读书笔记  ${obj.b._booktitle}</a>
+                        <a href="#">读书笔记</a>
                     </li>
                     <li>
-                        <a href="#">章节  ${obj.s._seristitle}</a>
+                        <a href="#">《${obj.book._booktitle}》</a>
                     </li>
-                <#else >
-                    <li>
-                        <a href="#">系列教程列表</a>
-                    <li>
-                        <a href="#">${obj.s._seristitle}</a>
-                    </li>
-                    </li>
-                </#if>
-                    <li class="active">添加/修改博客</li>
+                    <li class="active">添加/修改章节</li>
                 </ul>
             </div>
             <div class="page-content">
                 <div class="page-header">
-
-                <#if (obj.b._id) gt 0>
                     <a href="/adm/listnote">返回读书笔记列表</a>
-                    <a href="/adm/books_mgr/showlist_in/?_id=${obj.b._id}">返回《${obj.b._booktitle}》章节列表</a>
-                    <a href="/adm/seris_mgr/showaddup_inlist/?seris_id=${obj.s._id}&book_id=${obj.b._id}">在该章节下新增文章</a>
-                <#else >
-                    <a href="/adm/listseris">返回教程列表</a>
-                    <a href="/adm/seris_mgr/showaddup_inlist?seris_id=${obj.s._id}">在该系列教程下新增文章</a>
-                </#if>
-
+                    <a href="/adm/books_mgr/showaddup_inlist/?book_id=${obj.book._id}">在该读书笔记下新增章节</a>
                 </div>
-                    
+
+
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table  table-bordered table-hover">
@@ -79,13 +61,14 @@
     {{each datas as value i}}
     <tr>
         <td>{{value._id}}</td>
-        <td>{{value._title}}</td>
-        <td>{{value.ut}}</td>
+        <td>{{value._seristitle}}</td>
+        <td>{{value.updateTime}}</td>
         <td>
             <a href="javascript:del({{value._id}});">删除</a>
             <a target="_self"
-               href="/adm/seris_mgr/showaddup_inlist?book_id=${(obj.b._id)!'0'}&seris_id=${obj.s._id}&single_id={{value._id}}">编辑</a>
+               href="/adm/books_mgr/showaddup_inlist/?book_id=${obj.book._id}&seris_id={{value._id}}">编辑</a>
             <a target="_blank" href="/page/{{value._id}}/{{value._titleen}}.html">预览</a>
+            <a target="_self" href="/adm/seris_mgr/showlist_in/?_id={{value._id}}&book_id=${obj.book._id}">管理章节中的文章</a>
             <a target="_blank" href="/html_single/{{value._id}}">[生成html]</a>
         </td>
     </tr>
@@ -96,7 +79,7 @@
 <script>
     function del(id) {
         if (confirm("确定删除吗?")) {
-            $.get("/adm/single_mgr/del/?id=" + id + "", function (rs) {
+            $.get("/adm/seris_mgr/del/?_id=" + id + "", function (rs) {
                 if (rs == "ok") {
                     window.location.reload();
                 } else {
@@ -115,9 +98,8 @@
 
     function page(pageno) {
         var txt_q = $("#txt_q").val();
-        $.post("/adm/seris_mgr/doshowlist_in/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "",
-                {"txt_q": txt_q, "_serisid": ${obj.s._id}}, function (data) {
-
+        $.post("/adm/books_mgr/doshowlist_in/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "",
+                {"_bookid": ${obj.book._id}}, function (data) {
                     console.log(data);
                     var html = template('template_list', data);
                     $("#list_tbody").html(html);

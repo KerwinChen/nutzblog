@@ -46,17 +46,6 @@ public class ListSerisModule {
     }
 
 
-    @At("/adm/seris_mgr/del")
-    @Ok("json")
-    public String del(@Param("_id") int id) {
-        int blogs = blogService.count(Cnd.where("_serisid", "=", id));
-        if (blogs > 0) {
-            return "系列教程下还有内容没删除，不能删除当前系列。";
-        }
-        serisService.delete(id);
-        return "ok";
-    }
-
     @At("/adm/seris_mgr/doshowlist")
     @Ok("json")
     public NutMap doshowlist(@Param("pageno") int pageno, @Param("txt_q") String txt_q, @Param("isdraft") int isdraft) {
@@ -89,6 +78,10 @@ public class ListSerisModule {
         NutMap out = NutMap.NEW();
         out.put("sidebar_openposition", "#li2");
         out.put("sidebar_activeposition", "#li2li1");
+        if (book_id > 0) {
+            out.put("sidebar_openposition", "#li3");
+            out.put("sidebar_activeposition", "#li3li1");
+        }
 
         out.setv("s", serisService.fetch(seris_id));
         out.setv("b", noteService.fetch(book_id) == null ? new tb_book() : noteService.fetch(book_id));
@@ -101,7 +94,7 @@ public class ListSerisModule {
     //列出指定serisid 下面的文章列表页面
     @At("/adm/seris_mgr/doshowlist_in")
     @Ok("json")
-    public Map doshowlist_in(@Param("isdraft") int isdraft, @Param("seris_id") int seris_id, @Param("pageno") int pageno) {
+    public Map doshowlist_in(@Param("isdraft") int isdraft, @Param("_serisid") int seris_id, @Param("pageno") int pageno) {
         Map out = new HashMap();
         Pager pager = new Pager();
 
@@ -116,8 +109,8 @@ public class ListSerisModule {
         Sql sqllist = Sqls.create("select * from  tb_singlepage $condition").setCondition(cnd);
         Sql sqlcount = Sqls.create("select count(*) from  tb_singlepage $condition").setCondition(cnd);
 
-        out.put("pages", serisService.getObjListByPage(sqllist, pageno));
-        out.put("datas", serisService.getPageHtmlByPage(sqlcount, pageno));
+        out.put("datas", serisService.getObjListByPage(sqllist, pageno));
+        out.put("pages", serisService.getPageHtmlByPage(sqlcount, pageno));
 
         return out;
     }
@@ -129,6 +122,11 @@ public class ListSerisModule {
         NutMap out = NutMap.NEW();
         out.put("sidebar_openposition", "#li2");
         out.put("sidebar_activeposition", "#li2li1");
+
+        if (book_id > 0) {
+            out.put("sidebar_openposition", "#li3");
+            out.put("sidebar_activeposition", "#li3li1");
+        }
 
         out.setv("b", noteService.fetch(book_id) == null ? new tb_book() : noteService.fetch(book_id));
         out.setv("s", serisService.fetch(seris_id));
@@ -143,59 +141,6 @@ public class ListSerisModule {
     }
 
 
-    @At("/adm/seris_mgr/doaddup_inlist")
-    @Ok("json")
-    public Map doaddup_inlist(@Param("..") final tb_singlepage tbin) {
-
-        NutMap map = NutMap.NEW();
-
-        tbin.set_isdraft(false);
-        tbin.setUpdateTime(new Date());
-        tbin.set_titleen(Translates.trans(tbin.get_title()));
-
-        tb_user user = CurrentUserUtils.getInstance().getUser();
-        tbin.set_username(user.get_username());
-
-        //同步新增加的tag到tag表中
-        if (!Strings.isBlank(tbin.get_tags())) {
-            String[] arr = tbin.get_tags().split(",");
-            Set<String> arr2 = new HashSet<String>(Arrays.asList(arr));
-            for (String item : arr2) {
-                String tag1 = item;
-                if (tagService.count(Cnd.where("_name", "=", tag1.trim())) == 0) {
-                    tb_tag t = new tb_tag();
-                    t.set_img("");
-                    t.set_intro("");
-                    t.set_name(tag1);
-                    t.set_pname("未分组");
-                    t.setUpdateTime(new Date());
-                    t.setCreateTime(new Date());
-                    tagService.insert(t);
-                }
-            }
-        }
-
-
-        if (tbin.get_id() > 0) {
-            blogService.update(tbin);
-        } else {
-            tb_singlepage count = blogService.fetch(Cnd.where("_serisid", "=", tbin.get_serisid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inseris", "desc"));
-            if (count == null) {
-                tbin.set_index_inseris(1);
-            } else {
-                tbin.set_index_inseris(count.get_index_inseris() + 1);
-            }
-            blogService.insert(tbin);
-        }
-
-        map.put("status", "ok");
-        map.put("item", tbin);
-
-
-        return map;
-
-
-    }
 
 
 }

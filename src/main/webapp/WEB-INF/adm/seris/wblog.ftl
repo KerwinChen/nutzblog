@@ -33,15 +33,40 @@
                         <i class="ace-icon fa fa-home home-icon"></i>
                         <a href="/adm/wblog">Home</a>
                     </li>
+
+                <#if (obj.b._id) gt 0 && (obj.s._id) gt 0>
                     <li>
-                        <a href="#">博客管理</a>
+                        <a href="#">读书笔记 《${obj.b._booktitle}》</a>
                     </li>
+                    <li>
+                        <a href="#">章节 ${obj.s._seristitle}</a>
+                    </li>
+                <#else >
+                    <li>
+                        <a href="#">系列教程 ${obj.s._seristitle}</a>
+                    </li>
+                </#if>
+
                     <li class="active">写博客</li>
                 </ul>
             </div>
             <div class="page-content">
                 <div class="page-header">
+
+                <#if (obj.b._id) gt 0 && (obj.s._id) gt 0>
+                    <input type="hidden" id="_bookid" value="${(obj.b._id)!'0'}"/>
+                    <input type="hidden" id="_serisid" value="${obj.s._id}"/>
+                    <input type="hidden" id="_index_inseris" value="${(obj.single._index_inseris)!'1'}"/>
+                    <a href="/adm/listnote">返回图书列表</a>
+                    <a href="/adm/books_mgr/showlist_in/?_id=${obj.b._id}">返回章节列表</a>
+                <#else >
+                    <input type="hidden" id="_bookid" value="${(obj.b._id)!'0'}"/>
+                    <input type="hidden" id="_serisid" value="${obj.s._id}"/>
+                    <input type="hidden" id="_index_inseris" value="${(obj.single._index_inseris)!'1'}"/>
                     <a href="/adm/seris_mgr/showlist_in/?_id=${obj.s._id}">返回系列教程  ${obj.s._seristitle}</a>
+                </#if>
+
+
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
@@ -112,8 +137,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-12">
+                            <div class="form-actions form-group clearfix">
+                                <div class="col-sm-11 col-sm-offset-1">
                                     <button id="btn_submit" type="button" class="btn btn-default">提交</button>
                                 </div>
                             </div>
@@ -169,6 +194,9 @@
             var _content_html = testEditor.getHTML();
             var _content_markdown = testEditor.getMarkdown();
             var _tags = $("#_tags").val();
+            var _serisid = $("#_serisid").val();
+            var _bookid = $("#_bookid").val();
+            var _index_inseris = $("#_index_inseris").val();
 
 
             if (!_title || !_showintro || !_content_html) {
@@ -196,15 +224,15 @@
             data._content_markdown = _content_markdown;
             data._toppic = _toppic;
             data._id = $("#_id").val();
+            data._serisid = _serisid;
+            data._bookid = _bookid;
+            data._index_inseris = _index_inseris;
             data._tags = _tags;
             data._titleinlogo = $("#_titleinlogo").val();
 
-
-            var jsondata = $.toJSON(data);
-
-            $.post("/adm/single_mgr/doaddup", data, function (rs) {
+            $.post("/adm/seris_mgr/doaddup_inlist", data, function (rs) {
                 if (rs["status"] == "ok") {
-                    window.location.href = "/adm/listblog";
+                    window.location.href = "/adm/seris_mgr/showlist_in/?_id=" + _serisid + "&book_id=" + _bookid;
                 }
                 console.log("返回结果" + $.toJSON(rs));
             });
@@ -217,18 +245,6 @@
 
         //弹出选择图片 iframe
         $('#btn_selectimg').bind('click', function () {
-//            art.dialog.open('/adm/upload/selectimg',
-//                    {
-//                        id: "win-selectpage",
-//                        title: '选择图片',
-//                        width: 870,
-//                        height: 620,
-//                        left: '50%',
-//                        top: '5%',
-//                        fixed: false,
-//                        drag: true,
-//                        resize: true
-//                    });
                     layer.open({
                         title: "选择图片",
                         type: 2,
@@ -237,7 +253,6 @@
                         offset: ['5%', ''],
                         content: ['/adm/upload/selectimg', 'no']
                     });
-
                 }
         );
 

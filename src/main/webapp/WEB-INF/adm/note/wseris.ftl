@@ -15,30 +15,38 @@
                         <a href="/adm/index">Home</a>
                     </li>
                     <li>
-                        <a href="#">写读书笔记</a>
+                        <a href="#">读书笔记  ${obj.book._booktitle}</a>
+                    </li>
+                    <li>
+                        <a href="#">增加/删除章节</a>
                     </li>
                 </ul>
             </div>
             <div class="page-content clearfix">
+                <div class="page-header">
+                    <a href="/adm/books_mgr/showlist_in/?_id=${obj.book._id}">返回读书笔记 ${obj.book._booktitle}</a>
+                </div>
+
                 <div class="row ">
                     <div class="col-xs-12">
                         <div class="form-group clearfix">
                             <label class="col-sm-1 control-label">标题</label>
+                            <input type="hidden" value="${obj.book._id}" id="_bookid">
                             <input type="hidden" value="${obj.item._id}" id="_id">
 
                             <div class="col-sm-11">
-                                <input type="input" class="form-control" name="_booktitle" id="_booktitle"
+                                <input type="input" class="form-control" name="_seristitle" id="_seristitle"
                                        class="required"
-                                       value="${obj.item._booktitle!''}">
+                                       value="${obj.item._seristitle!''}">
                             </div>
                         </div>
 
                         <div class="form-group clearfix">
-                            <label class="col-sm-1 control-label">描述</label>
+                            <label class="col-sm-1 control-label">内容</label>
                             <div class="col-sm-11">
-                                <textarea name="_bookintro" id="_bookintro" rows="5"
+                                <textarea name="_serisintro" id="_serisintro" rows="5"
                                           class="autosize-transition form-control"
-                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 112px;">${obj.item._bookintro!''}</textarea>
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 112px;">${obj.item._serisintro!''}</textarea>
                             </div>
                         </div>
 
@@ -65,22 +73,23 @@
 
 
         $("#btn_submit").bind("click", function () {
-            var _booktitle = $("#_booktitle").val();
-            var _bookintro = $("#_bookintro").val();
+            var _bookid = $("#_bookid").val();
+            var _seristitle = $("#_seristitle").val();
+            var _serisintro = $("#_serisintro").val();
 
-            if (!_booktitle || !_bookintro) {
+            if (!_serisintro || !_seristitle) {
                 alert("内容不完整");
                 return;
             }
             var data = {};
             data._id = $("#_id").val();
-            data._booktitle = _booktitle;
-            data._bookintro = _bookintro;
+            data._bookid = _bookid;
+            data._seristitle = _seristitle;
+            data._serisintro = _serisintro;
 
-
-            $.post("/adm/books_mgr/doaddup/?t=" + new Date().getTime(), data, function (rs) {
+            $.post("/adm/seris_mgr/doaddup/?t=" + new Date().getTime(), data, function (rs) {
                 console.log("返回结果" + rs);
-                window.location.href = "/adm/listnote";
+                window.location.href = "/adm/books_mgr/showlist_in/?_id=${obj.book._id}";
             });
 
 

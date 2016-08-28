@@ -109,8 +109,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-12">
+                            <div class="form-actions form-group clearfix">
+                                <div class="col-sm-11 col-sm-offset-1">
                                     <button id="btn_submit" type="button" class="btn btn-default">提交</button>
                                 </div>
                             </div>

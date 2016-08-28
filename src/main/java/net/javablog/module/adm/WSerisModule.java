@@ -1,17 +1,23 @@
 package net.javablog.module.adm;
 
 import net.javablog.bean.tb_seris;
+import net.javablog.bean.tb_singlepage;
+import net.javablog.bean.tb_tag;
+import net.javablog.bean.tb_user;
+import net.javablog.service.BlogService;
 import net.javablog.service.SerisService;
+import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
 import net.javablog.util.Translates;
+import org.nutz.dao.Cnd;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
 import org.nutz.mvc.filter.CheckSession;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 
 @IocBean
@@ -20,6 +26,12 @@ public class WSerisModule {
 
     @Inject
     private SerisService serisService;
+
+    @Inject
+    private BlogService blogService;
+
+    @Inject
+    private TagService tagService;
 
     @At("/adm/wseris")
     @Ok("fm:adm.seris.wseris")
@@ -49,5 +61,71 @@ public class WSerisModule {
         return tb.get_id() + "";
     }
 
+    @At("/adm/seris_mgr/del")
+    @Ok("json")
+    public String del(@Param("_id") int id) {
+        int blogs = blogService.count(Cnd.where("_serisid", "=", id));
+        if (blogs > 0) {
+            return "系列教程下还有内容没删除，不能删除当前系列。";
+        }
+        serisService.delete(id);
+        return "ok";
+    }
+
+
+
+    @At("/adm/seris_mgr/doaddup_inlist")
+    @Ok("json")
+    public Map doaddup_inlist(@Param("..") final tb_singlepage tbin) {
+
+        NutMap map = NutMap.NEW();
+
+        tbin.set_isdraft(false);
+        tbin.setUpdateTime(new Date());
+        tbin.set_titleen(Translates.trans(tbin.get_title()));
+
+        tb_user user = CurrentUserUtils.getInstance().getUser();
+        tbin.set_username(user.get_username());
+
+        //同步新增加的tag到tag表中
+        if (!Strings.isBlank(tbin.get_tags())) {
+            String[] arr = tbin.get_tags().split(",");
+            Set<String> arr2 = new HashSet<String>(Arrays.asList(arr));
+            for (String item : arr2) {
+                String tag1 = item;
+                if (tagService.count(Cnd.where("_name", "=", tag1.trim())) == 0) {
+                    tb_tag t = new tb_tag();
+                    t.set_img("");
+                    t.set_intro("");
+                    t.set_name(tag1);
+                    t.set_pname("未分组");
+                    t.setUpdateTime(new Date());
+                    t.setCreateTime(new Date());
+                    tagService.insert(t);
+                }
+            }
+        }
+
+
+        if (tbin.get_id() > 0) {
+            blogService.update(tbin);
+        } else {
+            tb_singlepage count = blogService.fetch(Cnd.where("_serisid", "=", tbin.get_serisid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inseris", "desc"));
+            if (count == null) {
+                tbin.set_index_inseris(1);
+            } else {
+                tbin.set_index_inseris(count.get_index_inseris() + 1);
+            }
+            blogService.insert(tbin);
+        }
+
+        map.put("status", "ok");
+        map.put("item", tbin);
+
+
+        return map;
+
+
+    }
 
 }

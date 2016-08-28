@@ -38,7 +38,7 @@
                             <div class="col-sm-11">
                                 <textarea name="_serisintro" id="_serisintro" rows="5"
                                           class="autosize-transition form-control"
-                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 112px;">${obj.item._seristitle!''}</textarea>
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 112px;">${obj.item._serisintro!''}</textarea>
                             </div>
                         </div>
 
