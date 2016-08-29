@@ -61,17 +61,16 @@ function fileupload(id) {
 
 //                var win = art.dialog.top;
 //                win.artDialog.list['dia_ad_recommend'].size(360, 650).position("50%", "50%");
-
         }
     });
 }
 
 
-function hideprocess() {
+function hideprocess(id) {
     //上传完毕，5秒钟后消失。并且使得进度条
-    $('#progress').hide();
+    $("#" + id).find(".progress").hide();
     //进度值减为0
-    $('.progress-bar').css(
+    $("#" + id).find('.progress-bar').css(
         'width', '0%'
     );
 }

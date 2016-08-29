@@ -122,12 +122,11 @@
                             var rsvalue = "  <a target=\"_blank\"  href=\"/view/" + filekey + "/\">查看 " + filename + "</a>";
 
                             layer.msg("选中 " + filename, {time: 1000, icon: 1}, function () {
-                                parent.$("#imgid").empty();
-                                parent.$("#imgid").attr("imgid", filekey);
-                                parent.$("#imgid").append(rsvalue);
+                                parent.$("#${obj.callbackid}").empty();
+                                parent.$("#${obj.callbackid}").attr("imgid", filekey);
+                                parent.$("#${obj.callbackid}").append(rsvalue);
                                 parent.layer.close(index);
                             });
-
 
                         });
                     }
