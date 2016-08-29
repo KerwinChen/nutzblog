@@ -100,7 +100,7 @@
                             <li id="li5" class="highlight">
                                 <a href="/adm/settings">
                                     <i class="menu-icon fa fa-tachometer"></i>
-                                    <span class="menu-text"> 选项设置 </span>
+                                    <span class="menu-text"> 站点设置 </span>
                                 </a>
                                 <b class="arrow"></b>
                             </li>

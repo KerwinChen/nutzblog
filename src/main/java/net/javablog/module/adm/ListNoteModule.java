@@ -16,7 +16,6 @@ import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
 import org.nutz.mvc.filter.CheckSession;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,6 +105,12 @@ public class ListNoteModule {
     @At("/adm/books_mgr/showaddup_inlist")
     public Map showaddup_inlist(@Param("book_id") int book_id, @Param(value = "seris_id", df = "0") int seris_id) {
         NutMap out = NutMap.NEW();
+        
+        if (book_id > 0) {
+            out.put("sidebar_openposition", "#li3");
+            out.put("sidebar_activeposition", "#li3li1");
+        }
+
         out.setv("book_id", book_id);
         out.setv("book", noteService.fetch(book_id));
         out.setv("seris_id", seris_id);

@@ -1,0 +1,30 @@
+
+siteconfig
+
+##站点
+site_name			 站点名称
+site_logo			 建议大小
+site_fav			 建议大小
+site_createtime
+site_aboutme
+site_tj				 统计代码,百度统计?cnzz?
+site_msgstatus   是否启用留言板
+site_msgboard	  配置代码
+
+
+##关于站长
+admin
+admin_icon
+admin_email
+admin_github
+admin_weibo
+admin_qq
+
+
+##FTP设置
+ftp_ip
+ftp_username
+ftp_pwd
+
+
+
