@@ -6,9 +6,6 @@
 <script src="/adm/assets/js/jquery.inputlimiter.min.js"></script>
 <script src="/adm/assets/js/bootstrap-tag.min.js"></script>
 
-<#--对话框-->
-<script src="/adm/assets/js/dialog/artDialog.js?skin=chrome"></script>
-<script src="/adm/assets/js/dialog/plugins/iframeTools.js"></script>
 
 <#--上传组件-->
 <link href="/adm/assets/js/jquery-file-upload/jquery.fileupload.css" rel="stylesheet">
@@ -91,6 +88,7 @@
                         </span>
                                     <button id="btn_selectimg" type="button" class="btn btn-sm  btn-info">选择图片</button>
                                     <br>
+
                                     <div id="progress" class="progress" style="display: none;margin: 2px auto">
                                         <div class="progress-bar progress-bar-success"></div>
                                     </div>
@@ -211,25 +209,11 @@
         //设置哪个 btn_upload 为上传控件
         fileupload("fileupload_group");
 
-
         //弹出选择图片 iframe
         $('#btn_selectimg').bind('click', function () {
-//            art.dialog.open('/adm/upload/selectimg',
-//                    {
-//                        id: "win-selectpage",
-//                        title: '选择图片',
-//                        width: 870,
-//                        height: 620,
-//                        left: '50%',
-//                        top: '5%',
-//                        fixed: false,
-//                        drag: true,
-//                        resize: true
-//                    });
                     layer.open({
                         title: "选择图片",
                         type: 2,
-//                        area: ['870px', '100px'],
                         area: ['900px', '90%'],
                         offset: ['5%', ''],
                         content: ['/adm/upload/selectimg', 'no']

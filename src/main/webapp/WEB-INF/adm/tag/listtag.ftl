@@ -14,9 +14,9 @@
                         <a href="/adm/index">Home</a>
                     </li>
                     <li>
-                        <a href="#">博客管理</a>
+                        <a href="#">标签管理</a>
                     </li>
-                    <li class="active">博客列表</li>
+                    <li class="active">标签列表</li>
                 </ul>
             </div>
             <div class="page-content">
@@ -35,11 +35,16 @@
                     <div class="col-md-12">
                         <form class="form-inline">
                             <div class="form-group">
-                                <input type="text" class="form-control input-sm" id="txt_q" placeholder="标题">
+                                <input type="text" class="form-control input-sm" id="txt_q" placeholder="标签">
                             </div>
                             <button id="btn_q" type="button" class="btn btn-info btn-xs">
                                 搜索
                             </button>
+                        </form>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <a href="/adm/tag_mgr/showaddup">添加标签</a>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -50,7 +55,7 @@
                             <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>标题</th>
+                                <th>标签</th>
                                 <th>时间</th>
                                 <th>管理</th>
                             </tr>
@@ -75,18 +80,15 @@
 </div>
 
 <#include  "../common/endjs.ftl">
-
 <script id="template_list" type="text/html">
     {{each datas as value i}}
     <tr>
         <td>{{value._id}}</td>
-        <td>{{value._title}}</td>
+        <td>{{value._pname}} - {{value._name}}</td>
         <td>{{value.ut}}</td>
         <td>
             <a href="javascript:del({{value._id}});">删除</a>
-            <a target="_self" href="/adm/wblog/?_id={{value._id}}">编辑</a>
-            <a target="_blank" href="/page/{{value._id}}/{{value._titleen}}.html">预览</a>
-            <a target="_blank" href="/html_single/{{value._id}}">[生成html]</a>
+            <a target="_self" href="/adm/tag_mgr/showaddup/?_id={{value._id}}">编辑</a>
         </td>
     </tr>
     {{/each}}
@@ -96,12 +98,8 @@
 <script>
     function del(id) {
         if (confirm("确定删除吗?")) {
-            $.get("/adm/single_mgr/del/?id=" + id + "", function (rs) {
-                if (rs == "ok") {
-                    window.location.reload();
-                } else {
-                    alert(rs);
-                }
+            $.get("/adm/tag_mgr/del/?_id=" + id + "", function (data) {
+                window.location.reload();
             });
         }
     }
@@ -115,11 +113,12 @@
 
     function page(pageno) {
         var txt_q = $("#txt_q").val();
-        $.post("/adm/single_mgr/doshowlist/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "", {"txt_q": txt_q}, function (data) {
+        $.post("/adm/tag_mgr/doshowlist_tag/?pageno=" + pageno + "&t=" + new Date().getTime() + "", {txt_q: txt_q}, function (data) {
             console.log(data);
             var html = template('template_list', data);
             $("#list_tbody").html(html);
             $("#pager").html(data["pages"]);
+
         })
     }
 

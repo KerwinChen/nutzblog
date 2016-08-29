@@ -6,6 +6,7 @@
 
 <!-- page specific plugin scripts -->
 <script src="/adm/assets/js/autosize.min.js"></script>
+<script src="/adm/assets/js/jquery-typeahead.js"></script>
 
 <!-- ace scripts -->
 <script src="/adm/assets/js/ace-elements.min.js"></script>

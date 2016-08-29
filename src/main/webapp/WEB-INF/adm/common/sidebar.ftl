@@ -18,14 +18,14 @@
                                 </a>
                                 <b class="arrow"></b>
                                 <ul class="submenu">
-                                    <li  id="li1li1">
+                                    <li id="li1li1">
                                         <a href="/adm/listblog">
                                             <i class="menu-icon fa fa-caret-right"></i>
                                             博客列表
                                         </a>
                                         <b class="arrow"></b>
                                     </li>
-                                    <li  id="li1li2" class="">
+                                    <li id="li1li2" class="">
                                         <a href="/adm/wblog">
                                             <i class="menu-icon fa fa-caret-right"></i>
                                             写博客
@@ -35,7 +35,7 @@
                                 </ul>
                             </li>
 
-                            <li  id="li2"class="highlight">
+                            <li id="li2" class="highlight">
                                 <a href="#" class="dropdown-toggle">
                                     <i class="menu-icon fa fa-desktop"></i>
                                         <span class="menu-text">
@@ -44,15 +44,15 @@
                                     <b class="arrow fa fa-angle-down"></b>
                                 </a>
                                 <b class="arrow"></b>
-                                <ul class="submenu nav-show" >
-                                    <li  id="li2li1"class="">
+                                <ul class="submenu nav-show">
+                                    <li id="li2li1" class="">
                                         <a href="/adm/listseris">
                                             <i class="menu-icon fa fa-caret-right"></i>
                                             教程列表
                                         </a>
                                         <b class="arrow"></b>
                                     </li>
-                                    <li  id="li2li2" class="">
+                                    <li id="li2li2" class="">
                                         <a href="/adm/wseris">
                                             <i class="menu-icon fa fa-caret-right"></i>
                                             写教程
@@ -71,15 +71,15 @@
                                     <b class="arrow fa fa-angle-down"></b>
                                 </a>
                                 <b class="arrow"></b>
-                                <ul class="submenu nav-show" >
-                                    <li  id="li3li1" class="">
+                                <ul class="submenu nav-show">
+                                    <li id="li3li1" class="">
                                         <a href="/adm/listnote">
                                             <i class="menu-icon fa fa-caret-right"></i>
                                             读书笔记列表
                                         </a>
                                         <b class="arrow"></b>
                                     </li>
-                                    <li  id="li3li2" class="">
+                                    <li id="li3li2" class="">
                                         <a href="/adm/wnote">
                                             <i class="menu-icon fa fa-caret-right"></i>
                                             写读书笔记
@@ -89,7 +89,15 @@
                                 </ul>
                             </li>
 
-                            <li  id="li4"class="highlight">
+                            <li id="li4" class="highlight">
+                                <a href="/adm/listtag">
+                                    <i class="menu-icon fa fa-tachometer"></i>
+                                    <span class="menu-text"> 标签管理 </span>
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li id="li5" class="highlight">
                                 <a href="/adm/settings">
                                     <i class="menu-icon fa fa-tachometer"></i>
                                     <span class="menu-text"> 选项设置 </span>
@@ -101,7 +109,7 @@
                         </ul>
                     </div>
                     <div class="ace-scroll nav-scroll scroll-disabled">
-                        <div class="scroll-track scroll-hover" >
+                        <div class="scroll-track scroll-hover">
                             <div class="scroll-bar"
                                  style="top: 0px; transition-property: top; transition-duration: 0.1s;"></div>
                         </div>

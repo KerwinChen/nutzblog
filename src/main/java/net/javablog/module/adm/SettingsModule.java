@@ -20,7 +20,7 @@ public class SettingsModule {
     @Ok("fm:adm.settings")
     public NutMap settings() {
         NutMap out = new NutMap();
-        out.put("sidebar_openposition", "#li4");
+        out.put("sidebar_openposition", "#li5");
 //        out.put("sidebar_activeposition", "#li4li1");
         return out;
     }
