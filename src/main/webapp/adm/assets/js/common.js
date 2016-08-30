@@ -17,7 +17,7 @@ function neweditor(id) {
         // autoHeight: true,
         // watch: false,             //实时预览
         syncScrolling: "single",
-        saveHTMLToTextarea: true, 
+        saveHTMLToTextarea: true,
         toolbarIcons: function () {
             return [
                 "undo", "redo", "|",

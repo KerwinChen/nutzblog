@@ -230,8 +230,7 @@
 
                     <#--site_aboutme-->
                         <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right"
-                            >About Me</label>
+                            <label class="col-sm-1 control-label no-padding-right" >About Me</label>
                             <div class="col-sm-11">
                                 <div id="site_aboutme">
                                     <textarea style="display:none;">${(obj.item._content_markdown)!""}</textarea>
@@ -261,8 +260,6 @@
 
 <script>
     $(function () {
-
-
 
         //设置哪个 btn_upload 为上传控件
         fileupload("fileupload_photo");
@@ -314,9 +311,6 @@
         });
 
 
-        var testEditor = neweditor("site_aboutme");
-
-
         $("#btn_save_ftp").bind("click", function () {
 
             layer.alert('见到你真的很高兴', {icon: 6});
@@ -337,6 +331,11 @@
                 }
             });
         });
+
+
+
+        var testEditor = neweditor("site_aboutme");
+
 
 
     });
