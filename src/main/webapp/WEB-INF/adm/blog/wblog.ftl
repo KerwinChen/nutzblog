@@ -222,38 +222,8 @@
                 }
         );
 
-
         //编辑器
-        var testEditor;
-        testEditor = editormd("test-editormd", {
-            width: "100%",
-            height: 300,
-            toolbarAutoFixed: false,
-//            autoHeight: true,
-//            watch: false,             //实时预览
-            syncScrolling: "single",
-            saveHTMLToTextarea: true,//getHTML() 的使用需要设置该属性为true
-            toolbarIcons: function () {
-                // Or return editormd.toolbarModes[name]; // full, simple, mini
-                // Using "||" set icons align right.
-//                return ["undo", "redo", "|", "bold", "hr", "|", "preview", "watch", "|", "fullscreen", "info", "testIcon", "testIcon2", "file", "faicon", "||", "watch", "fullscreen", "preview", "testIcon"]
-                return [
-                    "undo", "redo", "|",
-                    "bold", "del", "italic", "quote", "uppercase", "lowercase", "|",
-                    "h1", "h2", "h3", "h4", "h5", "h6", "|",
-                    "list-ul", "list-ol", "hr", "|",
-                    "watch", "preview", "fullscreen", "|",
-                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities",
-                    "help", "info"
-                ];
-            },
-            path: "/adm/assets/js/editor.md/lib/",
-            imageUpload: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/adm/upload_editor",
-            htmlDecode: true
-
-        });
+        var testEditor = neweditor("test-editormd");
 
 
     });

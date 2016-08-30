@@ -9,6 +9,37 @@ $(function () {
 });
 
 
+function neweditor(id) {
+    return editormd(id, {
+        width: "100%",
+        height: 300,
+        toolbarAutoFixed: false,
+        // autoHeight: true,
+        // watch: false,             //实时预览
+        syncScrolling: "single",
+        saveHTMLToTextarea: true, 
+        toolbarIcons: function () {
+            return [
+                "undo", "redo", "|",
+                "bold", "del", "italic", "quote", "|",
+                "h2", "h3", "h4", "|",
+                "list-ul", "list-ol", "hr", "|",
+                "watch", "preview", "fullscreen", "|",
+                "link", "image", "code-block", "table", "datetime", "html-entities",
+                "help", "info"
+            ];
+
+        },
+        path: "/adm/assets/js/editor.md/lib/",
+        imageUpload: true,
+        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL: "/adm/upload_editor",
+        htmlDecode: true
+
+    });
+}
+
+
 var manyfile = false;
 function fileupload(id) {
     $("#" + id).find("input[type='file']").fileupload({

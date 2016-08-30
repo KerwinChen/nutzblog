@@ -40,15 +40,12 @@ public class MainSetup implements Setup {
         listconfig.add(new tb_config("site_createtime", "2015-01-01"));
         listconfig.add(new tb_config("site_aboutme", "请叫我刀刀~~ (daodaovps@qq.com)"));
         listconfig.add(new tb_config("site_tj", ""));
-        listconfig.add(new tb_config("site_msgstatus", "false"));
         listconfig.add(new tb_config("site_msgboard", ""));
 
-        listconfig.add(new tb_config("admin_website", "http://daodaovps.com"));
-        listconfig.add(new tb_config("admin_icon", "http://i4.buimg.com/1949/94c52c5fe19ccecc.jpg"));
+        listconfig.add(new tb_config("admin", "刀刀"));
+        listconfig.add(new tb_config("admin_photo", "http://i4.buimg.com/1949/94c52c5fe19ccecc.jpg"));
         listconfig.add(new tb_config("admin_email", "daodaovps@qq.com"));
         listconfig.add(new tb_config("admin_github", "https://github.com/daodaovps"));
-        listconfig.add(new tb_config("admin_weibo", "http://weibo.com/jiaowodaodao"));
-        listconfig.add(new tb_config("admin_qq", "daodaovps@qq.com"));
 
         listconfig.add(new tb_config("ftp_ip", ""));
         listconfig.add(new tb_config("ftp_username", ""));
