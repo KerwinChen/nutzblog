@@ -116,8 +116,10 @@ public class UploadModule {
 
     @Ok("fm:adm.selectimg")
     @At("/adm/upload/selectimg")
-    public String selectimg() {
-        return "adm/selectimg";
+    public Map selectimg(@Param(value = "callbackid", df = "imgid") String callbackid) {
+        NutMap out = new NutMap();
+        out.put("callbackid", callbackid);
+        return out;
     }
 
     //选择图片的 分页查询请求
@@ -145,8 +147,8 @@ public class UploadModule {
         Sql sqllist = Sqls.create("select * from tb_files $condition").setCondition(criteria);
         Sql sqlcount = Sqls.create("select count(*) from tb_files $condition").setCondition(criteria);
 
-        List datas = fileService.getObjListByPage(sqllist, pageno,18);
-        String page = fileService.getPageHtmlByPage(sqlcount, args, pageno,18);
+        List datas = fileService.getObjListByPage(sqllist, pageno, 18);
+        String page = fileService.getPageHtmlByPage(sqlcount, args, pageno, 18);
 
         map.setv("datas", datas);
         map.setv("pages", page);

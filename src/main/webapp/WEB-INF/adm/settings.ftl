@@ -1,5 +1,13 @@
 <html lang="en">
 <#include "common/header.ftl">
+<#--上传组件-->
+<link href="/adm/assets/js/jquery-file-upload/jquery.fileupload.css" rel="stylesheet">
+<script src="/adm/assets/js/jquery-file-upload/jquery.ui.widget.js"></script>
+<script src="/adm/assets/js/jquery-file-upload/jquery.iframe-transport.js"></script>
+<script src="/adm/assets/js/jquery-file-upload/jquery.fileupload.js"></script>
+<script src="/adm/assets/js/jquery-file-upload/upload-base.js"></script>
+<link rel="stylesheet" href="/adm/assets/css/bootstrap-datepicker3.min.css"/>
+
 <body class="no-skin">
 <#include "common/navbar.ftl">
 
@@ -27,6 +35,7 @@
                     <div class="col-md-12 form-horizontal">
                         <h4 class="header blue bolder smaller">站点属性</h4>
 
+                    <#--site_name-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right"
                                    for="form-field-facebook">博客名称</label>
@@ -36,33 +45,79 @@
                             </div>
                         </div>
 
-                    <#--选择,上传logo-->
+                    <#--选择,上传logo   site_logo-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right"
-                                    >博客Logo</label>
+                                    >上传Logo</label>
 
                             <div class="col-sm-9">
-                                <div class="col-sm-11" id="fileupload_logo">
+                                <div id="fileupload_logo">
                         <span class="btn btn-success btn-sm fileinput-button">
                             <i class="glyphicon glyphicon-plus"></i>
                             <span>上传</span>
                             <!-- The file input field used as target for the file upload widget -->
                             <input class="btn btn-primary" id="fileupload" type="file" name="f" multiple="">
                         </span>
-                                    <button id="btn_selectimg" type="button" class="btn btn-sm  btn-info">选择图片</button>
+                                    <button id="btn_selectimg_logo" type="button" class="btn btn-sm  btn-info">选择图片
+                                    </button>
                                     <br>
 
                                     <div id="progress" class="progress" style="display: none;margin: 2px auto">
                                         <div class="progress-bar progress-bar-success"></div>
                                     </div>
-                                    <div class="showimg" id="imgid" imgid="${obj.item._toppic!""}"
+                                    <div class="showimg" id="imgid_logo" imgid="${(obj.item._toppic)!""}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${obj.item._toppic!""}/">${obj.item._toppic!""}</a>
+                                           href="/view/${(obj.item._toppic)!""}/">${(obj.item._toppic)!""}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                    <#--site_fav-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right"
+                                    >上传favicon.ico</label>
+
+                            <div class="col-sm-9">
+                                <div id="fileupload_fav">
+                        <span class="btn btn-success btn-sm fileinput-button">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>上传</span>
+                            <!-- The file input field used as target for the file upload widget -->
+                            <input class="btn btn-primary" id="fileupload" type="file" name="f" multiple="">
+                        </span>
+                                    <button id="btn_selectimg_fav" type="button" class="btn btn-sm  btn-info">选择图片
+                                    </button>
+                                    <br>
+
+                                    <div id="progress" class="progress" style="display: none;margin: 2px auto">
+                                        <div class="progress-bar progress-bar-success"></div>
+                                    </div>
+                                    <div class="showimg" id="imgid_fav" imgid="${(obj.item._toppic)!""}"
+                                         style="margin: 2px auto">
+                                        <a target="_blank"
+                                           href="/view/${(obj.item._toppic)!""}/">${(obj.item._toppic)!""}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <#--site_createtime-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right"
+                                   for="form-field-facebook">建站时间</label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <input class="form-control date-picker" id="site_createtime" type="text"
+                                           data-date-format="yyyy-mm-dd"/>
+                                    <span class="input-group-addon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+                                </div>
+                            </div>
+                        </div>
+
 
 
                     </div>
@@ -79,20 +134,43 @@
 <script>
     $(function () {
         //设置哪个 btn_upload 为上传控件
-        fileupload("fileupload_group");
+        fileupload("fileupload_logo");
 
         //弹出选择图片 iframe
-        $('#btn_selectimg').bind('click', function () {
+        $('#btn_selectimg_logo').bind('click', function () {
                     layer.open({
                         title: "选择图片",
                         type: 2,
-                        area: ['900px', '90%'],
-                        offset: ['5%', ''],
-                        content: ['/adm/upload/selectimg?callbackid=imgid', 'no']
+                        area: ['900px', '600px'],
+                        offset: ['8%', ''],
+                        content: ['/adm/upload/selectimg?callbackid=imgid_logo', 'no']
                     });
-
                 }
         );
+
+        //设置哪个 btn_upload 为上传控件
+        fileupload("fileupload_fav");
+
+        //弹出选择图片 iframe
+        $('#btn_selectimg_fav').bind('click', function () {
+                    layer.open({
+                        title: "选择图片",
+                        type: 2,
+                        area: ['900px', '600px'],
+                        offset: ['8%', ''],
+                        content: ['/adm/upload/selectimg?callbackid=imgid_fav', 'no']
+                    });
+                }
+        );
+        $('#site_createtime').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        })
+
+//        $("#site_createtime").datepicker({
+//            autoclose: true,
+//            todayHighlight: true
+//        });
 
 
     });
