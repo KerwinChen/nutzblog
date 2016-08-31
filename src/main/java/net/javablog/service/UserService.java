@@ -3,13 +3,12 @@ package net.javablog.service;
 import net.javablog.bean.tb_user;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Lang;
-import org.nutz.lang.random.R;
-import org.nutz.service.IdNameEntityService;
 
 import java.util.Date;
 
 @IocBean(fields = "dao")
 public class UserService extends BaseService<tb_user> {
+
 
     public tb_user add(String name, String password) {
         tb_user user = new tb_user();

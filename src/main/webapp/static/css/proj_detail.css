@@ -1,0 +1,152 @@
+@import url('header.css');
+
+.margintop20 {
+    margin-top: 20px;
+}
+
+.margintop30 {
+    margin-top: 30px;
+}
+
+.margintop50 {
+    margin-top: 50px;
+}
+
+.col-md-2 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.col-md-2 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.col-md-10 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.col-md-12 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.projlogo_xs {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.zero-clipboard {
+    display: block;
+    position: relative;
+}
+
+.linkproj {
+    display: inline;
+    font-size: 20px;
+}
+
+.btn-clipboard {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #767676;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #e1e1e8;
+    border-radius: 0 4px 0 4px;
+}
+
+.zeroclipboard-is-hover {
+    color: #fff;
+    background-color: #00A0E9;
+    border-color: #00A0E9;
+}
+
+.url1 span {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.url1 a {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 1px dashed transparent;
+}
+
+.url1 a:visited {
+    color: #00A0E9;
+    text-decoration: none;
+}
+
+.url1 a:hover {
+    border-bottom: 1px dashed #00A0E9;
+    text-decoration: none;
+}
+
+#div_relapages ul {
+    list-style-type: none;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    padding-left: 0px;
+    border-bottom: 1px solid #E1E1E8;
+    font-size: 0;
+}
+
+#div_relapages ul li {
+    list-style-type: none;
+    border-bottom: 1px dashed #E1E1E8;
+    width: 100%;
+    margin: 3px 0 0 0;
+    padding: 0px;
+    display: inline-block;
+
+}
+
+#div_relapages ul li:hover {
+    list-style-type: none;
+    border-bottom: 1px dashed #00A0E9;
+    color: #00A0E9;
+    cursor: pointer;
+}
+
+#div_relapages ul li a:hover {
+    text-decoration: none;
+}
+
+#div_relapages ul li a {
+    display: inline-block;
+    background: url('/static/img/page.png') no-repeat 0 8px;
+    padding-left: 18px;
+    width: 70%;
+    font-size: 18px;
+    white-space: nowrap; /*强制不换行*/
+    text-overflow: ellipsis; /*省略号*/
+    overflow: hidden; /*自动隐藏文字*/
+    -o-text-overflow: ellipsis; /*适用于opera浏览器*/
+}
+
+#div_relapages ul li a:visited {
+    color: #00A0E9;
+}
+
+#div_relapages ul li span {
+
+    float: right;
+    font-size: 15px;
+    color: #b3b3b9;
+    line-height: 25px;
+}
+
+#comments {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+

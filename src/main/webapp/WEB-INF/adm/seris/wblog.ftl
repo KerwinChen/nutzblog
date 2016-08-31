@@ -248,9 +248,8 @@
                     layer.open({
                         title: "选择图片",
                         type: 2,
-//                        area: ['870px', '100px'],
-                        area: ['900px', '90%'],
-                        offset: ['5%', ''],
+                        area: ['900px', '600px'],
+                        offset: ['8%', ''],
                         content: ['/adm/upload/selectimg', 'no']
                     });
                 }

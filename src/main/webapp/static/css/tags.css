@@ -1,0 +1,71 @@
+@import url('header.css');
+
+.tags_warp {
+    border: 1px solid #e3e3e3;
+    padding: 20px 0px 20px 0px;
+    border-radius: 4px;
+    margin-bottom: 50px;
+    background-color: #FCF8E3;
+}
+
+dl {
+    background-color: #D9EDF7;
+    padding: 0px;
+    height: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+
+dt {
+    background-color: #67C1FA;
+    color: #FFFFFF;
+    padding: 10px;
+    width: 100%;
+}
+
+dd {
+    padding: 5px 10px 5px 10px;
+    display: inline-block;
+    width: 100%;
+    font-weight: normal;
+    color: #5e5e5e;
+}
+
+dd a:link {
+    text-decoration: none;
+    color: #5e5e5e;
+}
+
+dd a:visited {
+    text-decoration: none;
+    color: #5e5e5e;
+}
+
+dd a:hover {
+    text-decoration: none;
+    color: #F38176;
+}
+
+.meta-value a:visited, .meta-value a:hover {
+    text-decoration: none;
+    border: 1px solid #FA8172;
+    border-radius: 3px;
+    text-align: center;
+    position: relative;
+}
+
+.meta-value a {
+    text-decoration: none;
+    border: 1px solid transparent;
+    padding: 5px 8px 5px 5px;
+    line-height: 20px;
+    display: inline-block;
+}
+
+.meta-value a.tag-img {
+    padding-left: 26px;
+    background-repeat: no-repeat;
+    background-position: 6px 6px;
+    background-size: 16px 16px;
+}
+

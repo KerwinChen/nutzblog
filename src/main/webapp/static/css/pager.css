@@ -1,0 +1,78 @@
+
+#pagination {
+    /*width: 100%;*/
+    padding-top: 35px;
+    text-align: center;
+    display: block;
+}
+
+#pagination .pagination {
+    display: inline-block;
+}
+
+#pagination .previous_page.disabled, #pagination .next_page.disabled {
+    opacity: 0.2;
+    cursour: default;
+}
+
+#pagination .previous_page, #pagination .next_page {
+
+    display: block;
+    float: left;
+    margin-right: 6px;
+    background: #f6f6f6;
+    color: #a6a6a7;
+    height: 43px;
+    width: 70px;
+    text-align: center;
+    line-height: 45px;
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 18px;
+    transition: all 0.2s ease-in-out;
+
+}
+
+#pagination a.page {
+    display: block;
+    float: left;
+    margin-right: 6px;
+    background: #f6f6f6;
+    color: #a6a6a7;
+    height: 43px;
+    width: 43px;
+    text-align: center;
+    line-height: 45px;
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 18px;
+    transition: all 0.2s ease-in-out;
+}
+
+#pagination a.page:hover {
+    background: #E8E8E8;
+    text-decoration: none;
+}
+
+#pagination a.next_page:hover {
+    background: #E8E8E8;
+    text-decoration: none;
+}
+
+#pagination a.previous_page:hover {
+    background: #E8E8E8;
+    text-decoration: none;
+}
+
+#pagination a.page.active {
+    background: #00a9db;
+    color: white;
+}
+
+#pagination span.gap {
+    float: left;
+    padding: 0 20px 0 14px;
+    margin-top: 14px;
+    font-weight: 800;
+    font-size: 22px;
+}
