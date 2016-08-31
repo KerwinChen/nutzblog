@@ -6,12 +6,10 @@ import net.javablog.bean.tb_user;
 import net.javablog.service.BlogService;
 import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
-import net.javablog.util.PagerUT;
 import net.javablog.util.Translates;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.entity.Record;
-import org.nutz.dao.pager.Pager;
 import org.nutz.dao.sql.Sql;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -22,7 +20,6 @@ import org.nutz.mvc.annotation.*;
 import org.nutz.mvc.filter.CheckSession;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +61,7 @@ public class ListBlogModule {
 
     @At("/adm/single_mgr/doaddup")
     @Ok("json")
-    public NutMap doaddup(@Param("::") final tb_singlepage tbin) {
+    public NutMap doaddup(@Param("..") final tb_singlepage tbin) {
         NutMap map = new NutMap();
 
         tbin.set_isdraft(false);
