@@ -109,21 +109,23 @@ public class SettingsModule {
                          @Param("site_msgboard") String site_msgboard) {
         NutMap out = NutMap.NEW();
 
-        dao.clear(tb_config.class, Cnd.where("k", "like", "admin%"));
-        tb_config c1 = new tb_config("admin", site_logo);
-        tb_config c2 = new tb_config("admin_email", site_fav);
-        tb_config c3 = new tb_config("admin_github", site_createtime);
-        tb_config c4 = new tb_config("site_aboutme", site_aboutme);
-        tb_config c40 = new tb_config("site_aboutme_md", site_aboutme_md);
-        tb_config c5 = new tb_config("site_tj", site_tj);
-        tb_config c6 = new tb_config("site_msgboard", site_msgboard);
+        dao.clear(tb_config.class, Cnd.where("k", "like", "site%"));
+        tb_config c1 = new tb_config("site_name", site_name);
+        tb_config c2 = new tb_config("site_logo", site_logo);
+        tb_config c3 = new tb_config("site_fav", site_fav);
+        tb_config c4 = new tb_config("site_createtime", site_createtime);
+        tb_config c5 = new tb_config("site_aboutme", site_aboutme);
+        tb_config c6 = new tb_config("site_aboutme_md", site_aboutme_md);
+        tb_config c7 = new tb_config("site_tj", site_tj);
+        tb_config c8 = new tb_config("site_msgboard", site_msgboard);
         dao.insert(c1);
         dao.insert(c2);
         dao.insert(c3);
         dao.insert(c4);
-        dao.insert(c40);
         dao.insert(c5);
         dao.insert(c6);
+        dao.insert(c7);
+        dao.insert(c8);
         out.setv("status", "ok");
         return out;
     }

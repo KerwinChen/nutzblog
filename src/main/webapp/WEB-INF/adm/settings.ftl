@@ -166,10 +166,10 @@
                                     <div id="progress" class="progress" style="display: none;margin: 2px auto">
                                         <div class="progress-bar progress-bar-success"></div>
                                     </div>
-                                    <div class="showimg" id="imgid_logo" imgid="${(obj.site_log)!""}"
+                                    <div class="showimg" id="imgid_logo" imgid="${(obj.site_logo)!''}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${(obj.site_log)!""}/">${(obj.site_log)!""}</a>
+                                           href="/view/${(obj.site_logo)!''}/">${(obj.site_logo)!''}</a>
                                     </div>
                                 </div>
                             </div>
