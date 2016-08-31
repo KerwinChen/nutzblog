@@ -167,7 +167,7 @@ public class FTPUtil {
             ftpClient.setConnectTimeout(5000);
             // connect and login to the server
             ftpClient.connect(server, 21);
-            ftpClient.login(user, pass);
+            boolean rs=ftpClient.login(user, pass);
             // use local passive mode to pass firewall
             ftpClient.enterLocalPassiveMode();
 
@@ -178,11 +178,12 @@ public class FTPUtil {
             ftpClient.disconnect();
 
             System.out.println("Disconnected");
+
+            return rs;
         } catch (IOException ex) {
             ex.printStackTrace();
             return false;
         }
-        return true;
 
     }
 

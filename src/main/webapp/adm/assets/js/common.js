@@ -14,6 +14,7 @@ function neweditor(id) {
         width: "100%",
         height: 300,
         toolbarAutoFixed: false,
+        autoFocus: false,
         // autoHeight: true,
         // watch: false,             //实时预览
         syncScrolling: "single",

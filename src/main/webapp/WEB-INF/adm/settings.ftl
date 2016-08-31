@@ -1,4 +1,3 @@
-<html lang="en">
 <#include "common/header.ftl">
 <#--上传组件-->
 <link href="/adm/assets/js/jquery-file-upload/jquery.fileupload.css" rel="stylesheet">
@@ -42,25 +41,26 @@
 
                     <#--FTP信息 ========================-->
                         <h4 class="header blue bolder smaller">FTP信息</h4>
+
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">FTP IP</label>
 
                             <div class="col-sm-11">
-                                <input type="text" value="" id="ftp_ip">
+                                <input type="text" value="${(obj.ftp_ip)!""}" id="ftp_ip">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">FTP 用户名</label>
 
                             <div class="col-sm-11">
-                                <input type="text" value="" id="ftp_user">
+                                <input type="text" value="${(obj.ftp_user)!""}" id="ftp_user">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">FTP 密码</label>
 
                             <div class="col-sm-11">
-                                <input type="text" value="" id="ftp_pwd">
+                                <input type="text" value="${(obj.ftp_pwd)!""}" id="ftp_pwd">
                             </div>
                         </div>
                         <div class="clearfix form-actions">
@@ -75,6 +75,7 @@
 
                     <#--站长信息 ========================-->
                         <h4 class="header blue bolder smaller">站长信息</h4>
+
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">大名</label>
 
@@ -84,6 +85,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">上传玉照</label>
+
                             <div class="col-sm-11">
                                 <div id="fileupload_photo">
                         <span class="btn btn-success btn-sm fileinput-button">
@@ -174,6 +176,7 @@
                     <#--site_fav-->
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">上传fav.ico</label>
+
                             <div class="col-sm-11">
                                 <div id="fileupload_fav">
                         <span class="btn btn-success btn-sm fileinput-button">
@@ -201,10 +204,12 @@
                     <#--site_createtime-->
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">建站时间</label>
+
                             <div class="col-sm-11">
                                 <div class="input-group date " data-provide="datepicker" id="p_site_creaetime"
                                      data-date-format="yyyy-mm-dd">
                                     <input type="text" class="form-control date-picker">
+
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
@@ -215,6 +220,7 @@
                     <#--site_tj-->
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">统计代码</label>
+
                             <div class="col-sm-11">
                                 <textarea class="form-control" id="site_tj" placeholder="CNZZ,51la,百度统计"></textarea>
                             </div>
@@ -222,6 +228,7 @@
                     <#--site_msgboard-->
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">留言板配置</label>
+
                             <div class="col-sm-11">
                                 <textarea class="form-control" id="site_msgboard" placeholder="多说,畅言,Disqus"></textarea>
                             </div>
@@ -230,10 +237,11 @@
 
                     <#--site_aboutme-->
                         <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" >About Me</label>
+                            <label class="col-sm-1 control-label no-padding-right">About Me</label>
+
                             <div class="col-sm-11">
                                 <div id="site_aboutme">
-                                    <textarea style="display:none;">${(obj.item._content_markdown)!""}</textarea>
+                                    <textarea style="display:none;">${(obj.item._content_markdown)!"Tips : F11可以全屏"}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -313,29 +321,38 @@
 
         $("#btn_save_ftp").bind("click", function () {
 
-            layer.alert('见到你真的很高兴', {icon: 6});
+            //1 对号
+            //2 叉号
+            //3 问号
+            //4 锁
+            //5 哭脸
+            //6 笑脸
+            //7 叹号
 
             var ftp_ip = $("#ftp_ip").val();
             var ftp_user = $("#ftp_user").val();
             var ftp_pwd = $("#ftp_pwd").val();
             if (!ftp_ip || !ftp_user || !ftp_pwd) {
+                layer.msg("逗我呢?还没填完呢", {icon: 5});
                 return;
             }
 
+            //正在处理
+            layer.load(2);
+
             $.post("/adm/save_ftp", {"ftp_ip": ftp_ip, "ftp_user": ftp_user, "ftp_pwd": ftp_pwd}, function (rs) {
+                layer.closeAll('loading');
                 if (rs["status"] == "ok") {
-                    layer.msg("保存成功");
+                    layer.msg("保存成功", {icon: 6});
                 }
                 else {
-                    layer.msg(rs["status"]);
+                    layer.msg(rs["status"], {icon: 5});
                 }
             });
         });
 
 
-
         var testEditor = neweditor("site_aboutme");
-
 
 
     });
