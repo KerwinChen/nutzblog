@@ -108,23 +108,7 @@ public class FTPUtil {
     }
 
 
-    public static void main(String[] args) {
 
-        boolean b = testconn("1.95.29.151", "dd50", "7947a9");
-        System.out.println(b);
-
-    }
-
-    private static void testupload() {
-        String server = "23.95.29.151";
-        String user = "dd50";
-        String pass = "7947a9";
-
-        String localDir = "C:\\Users\\Administrator\\Desktop\\ace";
-        String remoteDir = "/target";
-
-        uploadDirectory(server, user, pass, localDir, remoteDir);
-    }
 
     private static void uploadDirectory(String server, String user, String pass, String localDir, String remoteDir) {
         FTPClient ftpClient = new FTPClient();
@@ -152,7 +136,7 @@ public class FTPUtil {
 
 
     /**
-     * 5秒钟算超时
+     * 3秒钟算超时
      *
      * @param server
      * @param user
@@ -164,7 +148,7 @@ public class FTPUtil {
         FTPClient ftpClient = new FTPClient();
 
         try {
-            ftpClient.setConnectTimeout(5000);
+            ftpClient.setConnectTimeout(3000);
             // connect and login to the server
             ftpClient.connect(server, 21);
             boolean rs=ftpClient.login(user, pass);
@@ -186,5 +170,25 @@ public class FTPUtil {
         }
 
     }
+
+    private static void testupload() {
+        String server = "23.95.29.151";
+        String user = "dd50";
+        String pass = "7947a9";
+
+        String localDir = "C:\\Users\\Administrator\\Desktop\\ace";
+        String remoteDir = "/target";
+        uploadDirectory(server, user, pass, localDir, remoteDir);
+    }
+
+
+    public static void main(String[] args) {
+
+        boolean b = testconn("23.95.29.151", "dd50", "7947a9");
+        System.out.println(b);
+
+    }
+
+
 
 }

@@ -38,7 +38,8 @@ public class MainSetup implements Setup {
         listconfig.add(new tb_config("site_logo", "http://i1.buimg.com/1949/0847caefe5536050.png")); //本地图片    uuid.png , 肯定最后在文件夹中查找.
         listconfig.add(new tb_config("site_fav", "http://i1.buimg.com/1949/a688e1b6d48caabb.png"));  //本地图片    uuid.png , 肯定最后在文件夹中查找.
         listconfig.add(new tb_config("site_createtime", "2015-01-01"));
-        listconfig.add(new tb_config("site_aboutme", "请叫我刀刀~~ (daodaovps@qq.com)"));
+        listconfig.add(new tb_config("site_aboutme", "我是刀刀~~ (daodaovps@qq.com)"));
+        listconfig.add(new tb_config("site_aboutme_md", "我是刀刀~~ (daodaovps@qq.com)"));
         listconfig.add(new tb_config("site_tj", ""));
         listconfig.add(new tb_config("site_msgboard", ""));
 
@@ -48,7 +49,7 @@ public class MainSetup implements Setup {
         listconfig.add(new tb_config("admin_github", "https://github.com/daodaovps"));
 
         listconfig.add(new tb_config("ftp_ip", ""));
-        listconfig.add(new tb_config("ftp_username", ""));
+        listconfig.add(new tb_config("ftp_user", ""));
         listconfig.add(new tb_config("ftp_pwd", ""));
         insertConfig(listconfig, dao);
 

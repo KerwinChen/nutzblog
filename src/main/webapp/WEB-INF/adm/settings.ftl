@@ -80,7 +80,7 @@
                             <label class="col-sm-1 control-label no-padding-right">大名</label>
 
                             <div class="col-sm-11">
-                                <input type="text" value="" id="admin">
+                                <input type="text" value="${(obj.admin)!''}" id="admin">
                             </div>
                         </div>
                         <div class="form-group">
@@ -101,10 +101,10 @@
                                     <div id="progress" class="progress" style="display: none;margin: 2px auto">
                                         <div class="progress-bar progress-bar-success"></div>
                                     </div>
-                                    <div class="showimg" id="imgid_photo" imgid="${(obj.item._toppic)!""}"
+                                    <div class="showimg" id="imgid_photo" imgid="${(obj.admin_photo)!''}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${(obj.item._toppic)!""}/">${(obj.item._toppic)!""}</a>
+                                           href="/view/${(obj.admin_photo)!''}/">${(obj.admin_photo)!''}</a>
                                     </div>
                                 </div>
                             </div>
@@ -114,19 +114,21 @@
                             <label class="col-sm-1 control-label no-padding-right">Email</label>
 
                             <div class="col-sm-11">
-                                <input type="text" value="" id="admin_email">
+                                <input type="text" class="form-control" value="${(obj.admin_email)!''}"
+                                       id="admin_email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right">Github</label>
 
                             <div class="col-sm-11">
-                                <input type="text" value="" id="admin_github">
+                                <input type="text" class="form-control" value="${(obj.admin_github)!''}"
+                                       id="admin_github">
                             </div>
                         </div>
                         <div class="clearfix form-actions">
                             <div class="col-sm-offset-1">
-                                <button class="btn btn-info" type="button">
+                                <button class="btn btn-info" type="button" id="btn_save_admin">
                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                     保存
                                 </button>
@@ -141,7 +143,7 @@
                             <label class="col-sm-1 control-label no-padding-right">博客名称</label>
 
                             <div class="col-sm-11">
-                                <input type="text" value="" id="site_name">
+                                <input type="text" value="${(obj.site_name)!''}" id="site_name">
                             </div>
                         </div>
 
@@ -164,10 +166,10 @@
                                     <div id="progress" class="progress" style="display: none;margin: 2px auto">
                                         <div class="progress-bar progress-bar-success"></div>
                                     </div>
-                                    <div class="showimg" id="imgid_logo" imgid="${(obj.item._toppic)!""}"
+                                    <div class="showimg" id="imgid_logo" imgid="${(obj.site_log)!""}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${(obj.item._toppic)!""}/">${(obj.item._toppic)!""}</a>
+                                           href="/view/${(obj.site_log)!""}/">${(obj.site_log)!""}</a>
                                     </div>
                                 </div>
                             </div>
@@ -187,17 +189,19 @@
                         </span>
                                     <button id="btn_selectimg_fav" type="button" class="btn btn-sm  btn-info">选择图片
                                     </button>
+                                    <span>jpg或png格式</span>
                                     <br>
 
                                     <div id="progress" class="progress" style="display: none;margin: 2px auto">
                                         <div class="progress-bar progress-bar-success"></div>
                                     </div>
-                                    <div class="showimg" id="imgid_fav" imgid="${(obj.item._toppic)!""}"
+                                    <div class="showimg" id="imgid_fav" imgid="${(obj.site_fav)!""}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${(obj.item._toppic)!""}/">${(obj.item._toppic)!""}</a>
+                                           href="/view/${(obj.site_fav)!""}/">${(obj.site_fav)!""}</a>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
@@ -208,7 +212,8 @@
                             <div class="col-sm-11">
                                 <div class="input-group date " data-provide="datepicker" id="p_site_creaetime"
                                      data-date-format="yyyy-mm-dd">
-                                    <input type="text" class="form-control date-picker">
+                                    <input type="text" id="site_createtime" value="${(obj.site_createtime)!''}"
+                                           class="form-control date-picker">
 
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
@@ -222,7 +227,8 @@
                             <label class="col-sm-1 control-label no-padding-right">统计代码</label>
 
                             <div class="col-sm-11">
-                                <textarea class="form-control" id="site_tj" placeholder="CNZZ,51la,百度统计"></textarea>
+                                <textarea class="form-control" id="site_tj"
+                                          placeholder="CNZZ,51la,百度统计">${(obj.site_tj)!''}</textarea>
                             </div>
                         </div>
                     <#--site_msgboard-->
@@ -230,7 +236,8 @@
                             <label class="col-sm-1 control-label no-padding-right">留言板配置</label>
 
                             <div class="col-sm-11">
-                                <textarea class="form-control" id="site_msgboard" placeholder="多说,畅言,Disqus"></textarea>
+                                <textarea class="form-control" id="site_msgboard"
+                                          placeholder="多说,畅言,Disqus">${(obj.site_msgboard)!''}</textarea>
                             </div>
                         </div>
 
@@ -241,13 +248,14 @@
 
                             <div class="col-sm-11">
                                 <div id="site_aboutme">
-                                    <textarea style="display:none;">${(obj.item._content_markdown)!"Tips : F11可以全屏"}</textarea>
+                                    <textarea
+                                            style="display:none;">${(obj.site_aboutme_md)!""}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix form-actions">
                             <div class="col-sm-offset-1">
-                                <button class="btn btn-info" type="button">
+                                <button class="btn btn-info" type="button" id="btn_save_site">
                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                     保存
                                 </button>
@@ -352,7 +360,84 @@
         });
 
 
+        $("#btn_save_admin").bind("click", function () {
+            var admin = $("#admin").val();
+            var admin_github = $("#admin_github").val();
+            var admin_email = $("#admin_email").val();
+            if (!admin || !admin_email || !admin_github) {
+                layer.msg("还没填完呢", {icon: 5});
+                return;
+            }
+            var admin_photo = $("#imgid_photo").attr("imgid");
+            if (!admin_photo) {
+                layer.msg("请上传照片", {icon: 5});
+                return;
+            }
+
+            //正在处理
+            layer.load(2);
+
+            $.post("/adm/save_admin", {
+                "admin": admin,
+                "admin_photo": admin_photo,
+                "admin_email": admin_email,
+                "admin_github": admin_github
+            }, function (rs) {
+                layer.closeAll('loading');
+                if (rs["status"] == "ok") {
+                    layer.msg("保存成功", {icon: 6});
+                }
+                else {
+                    layer.msg(rs["status"], {icon: 5});
+                }
+            });
+        });
+
         var testEditor = neweditor("site_aboutme");
+
+        $("#btn_save_site").bind("click", function () {
+            var site_name = $("#site_name").val();
+            var site_createtime = $("#site_createtime").val();
+            var site_aboutme = testEditor.getHTML();
+            var site_aboutme_md = testEditor.getMarkdown();
+            var site_tj = $("#site_tj").val();
+            var site_msgboard = $("#site_msgboard").val();
+            if (!site_name || !site_createtime || !site_aboutme || !site_tj || !site_msgboard) {
+                layer.msg("还没填完呢", {icon: 5});
+                return;
+            }
+
+            var site_logo = $("#imgid_logo").attr("imgid");
+            var site_fav = $("#imgid_fav").attr("imgid");
+            if (!site_logo) {
+                layer.msg("请上传Logo", {icon: 5});
+                return;
+            }
+            if (!site_fav) {
+                layer.msg("请上传fav.ico[格式PNG,JPG]", {icon: 5});
+                return;
+            }
+            layer.load(2);
+
+            $.post("/adm/save_site", {
+                "site_name": site_name,
+                "site_logo": site_logo,
+                "site_fav": site_fav,
+                "site_createtime": site_createtime,
+                "site_aboutme": site_aboutme,
+                "site_aboutme_md": site_aboutme_md,
+                "site_tj": site_tj,
+                "site_msgboard": site_msgboard
+            }, function (rs) {
+                layer.closeAll('loading');
+                if (rs["status"] == "ok") {
+                    layer.msg("保存成功", {icon: 6});
+                }
+                else {
+                    layer.msg(rs["status"], {icon: 5});
+                }
+            });
+        });
 
 
     });

@@ -45,6 +45,7 @@ public class SettingsModule {
             out.setv("site_fav", getV("site_fav", configs));
             out.setv("site_createtime", getV("site_createtime", configs));
             out.setv("site_aboutme", getV("site_aboutme", configs));
+            out.setv("site_aboutme_md", getV("site_aboutme_md", configs));
             out.setv("site_tj", getV("site_tj", configs));
             out.setv("site_msgboard", getV("site_msgboard", configs));
         }
@@ -77,6 +78,52 @@ public class SettingsModule {
         dao.insert(c2);
         dao.insert(c3);
 
+        out.setv("status", "ok");
+        return out;
+    }
+
+
+    @At("/adm/save_admin")
+    @Ok("json")
+    public Map save_ftp(@Param("admin") String admin, @Param("admin_photo") String admin_photo, @Param("admin_email") String admin_email, @Param("admin_github") String admin_github) {
+        NutMap out = NutMap.NEW();
+
+        dao.clear(tb_config.class, Cnd.where("k", "like", "admin%"));
+        tb_config c1 = new tb_config("admin", admin);
+        tb_config c2 = new tb_config("admin_email", admin_email);
+        tb_config c3 = new tb_config("admin_github", admin_github);
+        tb_config c4 = new tb_config("admin_photo", admin_photo);
+        dao.insert(c1);
+        dao.insert(c2);
+        dao.insert(c3);
+        dao.insert(c4);
+        out.setv("status", "ok");
+        return out;
+    }
+
+    @At("/adm/save_site")
+    @Ok("json")
+    public Map save_site(@Param("site_name") String site_name, @Param("site_logo") String site_logo,
+                         @Param("site_fav") String site_fav, @Param("site_createtime") String site_createtime,
+                         @Param("site_aboutme") String site_aboutme,@Param("site_aboutme_md") String site_aboutme_md, @Param("site_tj") String site_tj,
+                         @Param("site_msgboard") String site_msgboard) {
+        NutMap out = NutMap.NEW();
+
+        dao.clear(tb_config.class, Cnd.where("k", "like", "admin%"));
+        tb_config c1 = new tb_config("admin", site_logo);
+        tb_config c2 = new tb_config("admin_email", site_fav);
+        tb_config c3 = new tb_config("admin_github", site_createtime);
+        tb_config c4 = new tb_config("site_aboutme", site_aboutme);
+        tb_config c40 = new tb_config("site_aboutme_md", site_aboutme_md);
+        tb_config c5 = new tb_config("site_tj", site_tj);
+        tb_config c6 = new tb_config("site_msgboard", site_msgboard);
+        dao.insert(c1);
+        dao.insert(c2);
+        dao.insert(c3);
+        dao.insert(c4);
+        dao.insert(c40);
+        dao.insert(c5);
+        dao.insert(c6);
         out.setv("status", "ok");
         return out;
     }
