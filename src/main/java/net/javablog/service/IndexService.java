@@ -163,7 +163,7 @@ public class IndexService {
 
         } else if (type.equals("month")) {
             Date[] d = getBetw(typevalue);
-            criteria.where().and("_savedatetime", ">=", d[0]).and("_savedatetime", "<=", d[1]);
+            criteria.where().and("ut", ">=", d[0]).and("ut", "<=", d[1]);
             out.put("type", "归档");
             out.put("typevalue", Times.format("yyyy年MM月", d[0]));
 

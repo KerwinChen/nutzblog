@@ -14,13 +14,13 @@
                     <span class="icon-bar"></span>
                 </button>
             <#--<a class="navbar-brand" href="#">Project name</a>-->
-                <a title="Java核心技术 | JavaCore.CN" href="http://javacore.cn/" class="navbar-brand logo"
+                <a title="Java核心技术 | JavaCore.CN" href="/" class="navbar-brand logo"
                         style="background: url('/view/${obj.site_logo}/') no-repeat;">JavaCore.CN</a>
                 <ul class="header nav navbar-nav navbar-right">
-                    <li><a href="http://javacore.cn/">首页</a></li>
-                    <li><a href="http://javacore.cn/archive.html">归档</a></li>
-                    <li><a href="http://javacore.cn/tags.html">标签</a></li>
-                    <li><a href="http://javacore.cn/me.html">ME</a></li>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/archive.html">归档</a></li>
+                    <li><a href="/tags.html">标签</a></li>
+                    <li><a href="/me.html">ME</a></li>
                 </ul>
             </div>
             <div id="navbar" class="navbar-collapse collapse">

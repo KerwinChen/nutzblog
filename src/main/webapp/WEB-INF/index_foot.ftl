@@ -1,5 +1,7 @@
 <div style="display: none">
-    <script src="http://s4.cnzz.com/z_stat.php?id=1255832894&web_id=1255832894" language="JavaScript"></script>
+
+<#--<script src="http://s4.cnzz.com/z_stat.php?id=1255832894&web_id=1255832894" language="JavaScript"></script>-->
+
 </div>
 <div class="container-fluid">
     <div class="row">
