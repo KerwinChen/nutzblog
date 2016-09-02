@@ -1,12 +1,13 @@
 package net.javablog.module.adm;
 
-import net.javablog.bean.*;
+import net.javablog.bean.tb_book;
+import net.javablog.bean.tb_singlepage;
+import net.javablog.bean.tb_tag;
 import net.javablog.service.BlogService;
 import net.javablog.service.NoteService;
 import net.javablog.service.SerisService;
 import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
-import net.javablog.util.Translates;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.entity.Record;
@@ -20,7 +21,9 @@ import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
 import org.nutz.mvc.filter.CheckSession;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @IocBean
@@ -137,6 +140,10 @@ public class ListSerisModule {
             singlepage = blogService.fetch(single_id);
         }
         out.setv("single", singlepage);
+
+        List<tb_tag> tags = tagService.query();
+        out.put("_tags", tags);
+
         return out;
     }
 

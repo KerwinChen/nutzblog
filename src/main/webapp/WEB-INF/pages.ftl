@@ -166,11 +166,7 @@
                 <#--图书目录  结束-->
 
                     <div class="googlead">
-                        <script type="text/javascript">
-                            /*960*90 创建于 2016/8/2*/
-                            var cpro_id = "u2721188";
-                        </script>
-                        <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+
                     </div>
 
                 <#--头像+分享   开始-->
