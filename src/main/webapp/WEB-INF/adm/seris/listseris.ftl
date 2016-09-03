@@ -74,7 +74,7 @@
             <a target="_self" href="/adm/wseris/?_id={{value._id}}">编辑</a>
             <a target="_self" href="/adm/seris_mgr/showlist_in/?_id={{value._id}}">管理文章列表</a>
             <a target="_blank" href="/seris/{{value._id}}/{{value._seristitleen}}.html">预览</a>
-            <a target="_blank" href="/html_single/{{value._id}}">[生成html]</a>
+            <a target="_blank" href="/html/seris/{{value._id}}">[生成html]</a>
         </td>
     </tr>
     {{/each}}

@@ -291,7 +291,7 @@ public class FTPUtil {
             log.info("Connected");
 
             FTPUtil.uploadSingleFile_(ftpClient, localfile, remotefile);
-            
+
             // log out and disconnect from the server
             ftpClient.logout();
             ftpClient.disconnect();
@@ -314,15 +314,13 @@ public class FTPUtil {
 //        testuploadfile();
 
 //        testuploadfile();
-        test_clean();
+        removeDirectory("23.95.29.151", "dd50", "7947a9", "/");
 
 
     }
 
-    private static void test_clean() {
-        String ftpip = "23.95.29.151";
-        String ftpuser = "dd50";
-        String ftppwd = "7947a9";
+
+    private static void removeDirectory(String ftpip, String ftpuser, String ftppwd, String remotepath) {
 
         FTPClient ftpClient = new FTPClient();
         try {
@@ -335,9 +333,8 @@ public class FTPUtil {
 
             log.info("Connected");
 
-            String dirPath = "/";
             //入口肯定是 空
-            FTPUtil.removeDirectory(ftpClient, dirPath, "");
+            FTPUtil.removeDirectory(ftpClient, remotepath, "");
 
             // log out and disconnect from the server
             ftpClient.logout();

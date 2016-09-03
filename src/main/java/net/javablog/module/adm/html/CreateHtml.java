@@ -4,6 +4,8 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import net.javablog.service.BlogService;
+import net.javablog.service.MenuService;
+import net.javablog.service.SerisService;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.impl.NutDao;
 import org.nutz.ioc.loader.annotation.Inject;
@@ -25,6 +27,9 @@ public class CreateHtml {
     private BlogService blogService;
 
     @Inject
+    private MenuService menuService;
+
+    @Inject
     private Configuration cf;
 
     @Inject
@@ -34,6 +39,14 @@ public class CreateHtml {
 
     public void createhtml_page(int pageid, String template_name, String htmlfile) {
         createhtml(template_name, blogService.getpage(pageid), htmlfile );
+    }
+
+    public void createhtml_seriespage(int id, String templagefullname, String htmlfile) {
+        createhtml(templagefullname, blogService.getserispage(id), htmlfile);
+    }
+
+    public void createhtml_menu_seris(int id, String templagefullname, String htmlfile) {
+        createhtml(templagefullname, menuService.getseris(id), htmlfile);
     }
 
     /**
