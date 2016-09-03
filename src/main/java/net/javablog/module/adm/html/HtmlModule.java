@@ -1,6 +1,7 @@
 package net.javablog.module.adm.html;
 
 
+import net.javablog.bean.tb_book;
 import net.javablog.bean.tb_seris;
 import net.javablog.bean.tb_singlepage;
 import net.javablog.init.Const;
@@ -54,6 +55,36 @@ public class HtmlModule {
         String user = ftpConfigService.getUser();
         String pwd = ftpConfigService.getPwd();
 
+        html_single(type, id, ip, user, pwd);
+
+        html_seris(type, id, ip, user, pwd);
+
+        html_book(type, id, ip, user, pwd);
+
+
+    }
+
+    private void html_book(String type, final int id, final String ip, final String user, final String pwd) {
+        if (type.equals("note")) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    List<tb_seris> serises = dao.query(tb_seris.class, Cnd.where("_bookid", "=", id));
+                    if (!Lang.isEmpty(serises)) {
+                        for (int i = 0; i < serises.size(); i++) {
+                            html_seris("seris", serises.get(i).get_id(), ip, user, pwd);
+                        }
+                    }
+                    tb_book tbBook = dao.fetch(tb_book.class, id);
+                    String tofile = "/book/" + tbBook.get_id() + "/" + tbBook.get_booktitleen() + ".html";
+                    String fromfile = Const.HTML_SAVEPATH + tofile;
+                    createHtml.createhtml_menu_note(tbBook.get_id(), "menu_note.ftl", fromfile);
+                }
+            }).start();
+        }
+    }
+
+    private void html_single(String type, int id, final String ip, final String user, final String pwd) {
         if (type.equals("single")) {
             final tb_singlepage tbin = dao.fetch(tb_singlepage.class, id);
             new Thread(new Runnable() {
@@ -68,8 +99,9 @@ public class HtmlModule {
                 }
             }).start();
         }
+    }
 
-
+    private void html_seris(String type, final int id, final String ip, final String user, final String pwd) {
         if (type.equals("seris")) {
             final tb_singlepage tbin = dao.fetch(tb_singlepage.class, id);
             new Thread(new Runnable() {
@@ -104,8 +136,6 @@ public class HtmlModule {
                 }
             }).start();
         }
-
-
     }
 
 //

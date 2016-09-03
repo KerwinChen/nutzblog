@@ -90,7 +90,7 @@
             <a target="_self"
                href="/adm/seris_mgr/showaddup_inlist?book_id=${(obj.b._id)!'0'}&seris_id=${obj.s._id}&single_id={{value._id}}">编辑</a>
             <a target="_blank" href="/page/{{value._id}}/{{value._titleen}}.html">预览</a>
-            <a target="_blank" href="/html_single/{{value._id}}">[生成html]</a>
+            <a target="_blank" href="/html/single/{{value._id}}">[生成html]</a>
         </td>
     </tr>
     {{/each}}

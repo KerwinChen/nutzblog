@@ -49,6 +49,10 @@ public class CreateHtml {
         createhtml(templagefullname, menuService.getseris(id), htmlfile);
     }
 
+    public void createhtml_menu_note(int id, String templagefullname, String htmlfile) {
+        createhtml(templagefullname, menuService.getbook(id), htmlfile);
+    }
+
     /**
      * 生成静态文件.
      *
