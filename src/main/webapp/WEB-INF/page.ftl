@@ -99,6 +99,10 @@
                 <div class="tutorial-footer">
                     <div class="tutorial-footer-details">
 
+                        <div class="googlead">
+
+                        </div>
+
                     <#--用户头像部分-->
                         <div class="tutorial-footer-user">
                             <a href="javascript:void(0)">
