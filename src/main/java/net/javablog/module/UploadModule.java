@@ -61,7 +61,7 @@ public class UploadModule {
 
         //for  editor.md
         map.setv("success", 1);
-        map.setv("url", "/images/" + t.get_filekey() );
+        map.setv("url", "/images/" + t.get_filekey());
 
         return map;
     }
@@ -83,7 +83,7 @@ public class UploadModule {
 
         //for  editor.md
         map.setv("success", 1);
-        map.setv("url", "/images/" + t.get_filekey()  );
+        map.setv("url", "/images/" + t.get_filekey());
 
         return map;
     }

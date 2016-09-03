@@ -14,6 +14,7 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
+import org.nutz.plugins.cache.dao.CachedNutDaoExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,11 @@ public class MainSetup implements Setup {
         //测试初始化Quartz
         //因为NutIoc中的Bean是完全懒加载模式的,不获取就不生成,不初始化,所以,为了触发计划任务的加载,需要获取一次
         ioc.get(NutQuartzCronJobFactory.class);
+
+
+//        CachedNutDaoExecutor cacheManager = ioc.get(CachedNutDaoExecutor.class);
+//        cacheManager.setCachedTableNamePatten("tb_*");//缓存所有的表
+
 
         //测试一次成功后，就不再运行
         if (false) {

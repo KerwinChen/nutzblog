@@ -3,7 +3,9 @@ package net.javablog.module.adm.html;
 
 import net.javablog.bean.tb_singlepage;
 import net.javablog.init.Const;
+import net.javablog.service.FtpConfigService;
 import net.javablog.util.CurrentUserUtils;
+import net.javablog.util.FTPUtil;
 import org.nutz.dao.impl.NutDao;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -22,6 +24,10 @@ public class HtmlModule {
     @Inject
     private CreateHtml createHtml;
 
+    @Inject
+    private FtpConfigService ftpConfigService;
+
+
     /**
      * 生成html
      * <p>
@@ -33,20 +39,27 @@ public class HtmlModule {
      * @return
      */
     @At("/html/?/?")
-    @Ok("redirect:/show_getlog")
+    @Ok("redirect:/log")
     public void html(String type, int pageid) {
+
+        String ip = ftpConfigService.getIP();
+        String user = ftpConfigService.getUser();
+        String pwd = ftpConfigService.getPwd();
+
         if (type.equals("single")) {
             final tb_singlepage tbin = dao.fetch(tb_singlepage.class, pageid);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    createHtml.createhtml_page(tbin.get_id(), "page.ftl", Const.HTML_SAVEPATH + "/page/" + tbin.get_id() + "/", tbin.get_titleen() + ".html");
-//                FTPUtil.up(Const.filepath + "/page/" + tbin.get_id() + "/", tbin.get_titleen() + ".html", "/page/" + tbin.get_id() + "/");
+
+                    String tofile = "/page/" + tbin.get_id() + "/" + tbin.get_titleen() + ".html";
+                    String fromfile = Const.HTML_SAVEPATH + tofile;
+
+                    createHtml.createhtml_page(tbin.get_id(), "page.ftl", fromfile);
+                    FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
                 }
             }).start();
         }
-
-
     }
 
 //

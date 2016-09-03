@@ -12,6 +12,8 @@ import org.nutz.lang.Files;
 import org.nutz.lang.util.NutMap;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.Map;
@@ -28,11 +30,10 @@ public class CreateHtml {
     @Inject
     private NutDao dao;
 
-    private static final Log log = Logs.getLog(CreateHtml.class);
+    private static final Logger log = LoggerFactory.getLogger("FTP");
 
-    public void createhtml_page(int pageid, String template_name, String html_path, String filename) {
-        Files.createDirIfNoExists(html_path);
-        createhtml(template_name, blogService.getpage(pageid), html_path, filename);
+    public void createhtml_page(int pageid, String template_name, String htmlfile) {
+        createhtml(template_name, blogService.getpage(pageid), htmlfile );
     }
 
     /**
@@ -40,12 +41,11 @@ public class CreateHtml {
      *
      * @param templateFileName 模板文件名
      * @param propMap          用于处理模板的属性Object映射
-     * @param htmlFilePath     静态文件，本地要保存的位置
-     * @param htmlFileName     要生成的文件名,例如 "1.htm"
+     * @param htmlFile         静态文件，本地要保存的文件名
      */
 
 
-    public boolean createhtml(String templateFileName, Map propMap, String htmlFilePath, String htmlFileName) {
+    public boolean createhtml(String templateFileName, Map propMap, String htmlFile) {
         try {
 
             propMap.put("admin", dao.fetch("tb_config", Cnd.where("k", "=", "admin")).getString("v"));
@@ -62,8 +62,8 @@ public class CreateHtml {
             propMap.put("site_msgboard", dao.fetch("tb_config", Cnd.where("k", "=", "site_msgboard")).getString("v"));
 
             Template t = cf.getTemplate(templateFileName);
-            Files.createDirIfNoExists(htmlFilePath);
-            File afile = new File(htmlFilePath + File.separatorChar + htmlFileName);
+
+            File afile = new File(htmlFile);
             Files.createDirIfNoExists(afile.getParentFile());//生成目标文件的所在文件夹
 
             Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(afile)));
@@ -82,7 +82,7 @@ public class CreateHtml {
             log.error("Error while processing FreeMarker template " + templateFileName, e);
             return false;
         } catch (IOException e) {
-            log.error("Error while generate Static Html File " + htmlFileName, e);
+            log.error("Error while generate Static Html File " + htmlFile, e);
             return false;
         }
         return true;
