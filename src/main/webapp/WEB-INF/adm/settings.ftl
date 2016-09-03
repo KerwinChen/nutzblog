@@ -104,7 +104,7 @@
                                     <div class="showimg" id="imgid_photo" imgid="${(obj.admin_photo)!''}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${(obj.admin_photo)!''}/">${(obj.admin_photo)!''}</a>
+                                           href="/images/${(obj.admin_photo)!''}/">${(obj.admin_photo)!''}</a>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@
                                     <div class="showimg" id="imgid_logo" imgid="${(obj.site_logo)!''}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${(obj.site_logo)!''}/">${(obj.site_logo)!''}</a>
+                                           href="/images/${(obj.site_logo)!''}/">${(obj.site_logo)!''}</a>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@
                                     <div class="showimg" id="imgid_fav" imgid="${(obj.site_fav)!""}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${(obj.site_fav)!""}/">${(obj.site_fav)!""}</a>
+                                           href="/images/${(obj.site_fav)!""}/">${(obj.site_fav)!""}</a>
                                     </div>
                                 </div>
 

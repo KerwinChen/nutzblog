@@ -15,7 +15,7 @@
                 </button>
             <#--<a class="navbar-brand" href="#">Project name</a>-->
                 <a title="Java核心技术 | JavaCore.CN" href="/" class="navbar-brand logo"
-                        style="background: url('/view/${obj.site_logo}/') no-repeat;">JavaCore.CN</a>
+                        style="background: url('/images/${obj.site_logo}') no-repeat;">JavaCore.CN</a>
                 <ul class="header nav navbar-nav navbar-right">
                     <li><a href="/">首页</a></li>
                     <li><a href="/archive.html">归档</a></li>

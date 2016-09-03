@@ -73,7 +73,7 @@
                             <div class="tutorial-footer-user">
                                 <a href="javascript:void(0)">
                                     <img alt="manicas" class="avatar avatar-small" height="80"
-                                         src="/view/${obj.admin_photo}/"
+                                         src="/images/${obj.admin_photo}"
                                          width="80"></a>
                                 <div class="user-info">
                                     <a href="javascript:void(0)">${obj.admin}</a>

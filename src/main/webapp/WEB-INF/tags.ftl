@@ -46,7 +46,7 @@
                         <div class="col-md-4">
                         ${obj.s2}
                         </div>
-
+                        
                         <div class="col-md-4">
                         ${obj.s3}
                         </div>

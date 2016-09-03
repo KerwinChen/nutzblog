@@ -74,7 +74,7 @@
             <a href="javascript:del({{value._id}});">删除</a>
             <a target="_self" href="/adm/wnote/?_id={{value._id}}">编辑</a>
             <a target="_self" href="/adm/books_mgr/showlist_in/?_id={{value._id}}">管理章节</a>
-            <a target="_self" href="/adm/books_mgr/view/?_id={{value._id}}">预览</a>
+            <a target="_blank" href="/book/{{value._id}}/{{value._booktitleen}}.html">预览</a>
             <a target="_blank" href="/html_single/{{value._id}}">[生成html]</a>
 
         </td>

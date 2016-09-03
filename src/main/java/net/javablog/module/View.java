@@ -5,7 +5,6 @@ import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Streams;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
-import org.nutz.mvc.view.HttpServerResponse;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -23,13 +22,19 @@ public class View {
     @At("/down/*")
     @Ok("raw:jpg")
     public File down(String fileid) {
-        return new File(Const.savepath + fileid);
+        return new File(Const.IMG_SAVEPATH + fileid);
     }
 
-    @At("/view/*")
+    /**
+     * 这里是服务器端代码，务必传递的参数最后有 / 结尾
+     *
+     * @param fileid
+     * @param resp
+     */
+    @At("/images/?")
     @Ok("void")
     public void view(String fileid, HttpServletResponse resp) {
-        File f = new File(Const.savepath + fileid);
+        File f = new File(Const.IMG_SAVEPATH + fileid);
         try {
             Streams.writeAndClose(resp.getOutputStream(), new FileInputStream(f));
         } catch (IOException e) {

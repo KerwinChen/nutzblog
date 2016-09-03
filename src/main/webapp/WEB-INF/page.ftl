@@ -8,8 +8,8 @@
     <meta name="Keywords" content="${(obj.item._title)!''},${(obj.item._titleen)!''}"/>
     <meta name="Description" content="${(obj.item._title)!''},${(obj.item._showintro)!''}"/>
 
-    <link rel="icon" href="/view/${obj.site_fav}/?v=${(obj.version)!''}">
-    <title>${(obj.item._title)!''} - ${(obj.website)!''}</title>
+    <link rel="icon" href="/images/${obj.site_fav}?v=${(obj.version)!''}">
+    <title>${(obj.item._title)!''} - ${(obj.site_name)!''}</title>
 
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/tutorial-page.css?v=${(obj.version)!''}" rel="stylesheet">
@@ -63,7 +63,7 @@
                 <#--height="300" title="java">-->
 
                     <div class="col-cv-bg col-cv-bg-shown"
-                         style="display:block;left: 0px; top: 0px; width: 100%; height: 300px;background-size:cover;  background-image: url(/view/${(obj.item._toppic)!""}/) ;">
+                         style="display:block;left: 0px; top: 0px; width: 100%; height: 300px;background-size:cover;  background-image: url(/images/${(obj.item._toppic)!""}) ;">
                         <div class="col-cv-bg-title">
                         ${(obj.item._titleinlogo)!""}
                         </div>
@@ -103,7 +103,7 @@
                         <div class="tutorial-footer-user">
                             <a href="javascript:void(0)">
                                 <img alt="manicas" class="avatar avatar-small" height="80"
-                                     src="/view/${obj.userphoto}/"
+                                     src="/images/${obj.userphoto}"
                                      width="80">
                             </a>
 

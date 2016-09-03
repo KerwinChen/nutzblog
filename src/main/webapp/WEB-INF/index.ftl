@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/view/${obj.site_fav}/?v=${obj.version}">
+    <link rel="icon" href="/images/${obj.site_fav}?v=${obj.version}">
     <meta name="description"
           content="Java核心技术 - 提供简单独特的Java开发教程 ."/>
 

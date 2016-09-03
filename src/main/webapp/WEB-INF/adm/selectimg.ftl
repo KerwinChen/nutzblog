@@ -93,13 +93,13 @@
                     html = html + "<li>\n" +
                             "		<a href=\"javascript:void(0);\" data-rel=\"colorbox\">\n" +
                             "				<img  width=\"120px\" height=\"120px\"\n" +
-                            "						 src=\"" + v["_downurl"] + "\">\n" +
-                            "				<div   filename='" + v["_name"] + "'  filekey='" + v["_filekey"] + "' downurl='" + v["_downurl"] + "'  class=\"text\">\n" +
+                            "						 src=\"" + "/images/" + v["_filekey"] + "/" + "\">\n" +
+                            "				<div   filename='" + v["_name"] + "'  filekey='" + v["_filekey"] + "'  downurl='/images/" + v["_filekey"] + "'  class=\"text\">\n" +
                             "						<div class=\"inner\">" + v["_name"] + "</div>\n" +
                             "				</div>\n" +
                             "		</a>\n" +
                             "		<div class=\"tools tools-bottom\">\n" +
-                            "				<a target='_blank' href=\"/view/" + v["_filekey"] + "/\">\n" +
+                            "				<a target='_blank' href=\"" + "/images/" + v["_filekey"] + "/"  + "\">\n" +
                             "						<i class=\"ace-icon fa fa-link\"></i>\n" +
                             "				</a>\n" +
                             "		</div>\n" +
@@ -117,10 +117,9 @@
             $("#list_tbody li .text").each(function (item, idx) {
                         $(this).bind("click", function () {
                             var filename = $(this).attr("filename");
-                            var filekey = $(this).attr("filekey");
+                            var filekey = $(this).attr("filekey");//此处filekey 已经补充后缀
                             var downurl = $(this).attr("downurl");
-                            var rsvalue = "  <a target=\"_blank\"  href=\"/view/" + filekey + "/\">查看 " + filename + "</a>";
-
+                            var rsvalue = "  <a target=\"_blank\"  href=\"/images/" + filekey + "/\">查看 " + filename + "</a>";
                             layer.msg("选中 " + filename, {time: 1000, icon: 1}, function () {
                                 parent.$("#${obj.callbackid}").empty();
                                 parent.$("#${obj.callbackid}").attr("imgid", filekey);

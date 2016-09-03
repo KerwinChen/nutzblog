@@ -125,7 +125,7 @@
                                     <div class="showimg" id="imgid" imgid="${obj.single._toppic!""}"
                                          style="margin: 2px auto">
                                         <a target="_blank"
-                                           href="/view/${obj.single._toppic!""}/">${obj.single._toppic!""}</a>
+                                           href="/images/${obj.single._toppic!""}/">${obj.single._toppic!""}</a>
                                     </div>
                                 </div>
                             </div>

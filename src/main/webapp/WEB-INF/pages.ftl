@@ -52,7 +52,7 @@
             <div class="wrapper layout-wrapper">
                 <div class="section-content content">
                     <div class="col-cv-bg col-cv-bg-shown"
-                         style="display:block;left: 0px; top: 0px; width: 100%; height: 300px;background-size:cover;  background-image: url(/view/${(obj.item._toppic)!""}/) ;">
+                         style="display:block;left: 0px; top: 0px; width: 100%; height: 300px;background-size:cover;  background-image: url(/images/${(obj.item._toppic)!""}) ;">
                         <div class="col-cv-bg-title">
                         ${(obj.item._titleinlogo)!""}
                         </div>
@@ -181,7 +181,7 @@
                             <div class="tutorial-footer-user">
                                 <a href="javascript:void(0)">
                                     <img alt="manicas" class="avatar avatar-small" height="80"
-                                         src="/view/${obj.userphoto}/"
+                                         src="/images/${obj.userphoto}"
                                          width="80"></a>
 
                                 <div class="user-info">

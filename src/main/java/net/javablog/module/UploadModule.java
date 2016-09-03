@@ -53,15 +53,15 @@ public class UploadModule {
 
         tb_files t = getTb_files(file, fieldid);
 
-
         NutMap map = NutMap.NEW();
         map.setv("imgid", t.get_filekey());
-        map.setv("path", t.get_downurl());
+//        map.setv("suffix", t.get_suffix());
+//        map.setv("path", "/images/" + t.get_filekey() + t.get_suffix() + "/");
         map.setv("imgname", t.get_name());
 
         //for  editor.md
         map.setv("success", 1);
-        map.setv("url", t.get_downurl());
+        map.setv("url", "/images/" + t.get_filekey() );
 
         return map;
     }
@@ -83,7 +83,7 @@ public class UploadModule {
 
         //for  editor.md
         map.setv("success", 1);
-        map.setv("url", t.get_downurl());
+        map.setv("url", "/images/" + t.get_filekey()  );
 
         return map;
     }
@@ -94,19 +94,21 @@ public class UploadModule {
             t = fileService.fetch(fieldid);
             t.set_name(file.getMeta().getFileLocalName());
             t.setUpdateTime(new Date());
+            t.set_suffix(Files.getSuffix(file.getMeta().getFileExtension()));
             fileService.updateIgnoreNull(t);
         } else {
             String uid = R.UU16();
             t.setCreateTime(new Date());
             t.setUpdateTime(new Date());
-            t.set_filekey(uid + Files.getSuffix(file.getMeta().getFileExtension()));
+            t.set_filekey(uid);
+            t.set_suffix(Files.getSuffix(file.getMeta().getFileExtension()));
             t.set_name(file.getMeta().getFileLocalName());
-            t.set_downurl("/down/" + t.get_filekey() + "/");
+//            t.set_downurl("/down/" + t.get_filekey() + "");
             fileService.insert(t);
         }
 
         try {
-            file.write(Const.savepath + t.get_filekey());
+            file.write(Const.IMG_SAVEPATH + t.get_filekey());
             file.delete();
         } catch (Exception e) {
             e.printStackTrace();

@@ -86,7 +86,7 @@ function fileupload(id) {
             data = data["result"];
             var imgid = data["imgid"];
             var imgname = data["imgname"];
-            $("#" + id).find(".showimg").html("<a  target='_blank' href=\"/view/" + imgid + "/\">查看 " + imgname + "</a>");
+            $("#" + id).find(".showimg").html("<a  target='_blank' href=\"/images/" + imgid  + "/\">查看 " + imgname + "</a>");
             $("#" + id).find(".showimg").attr("imgid", imgid);
             $("#" + id).removeAttr("disabled");
             setTimeout("hideprocess(\"" + id + "\")", 3000);
