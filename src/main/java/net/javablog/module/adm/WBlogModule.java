@@ -43,10 +43,11 @@ public class WBlogModule {
         tbin.set_tags(tbin.get_tags().trim());
 
         tbin.setUpdateTime(new Date());
-        if (tbin.get_id() <= 0) {
+        if (tbin.get_id() == 0) {
             tbin.setCreateTime(new Date());
             blogService.insert(tbin);
         } else {
+            tbin.setCreateTime(blogService.fetch(tbin.get_id()).getCreateTime());
             blogService.update(tbin);
         }
 

@@ -9,7 +9,7 @@ public class Test01 {
 
     public static void main(String[] args) {
 
-        String path = "C:\\Users\\Administrator\\site_html\\images";
+        String path = "C:\\Users\\Administrator\\Desktop\\新建文件夹\\";
 
         File[] fs = Files.lsAll(new File(path), null);
 
