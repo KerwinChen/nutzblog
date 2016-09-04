@@ -1,9 +1,7 @@
 #NutzBlog
 
 
-DEMO [http://demo.javablog.net](http://demo.javablog.net)
-DEMO [http://demo.javablog.net/adm/login](http://demo.javablog.net/adm/login) admin/admin888
+基于nutz的简易博客程序   
 
-Git [https://github.com/daodaovps/nutzblog](https://github.com/daodaovps/nutzblog)
-
-
+案例 [http://javablog.net](http://javablog.net)
+后台地址  [http://javablog.net/adm/login](http://javablog.net/adm/login)
