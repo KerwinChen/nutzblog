@@ -89,7 +89,7 @@ public class FTPUtil {
         }
     }
 
-    public static boolean uploadSingleFile_(FTPClient ftpClient,
+    private static boolean uploadSingleFile_(FTPClient ftpClient,
                                             String localFilePath, String remoteFilePath) throws IOException {
         File localFile = new File(localFilePath);
 
@@ -143,7 +143,7 @@ public class FTPUtil {
     }
 
 
-    private static void uploadDirectory(String server, String user, String pass, String localDir, String remoteDir) {
+    public static void uploadDirectory(String server, String user, String pass, String localDir, String remoteDir) {
         FTPClient ftpClient = new FTPClient();
         try {
             // connect and login to the server
@@ -171,20 +171,20 @@ public class FTPUtil {
     /**
      * 3秒钟算超时
      *
-     * @param server
-     * @param user
-     * @param pass
+     * @param ftpip
+     * @param ftpuser
+     * @param ftppwd
      * @return
      */
-    public static boolean testconn(String server, String user, String pass) {
+    public static boolean testconn(String ftpip, String ftpuser, String ftppwd ) {
 
         FTPClient ftpClient = new FTPClient();
 
         try {
             ftpClient.setConnectTimeout(3000);
             // connect and login to the server
-            ftpClient.connect(server, 21);
-            boolean rs = ftpClient.login(user, pass);
+            ftpClient.connect(ftpip, 21);
+            boolean rs = ftpClient.login(ftpuser, ftppwd);
             // use local passive mode to pass firewall
             ftpClient.enterLocalPassiveMode();
 

@@ -38,6 +38,7 @@
                                 <th>标题</th>
                                 <th>时间</th>
                                 <th>管理</th>
+                                <th>排序</th>
                             </tr>
                             </thead>
                             <tbody id="list_tbody">
@@ -75,12 +76,30 @@
             <a target="_self" href="/adm/seris_mgr/showlist_in/?_id={{value._id}}&book_id=${obj.book._id}">管理章节中的文章</a>
             <a target="_blank" href="/html/seris/{{value._id}}">[生成html]</a>
         </td>
+        <td>
+            {{value._index_inbook}}
+            <a target="_self" href="javascript:upone({{value._id}});">上移</a>
+            <a target="_self" href="javascript:downone({{value._id}});">下移</a>
+        </td>
     </tr>
     {{/each}}
 </script>
 
 
 <script>
+    function upone(id) {
+        $.get("/adm/books_mgr/upone/?id=" + id + "", function (data) {
+            window.location.reload();
+        });
+    }
+
+    function downone(id) {
+        $.get("/adm/books_mgr/downone/?id=" + id + "", function (data) {
+            window.location.reload();
+        });
+    }
+
+
     function del(id) {
         if (confirm("确定删除吗?")) {
             $.get("/adm/seris_mgr/del/?_id=" + id + "", function (rs) {
@@ -102,7 +121,7 @@
 
     function page(pageno) {
         var txt_q = $("#txt_q").val();
-        $.post("/adm/books_mgr/doshowlist_in/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "",
+        $.post("/adm/books_mgr/doshowlist_in/?pageno=" + pageno + "&t=" + new Date().getTime() + "",
                 {"_bookid": ${obj.book._id}}, function (data) {
                     console.log(data);
                     var html = template('template_list', data);

@@ -79,8 +79,6 @@ public class WSerisModule {
     public Map doaddup_inlist(@Param("..") final tb_singlepage tbin) {
 
         NutMap map = NutMap.NEW();
-
-        tbin.set_isdraft(false);
         tbin.setUpdateTime(new Date());
         tbin.set_titleen(Translates.trans(tbin.get_title()));
 

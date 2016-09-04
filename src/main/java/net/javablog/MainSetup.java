@@ -5,6 +5,8 @@ import net.javablog.bean.tb_user;
 import net.javablog.init.Const;
 import net.javablog.service.ConfService;
 import net.javablog.service.UserService;
+import net.javablog.util.FTPUtil;
+import org.apache.commons.net.ftp.FTPClient;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
@@ -82,8 +84,12 @@ public class MainSetup implements Setup {
         ioc.get(NutQuartzCronJobFactory.class);
 
 
+        //js里已经配置好了
 //        CachedNutDaoExecutor cacheManager = ioc.get(CachedNutDaoExecutor.class);
 //        cacheManager.setCachedTableNamePatten("tb_*");//缓存所有的表
+
+
+//        upload_static_images( Const.ftp_ip ,Const.ftp_user,Const.ftp_pwd);
 
 
         //测试一次成功后，就不再运行
@@ -118,6 +124,21 @@ public class MainSetup implements Setup {
 //        RedisService redis = ioc.get(RedisService.class);
 //        redis.set("hi", "刀刀");
 //        log.debug("redis say again : " + redis.get("hi"));
+
+
+    }
+
+    private void upload_static_images(String ftp_ip, String ftp_user, String ftp_pwd) {
+
+
+        String remoteDir1 = "/images";
+        String remoteDir2 = "/static";
+        String localDir1 = Const.HTML_SAVEPATH + "images";
+        String localDir2 = Const.HTML_SAVEPATH + "static";
+
+
+        FTPUtil.uploadDirectory(ftp_ip, ftp_user, ftp_pwd, localDir1, remoteDir1);
+        FTPUtil.uploadDirectory(ftp_ip, ftp_user, ftp_pwd, localDir2, remoteDir2);
 
 
     }

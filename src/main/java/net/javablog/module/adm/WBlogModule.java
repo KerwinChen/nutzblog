@@ -35,7 +35,7 @@ public class WBlogModule {
     public Map doaddup(@Param("..") final tb_singlepage tbin) {
 
         HashMap map = new HashMap();
-        tbin.set_isdraft(false);
+//        tbin.set_isdraft(false);
         tbin.set_titleen(Translates.trans(tbin.get_title()));
         tb_user user = CurrentUserUtils.getInstance().getUser();
         tbin.set_username(user.get_username());
@@ -99,7 +99,6 @@ public class WBlogModule {
 
         return out;
     }
-
 
 
 }

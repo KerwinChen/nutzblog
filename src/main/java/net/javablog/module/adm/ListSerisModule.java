@@ -1,6 +1,7 @@
 package net.javablog.module.adm;
 
 import net.javablog.bean.tb_book;
+import net.javablog.bean.tb_seris;
 import net.javablog.bean.tb_singlepage;
 import net.javablog.bean.tb_tag;
 import net.javablog.service.BlogService;
@@ -16,6 +17,7 @@ import org.nutz.dao.sql.Sql;
 import org.nutz.dao.util.cri.SimpleCriteria;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
@@ -38,6 +40,7 @@ public class ListSerisModule {
     private NoteService noteService;
     @Inject
     private TagService tagService;
+
 
     @At("/adm/listseris")
     @Ok("fm:adm.seris.listseris")
@@ -97,7 +100,7 @@ public class ListSerisModule {
     //列出指定serisid 下面的文章列表页面
     @At("/adm/seris_mgr/doshowlist_in")
     @Ok("json")
-    public Map doshowlist_in(@Param("isdraft") int isdraft, @Param("_serisid") int seris_id, @Param("pageno") int pageno) {
+    public Map doshowlist_in(@Param("_serisid") int seris_id, @Param("pageno") int pageno) {
         Map out = new HashMap();
         Pager pager = new Pager();
 
@@ -106,7 +109,7 @@ public class ListSerisModule {
         }
         pager.setPageNumber(pageno);
 
-        Cnd cnd = Cnd.where("_serisid", "=", seris_id).and("_isdraft", "=", isdraft);
+        Cnd cnd = Cnd.where("_serisid", "=", seris_id);
         cnd.asc("_index_inseris");
 
         Sql sqllist = Sqls.create("select * from  tb_singlepage $condition").setCondition(cnd);
@@ -148,6 +151,81 @@ public class ListSerisModule {
     }
 
 
+    /**
+     * 对seris中的page排序,指定的page上移一位
+     *
+     * @param page_id
+     * @return
+     */
+    @At("/adm/seris_mgr/upone")
+    @Ok("json")
+    public String upone(@Param("id") int page_id) {
+
+        tb_singlepage p = blogService.fetch(page_id);
+        //所属的seris
+        tb_seris s = serisService.fetch(p.get_serisid());
+        List<tb_singlepage> ps = blogService.query(Cnd.where("_serisid", "=", s.get_id()).orderBy("_index_inseris", "asc"));
+
+        if (!Lang.isEmpty(ps)) {
+            if (ps.size() == 1) {
+                return "ok,只有1条记录";
+            }
+        }
+        if (p.get_id() == ps.get(0).get_id()) {
+            return "ok,第1条记录,不能移动";
+        }
+
+
+//        p是当前位置
+//        before是目标位置
+
+        tb_singlepage before = blogService.fetch(Cnd.where("_serisid", "=", s.get_id()).and("_id", "!=", p.get_id()).and("_index_inseris", "<", p.get_index_inseris()).orderBy("_index_inseris", "desc"));
+
+        int p_index = p.get_index_inseris();
+        int befor_index = before.get_index_inseris();
+        before.set_index_inseris(p_index);
+        p.set_index_inseris(befor_index);
+
+        blogService.update(p);
+        blogService.update(before);
+
+        return "ok";
+    }
+
+
+    @At("/adm/seris_mgr/downone")
+    @Ok("json")
+    public String downone(@Param("id") int page_id) {
+
+        tb_singlepage p = blogService.fetch(page_id);
+        //所属的seris
+        tb_seris s = serisService.fetch(p.get_serisid());
+        List<tb_singlepage> ps = blogService.query(Cnd.where("_serisid", "=", s.get_id()).orderBy("_index_inseris", "asc"));
+
+        if (!Lang.isEmpty(ps)) {
+            if (ps.size() == 1) {
+                return "ok,只有1条记录";
+            }
+        }
+        if (p.get_id() == ps.get(ps.size() - 1).get_id()) {
+            return "ok,最后1条记录,不能移动";
+        }
+
+
+//        p是当前位置
+//        after是目标位置
+
+        tb_singlepage after = blogService.fetch(Cnd.where("_serisid", "=", s.get_id()).and("_id", "!=", p.get_id()).and("_index_inseris", ">", p.get_index_inseris()).orderBy("_index_inseris", "asc"));
+
+        int p_index = p.get_index_inseris();
+        int befor_index = after.get_index_inseris();
+        after.set_index_inseris(p_index);
+        p.set_index_inseris(befor_index);
+
+        blogService.update(p);
+        blogService.update(after);
+        return "ok";
+    }
 
 
 }

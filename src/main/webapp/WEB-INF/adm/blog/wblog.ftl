@@ -33,7 +33,8 @@
                     <li>
                         <a href="#">博客管理</a>
                     </li>
-                    <li class="active">写博客</li>
+                    <li class="active"><#if obj.item._id &gt; 0 >【修改】<#else>
+                        【新文章】</#if>${(obj.item._isdraft)?string("【草稿】","")}</li>
                 </ul>
             </div>
             <div class="page-content">
@@ -43,7 +44,7 @@
                             <div class="form-group">
                                 <label class="col-sm-1 control-label">标题</label>
                                 <input type="hidden" value="${obj.item._id}" id="_id">
-
+                                <input type="hidden" value="${obj.item._isdraft?string('1','0')}" id="_isdraft">
                                 <div class="col-sm-11">
                                     <input type="input" class="form-control" name="_title" id="_title" class="required"
                                            value="${obj.item._title!''}">
@@ -109,7 +110,8 @@
 
                             <div class="form-actions form-group clearfix">
                                 <div class="col-sm-11 col-sm-offset-1">
-                                    <button id="btn_submit" type="button" class="btn btn-default">提交</button>
+                                    <button id="btn_submit" type="button" class="btn btn-default">确认提交</button>
+                                    <button id="btn_savedraft" type="button" class="btn btn-default">保存草稿</button>
                                 </div>
                             </div>
 
@@ -157,14 +159,26 @@
 
     $(function () {
 
+        //编辑器
+        var testEditor = neweditor("test-editormd");
 
         $("#btn_submit").bind("click", function () {
+            $("#_isdraft").val("0");
+          savecontent();
+        });
+
+        $("#btn_savedraft").bind("click", function () {
+            $("#_isdraft").val("1");
+            savecontent();
+        });
+
+        function savecontent() {
             var _title = $("#_title").val();
             var _showintro = $("#_showintro").val();
             var _content_html = testEditor.getHTML();
             var _content_markdown = testEditor.getMarkdown();
             var _tags = $("#_tags").val();
-
+            var _isdraft=$("#_isdraft").val();
 
             if (!_title || !_showintro || !_content_html) {
                 alert("内容不完整");
@@ -176,14 +190,11 @@
                 return;
             }
 
-
             var _toppic = $("#imgid").attr("imgid");
             if (!_toppic) {
                 alert("还没有上传图片");
                 return;
             }
-
-
             var data = {};
             data._title = _title;
             data._showintro = _showintro;
@@ -193,7 +204,7 @@
             data._id = $("#_id").val();
             data._tags = _tags;
             data._titleinlogo = $("#_titleinlogo").val();
-
+            data._isdraft=_isdraft;
 
             var jsondata = $.toJSON(data);
 
@@ -203,7 +214,8 @@
                 }
                 console.log("返回结果" + $.toJSON(rs));
             });
-        });
+        }
+
         tag_init();
 
         //设置哪个 btn_upload 为上传控件
@@ -222,8 +234,6 @@
                 }
         );
 
-        //编辑器
-        var testEditor = neweditor("test-editormd");
 
 
     });

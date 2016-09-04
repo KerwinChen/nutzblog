@@ -6,10 +6,6 @@
 <script src="/adm/assets/js/jquery.inputlimiter.min.js"></script>
 <script src="/adm/assets/js/bootstrap-tag.min.js"></script>
 
-<#--对话框-->
-<script src="/adm/assets/js/dialog/artDialog.js?skin=chrome"></script>
-<script src="/adm/assets/js/dialog/plugins/iframeTools.js"></script>
-
 <#--上传组件-->
 <link href="/adm/assets/js/jquery-file-upload/jquery.fileupload.css" rel="stylesheet">
 <script src="/adm/assets/js/jquery-file-upload/jquery.ui.widget.js"></script>
@@ -46,8 +42,9 @@
                         <a href="#">系列教程 ${obj.s._seristitle}</a>
                     </li>
                 </#if>
+                    <li class="active"><#if obj.single._id &gt; 0 >【修改】<#else>
+                        【新文章】</#if>${(obj.single._isdraft)?string("【草稿】","")}</li>
 
-                    <li class="active">写博客</li>
                 </ul>
             </div>
             <div class="page-content">
@@ -74,7 +71,7 @@
                             <div class="form-group">
                                 <label class="col-sm-1 control-label">标题</label>
                                 <input type="hidden" value="${obj.single._id}" id="_id">
-
+                                <input type="hidden" value="${obj.single._isdraft?string(1,0)}" id="_isdraft">
                                 <div class="col-sm-11">
                                     <input type="input" class="form-control" name="_title" id="_title" class="required"
                                            value="${obj.single._title!''}">
@@ -139,7 +136,8 @@
 
                             <div class="form-actions form-group clearfix">
                                 <div class="col-sm-11 col-sm-offset-1">
-                                    <button id="btn_submit" type="button" class="btn btn-default">提交</button>
+                                    <button id="btn_submit" type="button" class="btn btn-default">确认提交</button>
+                                    <button id="btn_savedraft" type="button" class="btn btn-default">保存草稿</button>
                                 </div>
                             </div>
 
@@ -171,7 +169,6 @@
                 tags.push("${one._name}");
             </#list>
         </#if>
-
             tag_input.tag(
                     {
                         placeholder: tag_input.attr('placeholder'),
@@ -184,59 +181,73 @@
         }
     }
 
+    //编辑器
+    var testEditor = neweditor("test-editormd");
 
-    $(function () {
-
-
-        $("#btn_submit").bind("click", function () {
-            var _title = $("#_title").val();
-            var _showintro = $("#_showintro").val();
-            var _content_html = testEditor.getHTML();
-            var _content_markdown = testEditor.getMarkdown();
-            var _tags = $("#_tags").val();
-            var _serisid = $("#_serisid").val();
-            var _bookid = $("#_bookid").val();
-            var _index_inseris = $("#_index_inseris").val();
-
-
-            if (!_title || !_showintro || !_content_html) {
-                alert("内容不完整");
-                return;
-            }
-
-            if (_content_html.indexOf("<h2") < 0) {
-                alert("至少要有1个h2标签");
-                return;
-            }
+    function autosavecontent() {
+        savecontent(1);
+    }
+    function savecontent(auto) {
+        var _title = $("#_title").val();
+        var _showintro = $("#_showintro").val();
+        var _content_html = testEditor.getHTML();
+        var _content_markdown = testEditor.getMarkdown();
+        var _tags = $("#_tags").val();
+        var _serisid = $("#_serisid").val();
+        var _bookid = $("#_bookid").val();
+        var _index_inseris = $("#_index_inseris").val();
 
 
-            var _toppic = $("#imgid").attr("imgid");
-            if (!_toppic) {
-                alert("还没有上传图片");
-                return;
-            }
+        if (!_title || !_showintro || !_content_html) {
+            alert("内容不完整");
+            return;
+        }
 
+        if (_content_html.indexOf("<h2") < 0) {
+            alert("至少要有1个h2标签");
+            return;
+        }
+        var _toppic = $("#imgid").attr("imgid");
+        if (!_toppic) {
+            alert("还没有上传图片");
+            return;
+        }
 
-            var data = {};
-            data._title = _title;
-            data._showintro = _showintro;
-            data._content_html = _content_html;
-            data._content_markdown = _content_markdown;
-            data._toppic = _toppic;
-            data._id = $("#_id").val();
-            data._serisid = _serisid;
-            data._bookid = _bookid;
-            data._index_inseris = _index_inseris;
-            data._tags = _tags;
-            data._titleinlogo = $("#_titleinlogo").val();
-
-            $.post("/adm/seris_mgr/doaddup_inlist", data, function (rs) {
-                if (rs["status"] == "ok") {
+        var data = {};
+        data._title = _title;
+        data._showintro = _showintro;
+        data._content_html = _content_html;
+        data._content_markdown = _content_markdown;
+        data._toppic = _toppic;
+        data._id = $("#_id").val();
+        data._serisid = _serisid;
+        data._bookid = _bookid;
+        data._index_inseris = _index_inseris;
+        data._tags = _tags;
+        data._titleinlogo = $("#_titleinlogo").val();
+        data._isdraft = $("#_isdraft").val();
+        $.post("/adm/seris_mgr/doaddup_inlist", data, function (rs) {
+            if (rs["status"] == "ok") {
+                if (!auto) {
                     window.location.href = "/adm/seris_mgr/showlist_in/?_id=" + _serisid + "&book_id=" + _bookid;
                 }
-                console.log("返回结果" + $.toJSON(rs));
-            });
+            }
+            console.log("返回结果" + $.toJSON(rs));
         });
+    }
+
+    setInterval("autosavecontent()", 1000 * 10);
+
+    $(function () {
+        $("#btn_submit").bind("click", function () {
+            $("#_isdraft").val("0");
+            savecontent();
+        });
+        $("#btn_savedraft").bind("click", function () {
+            $("#_isdraft").val("1");
+            savecontent();
+        });
+
         tag_init();
 
         //设置哪个 btn_upload 为上传控件
@@ -254,39 +265,6 @@
                     });
                 }
         );
-
-
-        //编辑器
-        var testEditor;
-        testEditor = editormd("test-editormd", {
-            width: "100%",
-            height: 300,
-            toolbarAutoFixed: false,
-//            autoHeight: true,
-//            watch: false,             //实时预览
-            syncScrolling: "single",
-            saveHTMLToTextarea: true,//getHTML() 的使用需要设置该属性为true
-            toolbarIcons: function () {
-                // Or return editormd.toolbarModes[name]; // full, simple, mini
-                // Using "||" set icons align right.
-//                return ["undo", "redo", "|", "bold", "hr", "|", "preview", "watch", "|", "fullscreen", "info", "testIcon", "testIcon2", "file", "faicon", "||", "watch", "fullscreen", "preview", "testIcon"]
-                return [
-                    "undo", "redo", "|",
-                    "bold", "del", "italic", "quote", "uppercase", "lowercase", "|",
-                    "h1", "h2", "h3", "h4", "h5", "h6", "|",
-                    "list-ul", "list-ol", "hr", "|",
-                    "watch", "preview", "fullscreen", "|",
-                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities",
-                    "help", "info"
-                ];
-            },
-            path: "/adm/assets/js/editor.md/lib/",
-            imageUpload: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/adm/upload_editor",
-            htmlDecode: true
-
-        });
 
 
     });

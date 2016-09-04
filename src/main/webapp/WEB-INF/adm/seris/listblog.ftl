@@ -42,11 +42,13 @@
                     <a href="/adm/seris_mgr/showaddup_inlist/?seris_id=${obj.s._id}&book_id=${obj.b._id}">在该章节下新增文章</a>
                 <#else >
                     <a href="/adm/listseris">返回教程列表</a>
-                    <a href="/adm/seris_mgr/showaddup_inlist?seris_id=${obj.s._id}">在该系列教程下新增文章</a>
+                    <#if (obj.isdraft==0) >
+                        <a href="/adm/seris_mgr/showaddup_inlist?seris_id=${obj.s._id}">在该系列教程下新增文章</a>
+                    </#if>
                 </#if>
 
                 </div>
-                    
+
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table  table-bordered table-hover">
@@ -55,7 +57,9 @@
                                 <th>序号</th>
                                 <th>标题</th>
                                 <th>时间</th>
+                                <th>状态</th>
                                 <th>管理</th>
+                                <th>排序</th>
                             </tr>
                             </thead>
                             <tbody id="list_tbody">
@@ -85,6 +89,7 @@
         <td>{{value._id}}</td>
         <td>{{value._title}}</td>
         <td>{{value.ut}}</td>
+        <td>{{if value._isdraft == 0}}已发布{{else}}草稿{{/if}}</td>
         <td>
             <a href="javascript:del({{value._id}});">删除</a>
             <a target="_self"
@@ -92,12 +97,29 @@
             <a target="_blank" href="/page/{{value._id}}/{{value._titleen}}.html">预览</a>
             <a target="_blank" href="/html/single/{{value._id}}">[生成html]</a>
         </td>
+        <td>
+            {{value._index_inseris}}
+            <a target="_self" href="javascript:upone({{value._id}});">上移</a>
+            <a target="_self" href="javascript:downone({{value._id}});">下移</a>
+        </td>
     </tr>
     {{/each}}
 </script>
 
 
 <script>
+    function upone(id) {
+        $.get("/adm/seris_mgr/upone/?id=" + id + "", function (data) {
+            window.location.reload();
+        });
+    }
+
+    function downone(id) {
+        $.get("/adm/seris_mgr/downone/?id=" + id + "", function (data) {
+            window.location.reload();
+        });
+    }
+
     function del(id) {
         if (confirm("确定删除吗?")) {
             $.get("/adm/single_mgr/del/?id=" + id + "", function (rs) {
@@ -119,9 +141,8 @@
 
     function page(pageno) {
         var txt_q = $("#txt_q").val();
-        $.post("/adm/seris_mgr/doshowlist_in/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "",
+        $.post("/adm/seris_mgr/doshowlist_in/?pageno=" + pageno + "&t=" + new Date().getTime() + "",
                 {"txt_q": txt_q, "_serisid": ${obj.s._id}}, function (data) {
-
                     console.log(data);
                     var html = template('template_list', data);
                     $("#list_tbody").html(html);

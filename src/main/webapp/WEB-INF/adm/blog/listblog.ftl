@@ -52,6 +52,7 @@
                                 <th>序号</th>
                                 <th>标题</th>
                                 <th>时间</th>
+                                <th>状态</th>
                                 <th>管理</th>
                             </tr>
                             </thead>
@@ -82,6 +83,7 @@
         <td>{{value._id}}</td>
         <td>{{value._title}}</td>
         <td>{{value.ut}}</td>
+        <td>{{if value._isdraft ==0 }} 已发布 {{else}} 草稿{{/if}}</td>
         <td>
             <a href="javascript:del({{value._id}});">删除</a>
             <a target="_self" href="/adm/wblog/?_id={{value._id}}">编辑</a>
@@ -115,7 +117,7 @@
 
     function page(pageno) {
         var txt_q = $("#txt_q").val();
-        $.post("/adm/single_mgr/doshowlist/?isdraft=0&pageno=" + pageno + "&t=" + new Date().getTime() + "", {"txt_q": txt_q}, function (data) {
+        $.post("/adm/single_mgr/doshowlist/?pageno=" + pageno + "&t=" + new Date().getTime() + "", {"txt_q": txt_q}, function (data) {
             console.log(data);
             var html = template('template_list', data);
             $("#list_tbody").html(html);

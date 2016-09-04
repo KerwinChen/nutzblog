@@ -78,7 +78,7 @@
             data._bookintro = _bookintro;
 
 
-            $.post("/adm/books_mgr/doaddup/?t=" + new Date().getTime(), data, function (rs) {
+            $.post("/adm/books_mgr/doaddup_inlist/?t=" + new Date().getTime(), data, function (rs) {
                 console.log("返回结果" + rs);
                 window.location.href = "/adm/listnote";
             });

@@ -14,6 +14,7 @@ import org.nutz.mvc.annotation.*;
 import org.nutz.mvc.filter.CheckSession;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -54,6 +55,33 @@ public class WNoteModule {
             noteService.insert(tb);
         }
         return tb.get_id() + "";
+    }
+
+
+    @At("/adm/books_mgr/doaddup_inlist")
+    @Ok("json")
+    public Map doaddup_inlist(@Param("..") tb_seris tbin) {
+
+        HashMap map = new HashMap();
+
+        if (tbin.get_id() > 0) {
+            tb_seris temp = serisService.fetch(tbin.get_id());
+            tbin.set_index_inbook(temp.get_index_inbook());
+            serisService.update(tbin);
+        } else {
+
+            tb_seris count = serisService.fetch(Cnd.where("_bookid", "=", tbin.get_bookid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inbook", "desc"));
+            if (count == null) {
+                tbin.set_index_inbook(1);
+            } else {
+                tbin.set_index_inbook(count.get_index_inbook() + 1);
+            }
+            serisService.insert(tbin);
+        }
+
+        map.put("status", "ok");
+        map.put("id", tbin.get_id());
+        return map;
     }
 
 

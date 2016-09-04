@@ -87,7 +87,7 @@
             data._seristitle = _seristitle;
             data._serisintro = _serisintro;
 
-            $.post("/adm/seris_mgr/doaddup/?t=" + new Date().getTime(), data, function (rs) {
+            $.post("/adm/books_mgr/doaddup_inlist/?t=" + new Date().getTime(), data, function (rs) {
                 console.log("返回结果" + rs);
                 window.location.href = "/adm/books_mgr/showlist_in/?_id=${obj.book._id}";
             });

@@ -26,8 +26,6 @@
     <script src="/adm/assets/js/jquery-file-upload/jquery.fileupload.js"></script>
 
     <script src="/adm/assets/js/jquery.json.min.js"></script>
-    <script src="/adm/assets/js/dialog/artDialog.js?skin=chrome"></script>
-    <script src="/adm/assets/js/dialog/plugins/iframeTools.js"></script>
 
 
 </head>
