@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        生成HTML
+        查看日志
     </title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
@@ -48,7 +48,7 @@
     function ref() {
         $.get("/getlog", function (data) {
             //登录失效
-            if (data.indexOf("Login - NutzBlog")>0) {
+            if (data.indexOf("Login - NutzBlog") > 0) {
                 window.location.href = "/adm/login";
             }
 

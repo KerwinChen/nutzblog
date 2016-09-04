@@ -23,7 +23,7 @@
                 <!-- /.ace-settings-container -->
                 <div class="page-header">
                     <h1>
-                        首页
+                        快捷链接
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                         </small>
@@ -32,12 +32,13 @@
                 <!-- /.page-header -->
 
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12" style="font-size: 16px">
 
-                        <div class="tabbable">
-                            welcome
-                        </div>
-
+                        <a target="_blank" href="/log">查看日志</a> <br><br>
+                        <a target="_blank" href="/createhtml_site">一键生成HTML</a> <br><br>
+                        <a href="">上传所有的HTML</a> <br><br>
+                        <#--<a href="">清空FTP所有HTMl文件</a> <br><br>-->
+                        <#--<a href="">最后一次编辑的文件</a><br><br>-->
 
                     </div>
                     <!-- /.col -->
