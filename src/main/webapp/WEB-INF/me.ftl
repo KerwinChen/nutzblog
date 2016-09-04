@@ -37,9 +37,8 @@
             <h3>关于本站</h3>
 
             <div>
-                ${(obj.rs)!''}
+                ${(obj.site_aboutme)!''}
             </div>
-
         </div>
 
     </div>

@@ -8,10 +8,13 @@ import net.javablog.service.BlogService;
 import net.javablog.service.SerisService;
 import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
+import net.javablog.util.RunES_IndexJob;
 import net.javablog.util.Translates;
 import org.nutz.dao.Cnd;
+import org.nutz.dao.entity.Record;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
@@ -73,7 +76,6 @@ public class WSerisModule {
     }
 
 
-
     @At("/adm/seris_mgr/doaddup_inlist")
     @Ok("json")
     public Map doaddup_inlist(@Param("..") final tb_singlepage tbin) {
@@ -120,9 +122,12 @@ public class WSerisModule {
         map.put("status", "ok");
         map.put("item", tbin);
 
+        Map rec = Lang.obj2map(tbin);
+        Record record = new Record();
+        record.putAll(rec);
 
+        RunES_IndexJob.createIndex(record);
         return map;
-
 
     }
 

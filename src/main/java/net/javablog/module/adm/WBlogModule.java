@@ -6,6 +6,7 @@ import net.javablog.bean.tb_user;
 import net.javablog.service.BlogService;
 import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
+import net.javablog.util.RunES_IndexJob;
 import net.javablog.util.Translates;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.entity.Record;
@@ -75,6 +76,7 @@ public class WBlogModule {
         Record record = new Record();
         record.putAll(m);
 
+        RunES_IndexJob.createIndex(record);
         return map;
 
     }

@@ -308,8 +308,7 @@ public class HtmlModule {
 
                         //标签页面
                         logService.setProcess(all);
-                        Map data_tag = new HashMap();
-                        data_tag.put("value", tagService.getdata());
+                        Map data_tag = tagService.getdata();
                         createHtml.createhtml("tags.ftl", data_tag, Const.HTML_SAVEPATH + "tags.html");
 
                         //每个标签对应的分页
