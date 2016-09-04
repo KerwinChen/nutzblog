@@ -21,6 +21,11 @@ public class ConfigService extends BaseService<tb_config> {
         return fetch(Cnd.where("k", "=", "ftp_pwd")).getV();
     }
 
+
+    public String get_site_aboutme() {
+        return fetch(Cnd.where("k", "=", "site_aboutme")).getV();
+    }
+
     /**
      * 返回的是字符串  类似 2015-01-01
      *

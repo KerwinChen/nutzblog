@@ -88,7 +88,9 @@ public class MainSetup implements Setup {
 
         //拷贝static文件夹
         try {
-            Files.copyDir(new File(  conf.getServletContext().getRealPath("/")+ "/static"), new File(Const.HTML_SAVEPATH+"/static"));
+            File target_static=new File(Const.HTML_SAVEPATH+"/static");
+            Files.deleteDir(target_static);
+            Files.copyDir(new File(  conf.getServletContext().getRealPath("/")+ "/static"), target_static);
         } catch (IOException e) {
             e.printStackTrace();
         }
