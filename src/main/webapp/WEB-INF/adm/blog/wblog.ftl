@@ -132,7 +132,6 @@
 
 <script>
 
-
     function tag_init() {
         var tag_input = $('#_tags');
         try {
@@ -156,15 +155,77 @@
         }
     }
 
+    //编辑器
+    var testEditor = neweditor("test-editormd");
+    function autosavecontent() {
+        savecontent(1);
+    }
+    function savecontent(auto) {
+        var _title = $("#_title").val();
+        var _showintro = $("#_showintro").val();
+        var _content_html = testEditor.getHTML();
+        var _content_markdown = testEditor.getMarkdown();
+        var _tags = $("#_tags").val();
+
+        if (!_title || !_showintro || !_content_html) {
+            if (!auto) {
+                alert("内容不完整");
+            }
+            return;
+        }
+
+        if (_content_html.indexOf("<h2") < 0) {
+            if (!auto) {
+                alert("至少要有1个h2标签");
+            }
+            return;
+        }
+
+        var _toppic = $("#imgid").attr("imgid");
+        if (!_toppic) {
+            if (!auto) {
+                alert("还没有上传图片");
+            }
+            return;
+        }
+        var data = {};
+        data._title = _title;
+        data._showintro = _showintro;
+        data._content_html = _content_html;
+        data._content_markdown = _content_markdown;
+        data._toppic = _toppic;
+        data._id = $("#_id").val();
+        data._tags = _tags;
+        data._titleinlogo = $("#_titleinlogo").val();
+        if(data._id==0)
+        {
+            data._isdraft=1;
+        } else{
+            data._isdraft = $("#_isdraft").val();
+        }
+
+        var jsondata = $.toJSON(data);
+
+        $.post("/adm/single_mgr/doaddup", data, function (rs) {
+            if (rs["status"] == "ok") {
+                $("#_id").val(rs["item"]["_id"]);
+                if (!auto) {
+                    window.location.href = "/adm/listblog";
+                }
+            }
+            console.log("返回结果" + $.toJSON(rs));
+        });
+    }
+    setInterval("autosavecontent()", 1000 * 10);
+
+
 
     $(function () {
 
-        //编辑器
-        var testEditor = neweditor("test-editormd");
 
         $("#btn_submit").bind("click", function () {
             $("#_isdraft").val("0");
-          savecontent();
+            savecontent();
         });
 
         $("#btn_savedraft").bind("click", function () {
@@ -172,49 +233,6 @@
             savecontent();
         });
 
-        function savecontent() {
-            var _title = $("#_title").val();
-            var _showintro = $("#_showintro").val();
-            var _content_html = testEditor.getHTML();
-            var _content_markdown = testEditor.getMarkdown();
-            var _tags = $("#_tags").val();
-            var _isdraft=$("#_isdraft").val();
-
-            if (!_title || !_showintro || !_content_html) {
-                alert("内容不完整");
-                return;
-            }
-
-            if (_content_html.indexOf("<h2") < 0) {
-                alert("至少要有1个h2标签");
-                return;
-            }
-
-            var _toppic = $("#imgid").attr("imgid");
-            if (!_toppic) {
-                alert("还没有上传图片");
-                return;
-            }
-            var data = {};
-            data._title = _title;
-            data._showintro = _showintro;
-            data._content_html = _content_html;
-            data._content_markdown = _content_markdown;
-            data._toppic = _toppic;
-            data._id = $("#_id").val();
-            data._tags = _tags;
-            data._titleinlogo = $("#_titleinlogo").val();
-            data._isdraft=_isdraft;
-
-            var jsondata = $.toJSON(data);
-
-            $.post("/adm/single_mgr/doaddup", data, function (rs) {
-                if (rs["status"] == "ok") {
-                    window.location.href = "/adm/listblog";
-                }
-                console.log("返回结果" + $.toJSON(rs));
-            });
-        }
 
         tag_init();
 
@@ -233,7 +251,6 @@
 
                 }
         );
-
 
 
     });

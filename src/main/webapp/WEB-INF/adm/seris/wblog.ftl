@@ -199,17 +199,23 @@
 
 
         if (!_title || !_showintro || !_content_html) {
-            alert("内容不完整");
+            if (!auto) {
+                alert("内容不完整");
+            }
             return;
         }
 
         if (_content_html.indexOf("<h2") < 0) {
-            alert("至少要有1个h2标签");
+            if (!auto) {
+                alert("至少要有1个h2标签");
+            }
             return;
         }
         var _toppic = $("#imgid").attr("imgid");
         if (!_toppic) {
-            alert("还没有上传图片");
+            if (!auto) {
+                alert("还没有上传图片");
+            }
             return;
         }
 
@@ -225,9 +231,16 @@
         data._index_inseris = _index_inseris;
         data._tags = _tags;
         data._titleinlogo = $("#_titleinlogo").val();
-        data._isdraft = $("#_isdraft").val();
+
+        if (data._id == 0) {
+            data._isdraft = 1;
+        } else {
+            data._isdraft = $("#_isdraft").val();
+        }
+
         $.post("/adm/seris_mgr/doaddup_inlist", data, function (rs) {
             if (rs["status"] == "ok") {
+                $("#_id").val(rs["item"]["_id"]);
                 if (!auto) {
                     window.location.href = "/adm/seris_mgr/showlist_in/?_id=" + _serisid + "&book_id=" + _bookid;
                 }
