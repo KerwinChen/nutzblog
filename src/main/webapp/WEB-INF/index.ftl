@@ -44,19 +44,17 @@
                             <img class="center-block  img-responsive img-rounded"
                                  src="/static/img/nav_01.png?v=${obj.version}">
                         </span>
-
                         <h3>分类</h3>
                     </a></div>
             </div>
 
             <div class="quarter col-md-3 col-xs-3  ">
                 <div id="hp-box-2">
-                    <a target="_blank" href="https://disqus.com/home/forums/javacorecn/">
+                    <a target="_blank" href="https://nutz.cn/">
                         <span class="bucket-icon">
                             <img class="center-block  img-responsive img-rounded"
                                  src="/static/img/nav_02.png?v=${obj.version}">
                         </span>
-
                         <h3>提问</h3>
                     </a>
                 </div>
@@ -64,13 +62,12 @@
 
             <div class="quarter col-md-3  col-xs-3  ">
                 <div id="hp-box-3">
-                    <a target="_self" href="/proj/1.html">
+                    <a target="_blank" href="https://github.com/daodaovps/nutzblog">
                         <span class="bucket-icon">
                             <img class="center-block  img-responsive img-rounded"
                                  src="/static/img/nav_03.png?v=${obj.version}">
                         </span>
-
-                        <h3>项目</h3>
+                        <h3>开源</h3>
                     </a>
                 </div>
             </div>

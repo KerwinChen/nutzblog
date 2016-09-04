@@ -3,21 +3,23 @@ package net.javablog;
 import net.javablog.bean.tb_config;
 import net.javablog.bean.tb_user;
 import net.javablog.init.Const;
-import net.javablog.service.ConfService;
+import net.javablog.service.ConfigService;
 import net.javablog.service.UserService;
 import net.javablog.util.FTPUtil;
-import org.apache.commons.net.ftp.FTPClient;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
 import org.nutz.integration.quartz.NutQuartzCronJobFactory;
 import org.nutz.ioc.Ioc;
+import org.nutz.lang.Files;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
+import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
-import org.nutz.plugins.cache.dao.CachedNutDaoExecutor;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +64,7 @@ public class MainSetup implements Setup {
         }
 
         // 公共常量
-        ConfService confService = ioc.get(ConfService.class);
+        ConfigService confService = ioc.get(ConfigService.class);
         Const.admin = confService.fetch(Cnd.where("k", "=", "admin")).getV();
         Const.admin_email = confService.fetch(Cnd.where("k", "=", "admin_email")).getV();
         Const.admin_github = confService.fetch(Cnd.where("k", "=", "admin_github")).getV();
@@ -82,6 +84,14 @@ public class MainSetup implements Setup {
         //测试初始化Quartz
         //因为NutIoc中的Bean是完全懒加载模式的,不获取就不生成,不初始化,所以,为了触发计划任务的加载,需要获取一次
         ioc.get(NutQuartzCronJobFactory.class);
+
+
+        //拷贝static文件夹
+        try {
+            Files.copyDir(new File(  conf.getServletContext().getRealPath("/")+ "/static"), new File(Const.HTML_SAVEPATH+"/static"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         //js里已经配置好了

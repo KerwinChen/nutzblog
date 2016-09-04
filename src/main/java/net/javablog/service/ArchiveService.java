@@ -19,10 +19,13 @@ public class ArchiveService {
     @Inject
     private BlogService blogService;
 
+    @Inject
+    private ConfigService configService;
+
     public Map data() {
         Map out = new HashMap();
 
-        String build_begindate = "2015-07-12";
+        String build_begindate = configService.getCreateTime();
         long build_long = 0;
 
         long a = Times.parseq("yyyy-MM-dd", build_begindate).getTime();

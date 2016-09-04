@@ -90,7 +90,7 @@ public class FTPUtil {
     }
 
     private static boolean uploadSingleFile_(FTPClient ftpClient,
-                                            String localFilePath, String remoteFilePath) throws IOException {
+                                             String localFilePath, String remoteFilePath) throws IOException {
         File localFile = new File(localFilePath);
 
         InputStream inputStream = new FileInputStream(localFile);
@@ -144,6 +144,11 @@ public class FTPUtil {
 
 
     public static void uploadDirectory(String server, String user, String pass, String localDir, String remoteDir) {
+
+        if (!new File(localDir).exists()) {
+            return;
+        }
+
         FTPClient ftpClient = new FTPClient();
         try {
             // connect and login to the server
@@ -176,7 +181,7 @@ public class FTPUtil {
      * @param ftppwd
      * @return
      */
-    public static boolean testconn(String ftpip, String ftpuser, String ftppwd ) {
+    public static boolean testconn(String ftpip, String ftpuser, String ftppwd) {
 
         FTPClient ftpClient = new FTPClient();
 
@@ -230,8 +235,8 @@ public class FTPUtil {
      * Removes a non-empty directory by delete all its sub files and
      * sub directories recursively. And finally remove the directory.
      */
-    public static void removeDirectory(FTPClient ftpClient, String parentDir,
-                                       String currentDir) throws IOException {
+    private static void removeDirectory(FTPClient ftpClient, String parentDir,
+                                        String currentDir) throws IOException {
         String dirToList = parentDir;
         if (!currentDir.equals("")) {
             dirToList += "/" + currentDir;
@@ -279,6 +284,11 @@ public class FTPUtil {
 
 
     public static void uploadSingleFile(String ftpip, String ftpuser, String ftppwd, String localfile, String remotefile) {
+
+        if (!new File(localfile).exists()) {
+            return;
+        }
+
         FTPClient ftpClient = new FTPClient();
         try {
             // connect and login to the server
@@ -320,7 +330,7 @@ public class FTPUtil {
     }
 
 
-    private static void removeDirectory(String ftpip, String ftpuser, String ftppwd, String remotepath) {
+    public static void removeDirectory(String ftpip, String ftpuser, String ftppwd, String remotepath) {
 
         FTPClient ftpClient = new FTPClient();
         try {

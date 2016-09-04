@@ -38,7 +38,7 @@
 <#if obj.showadm=="true">
     <div class="row">
         <div class="col-md-8  col-md-offset-2  col-xs-12 ">
-            <a href="/adm/single_mgr/showaddup/?_id=${(obj.item._id)}">编辑</a>
+            <a href="/adm/wblog/?_id=${(obj.item._id)}">编辑</a>
             <a href="javascript:del(${(obj.item._id)})">删除</a>
         </div>
     </div>

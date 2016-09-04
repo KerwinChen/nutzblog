@@ -36,10 +36,19 @@
 
                         <a target="_blank" href="/log">查看日志</a> <br><br>
                         <a target="_blank" href="/createhtml_site">一键生成HTML</a> <br><br>
-                        <a href="">上传所有的HTML</a> <br><br>
-                        <#--<a href="">清空FTP所有HTMl文件</a> <br><br>-->
-                        <#--<a href="">最后一次编辑的文件</a><br><br>-->
 
+                        <a target="_blank" href="/ftp_upload_html_all">上传所有的HTML</a>&nbsp;&nbsp;
+                        <a target="_blank" href="/ftp_upload_images_all">上传引用到的所有图片(images文件夹)</a>&nbsp;&nbsp;
+                        <a target="_blank" href="/ftp_upload_static">上传static文件夹(几乎没有变动,传一次即可)</a> <br><br>
+
+                    <#--<a href="">清空FTP所有HTMl文件</a> <br><br>-->
+                    <#--<a href="">最后一次编辑的文件</a><br><br>-->
+
+                        <hr>
+                        DEMO <a target="_blank" href="http://demo.javablog.net">http://demo.javablog.net</a>
+                        admin/admin888 <br><br>
+                        Git地址 <a target="_blank" href="https://github.com/daodaovps/nutzblog">https://github.com/daodaovps/nutzblog</a>
+                        <br><br>
                     </div>
                     <!-- /.col -->
                 </div>

@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right">上传玉照</label>
+                            <label class="col-sm-1 control-label no-padding-right">上传头像</label>
 
                             <div class="col-sm-11">
                                 <div id="fileupload_photo">

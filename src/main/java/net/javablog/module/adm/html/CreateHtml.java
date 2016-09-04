@@ -22,6 +22,7 @@ import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Files;
 import org.nutz.lang.Lang;
+import org.nutz.lang.random.R;
 import org.nutz.lang.util.NutMap;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
@@ -90,6 +91,7 @@ public class CreateHtml {
             propMap.put("site_aboutme_md", dao.fetch("tb_config", Cnd.where("k", "=", "site_aboutme_md")).getString("v"));
             propMap.put("site_tj", dao.fetch("tb_config", Cnd.where("k", "=", "site_tj")).getString("v"));
             propMap.put("site_msgboard", dao.fetch("tb_config", Cnd.where("k", "=", "site_msgboard")).getString("v"));
+            propMap.put("version", R.random(10,99));
 
             Template t = cf.getTemplate(templateFileName);
 
@@ -206,7 +208,7 @@ public class CreateHtml {
 
         int out = 0;
 
-        Sql sql = Sqls.create("SELECT  YEAR(_savedatetime) as y, MONTH(_savedatetime) as m ,count(*) as c from tb_singlepage  GROUP BY y,m ORDER BY y asc   ");
+        Sql sql = Sqls.create("SELECT  YEAR(ut) as y, MONTH(ut) as m ,count(*) as c from tb_singlepage  GROUP BY y,m ORDER BY y asc   ");
         sql.setCallback(Sqls.callback.records());
         dao.execute(sql);
         List<Record> records = sql.getList(Record.class);
@@ -246,7 +248,7 @@ public class CreateHtml {
         Map<Integer, Integer> outlist = new HashMap<Integer, Integer>();
         int out = 0;
 
-        Sql sql = Sqls.create("SELECT  YEAR(_savedatetime) as y, MONTH(_savedatetime) as m ,count(*) as c from tb_singlepage  GROUP BY y,m ORDER BY y asc   ");
+        Sql sql = Sqls.create("SELECT  YEAR(ut) as y, MONTH(ut) as m ,count(*) as c from tb_singlepage  GROUP BY y,m ORDER BY y asc   ");
         sql.setCallback(Sqls.callback.records());
         dao.execute(sql);
         List<Record> records = sql.getList(Record.class);

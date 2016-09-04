@@ -41,7 +41,7 @@ public class HtmlModule {
     private CreateHtml createHtml;
 
     @Inject
-    private FtpConfigService ftpConfigService;
+    private ConfigService configService;
 
     @Inject
     private LogService logService;
@@ -72,9 +72,9 @@ public class HtmlModule {
     @Ok("redirect:/log")
     public void html(String type, int id) {
 
-        String ip = ftpConfigService.getIP();
-        String user = ftpConfigService.getUser();
-        String pwd = ftpConfigService.getPwd();
+        String ip = configService.getIP();
+        String user = configService.getUser();
+        String pwd = configService.getPwd();
 
         html_single(type, id, ip, user, pwd);
 
@@ -216,7 +216,6 @@ public class HtmlModule {
                     final List<tb_singlepage> listpages = dao.query(tb_singlepage.class, Cnd.where("_isdraft", "=", 0));
                     int listpages_ = listpages == null ? 0 : listpages.size();
 
-
                     //多少个系列
                     List<tb_seris> seris_ = dao.query(tb_seris.class, Cnd.where("_isdraft", "=", 0).and("_bookid", "=", 0));
                     int seris_count = seris_ == null ? 0 : seris_.size();
@@ -235,19 +234,18 @@ public class HtmlModule {
                         logService.setProcess(all);
                         Files.createDirIfNoExists(Const.HTML_SAVEPATH + "index/");
                         if (pageno == 1) {
-                            createHtml.createhtml("indexhtml.ftl", indexService.getIndexMapdata(pageno), Const.HTML_SAVEPATH +"index.html");
+                            createHtml.createhtml("index.ftl", indexService.getIndexMapdata(pageno), Const.HTML_SAVEPATH +"index.html");
                             try {
                                 Files.copyFile(new File(Const.HTML_SAVEPATH + "index.html"), new File(Const.HTML_SAVEPATH + "index/" + "1.html"));
                                 Files.copyFile(new File(Const.HTML_SAVEPATH + "index.html"), new File(Const.HTML_SAVEPATH + "index.htm"));
                             } catch (IOException e) {
                             }
                         } else {
-                            createHtml.createhtml("indexhtml.ftl", indexService.getIndexMapdata(pageno), Const.HTML_SAVEPATH + "/index/"+pageno + ".html");
+                            createHtml.createhtml("index.ftl", indexService.getIndexMapdata(pageno), Const.HTML_SAVEPATH + "/index/"+pageno + ".html");
                         }
                         log.info("正在生成首页: " + pageno + "/" + count_index_pages);
                     }
                     log.info("生成首页over");
-
 
                     //按照经验分页
                     for (int i = 1; i <= count_filter_pagesingle; i++) {
@@ -263,7 +261,7 @@ public class HtmlModule {
                     for (int i = 0; i < seris_.size(); i++) {
                         logService.setProcess(all);
                         tb_seris tb = seris_.get(i);
-                        createHtml.createhtml("show_menu_seris.ftl", menuService.getseris(tb.get_id()), Const.HTML_SAVEPATH + "seris/" + tb.get_id()+ tb.get_seristitleen() + ".html");
+                        createHtml.createhtml("menu_seris.ftl", menuService.getseris(tb.get_id()), Const.HTML_SAVEPATH + "seris/" + tb.get_id()+ tb.get_seristitleen() + ".html");
                     }
 
                     //按照图书分页
@@ -275,13 +273,12 @@ public class HtmlModule {
                     for (int i = 0; i < books_.size(); i++) {
                         logService.setProcess(all);
                         tb_book tb = books_.get(i);
-                        createHtml.createhtml("show_menu_book.ftl", menuService.getbook(tb.get_id()), Const.HTML_SAVEPATH + "book/" + tb.get_id()+tb.get_booktitleen() + ".html");
+                        createHtml.createhtml("menu_note.ftl", menuService.getbook(tb.get_id()), Const.HTML_SAVEPATH + "book/" + tb.get_id()+"/"+tb.get_booktitleen() + ".html");
                     }
 
                     //归档页面
                     logService.setProcess(all);
-                    Map data = new HashMap();
-                    data.put("value", archiveService.data());
+                    Map data = archiveService.data();
                     createHtml.createhtml("archive.ftl", data, Const.HTML_SAVEPATH+ "archive.html");
 
                     //归档页面中的所有分页    count_archive_pages
@@ -339,9 +336,9 @@ public class HtmlModule {
                             log.info((i + 1) + "/" + listpages.size());
                             final tb_singlepage tbin = listpages.get(i);
                             if (tbin.get_serisid() == 0) {
-                                createHtml.createhtml_page(tbin.get_id(), "tutorial_page.ftl", Const.HTML_SAVEPATH + "/page/" + tbin.get_id() + "/"+tbin.get_titleen() + ".html");
+                                createHtml.createhtml_page(tbin.get_id(), "page.ftl", Const.HTML_SAVEPATH + "/page/" + tbin.get_id() + "/"+tbin.get_titleen() + ".html");
                             } else {
-                                createHtml.createhtml_seriespage(tbin.get_id(), "tutorial_seriespage.ftl", Const.HTML_SAVEPATH + "/pages/" + tbin.get_id() + "/"+ tbin.get_titleen() + ".html");
+                                createHtml.createhtml_seriespage(tbin.get_id(), "pages.ftl", Const.HTML_SAVEPATH + "/pages/" + tbin.get_id() + "/"+ tbin.get_titleen() + ".html");
                             }
                         }
 
