@@ -1,6 +1,7 @@
 package net.javablog.util;
 
 
+
 import com.google.gson.GsonBuilder;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
