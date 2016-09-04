@@ -8,7 +8,7 @@
     <title>关于本站 - ${(obj.site_name)!''}</title>
 
     <link href="/static/css/bootstrap.min.css?v=${(ojb.version)!''}" " rel="stylesheet">
-    <link href="/static/css/proj_detail.css?v=${(ojb.version)!''}" rel="stylesheet">
+    <link href="/static/css/tags.css?v=${(ojb.version)!''}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
