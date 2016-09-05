@@ -12,7 +12,6 @@ import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
-import org.nutz.lang.random.R;
 import org.nutz.lang.util.NutMap;
 
 import java.util.ArrayList;
@@ -34,7 +33,8 @@ public class BlogService extends BaseService<tb_singlepage> {
     private UserService userService;
 
     @Inject
-    private  NoteService noteService;
+    private NoteService noteService;
+
     /**
      * 根据page的id，查询所属的系列的，以及书（如果有的话）
      *
@@ -87,7 +87,7 @@ public class BlogService extends BaseService<tb_singlepage> {
         if (tbs.get_id() > 0) {
             int _bookid = tbs.get_bookid();
             if (_bookid > 0) {
-                tb_book = noteService.fetch( _bookid);
+                tb_book = noteService.fetch(_bookid);
             }
         }
         out.put("book", tb_book);
@@ -96,13 +96,13 @@ public class BlogService extends BaseService<tb_singlepage> {
         StringBuffer stringBuffer = new StringBuffer();
         Map<tb_seris, List<tb_singlepage>> menu = new HashMap<tb_seris, List<tb_singlepage>>();
         if (tb_book.get_id() > 0) {
-            List<tb_seris> serises = serisService.query( Cnd.where("_bookid", "=", tb_book.get_id()).and("_isdraft", "=", 0).orderBy("_index_inbook", "asc"));
+            List<tb_seris> serises = serisService.query(Cnd.where("_bookid", "=", tb_book.get_id()).and("_isdraft", "=", 0).orderBy("_index_inbook", "asc"));
             if (!Lang.isEmpty(serises)) {
                 for (int i = 0; i < serises.size(); i++) {
                     int index = i;
                     index++;
                     tb_seris s = serises.get(i);
-                    List<tb_singlepage> pages = query( Cnd.where("_serisid", "=", s.get_id()).and("_isdraft", "=", 0).orderBy("_index_inseris", "asc"));
+                    List<tb_singlepage> pages = query(Cnd.where("_serisid", "=", s.get_id()).and("_isdraft", "=", 0).orderBy("_index_inseris", "asc"));
 //                    if (!Lang.isEmpty(pages))
                     {
                         menu.put(s, pages);
@@ -186,11 +186,11 @@ public class BlogService extends BaseService<tb_singlepage> {
                 for (int i = 0; i < arr.length; i++) {
 
                     // 检查是否有图片 .如果有图片.
-                    tb_tag t = tagService.fetch( Cnd.where("_name", "=", arr[i]));
+                    tb_tag t = tagService.fetch(Cnd.where("_name", "=", arr[i]));
 
                     String imgstr = "";
                     if (!Strings.isBlank(t.get_img())) {
-                        imgstr = " class=\"tag-img\" style=\"background-image: url(" + t.get_img() + "?v=" + R.UU16() + ");\"";
+                        imgstr = " class=\"tag-img\" style=\"background-image: url(/images/" + t.get_img() + ");\"";
                     }
 
                     if (i == arr.length - 1) {

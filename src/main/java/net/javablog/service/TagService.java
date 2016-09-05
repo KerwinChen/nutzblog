@@ -38,7 +38,7 @@ public class TagService extends BaseService<tb_tag> {
 
                     String imgstr = "";
                     if (!Strings.isBlank(t.get_img())) {
-                        imgstr = " class=\"tag-img\" style=\"background-image: url(" + t.get_img() + "?v=" + R.UU16() + ");\"";
+                        imgstr = " class=\"tag-img\" style=\"background-image: url(/images/" + t.get_img() + ");\"";
                     }
 
                     if (i == arr.length - 1) {
