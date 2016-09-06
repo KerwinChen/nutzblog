@@ -179,7 +179,6 @@ public class HtmlModule {
             Files.deleteDir(target_static);
             Files.copyDir(new File(Mvcs.getActionContext().getServletContext().getRealPath("/") + "/static"), target_static);
 
-
             if (runing) {
 
             } else {

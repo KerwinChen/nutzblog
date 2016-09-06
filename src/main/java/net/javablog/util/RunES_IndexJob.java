@@ -2,7 +2,6 @@ package net.javablog.util;
 
 import org.nutz.dao.entity.Record;
 import org.nutz.dao.util.Daos;
-import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

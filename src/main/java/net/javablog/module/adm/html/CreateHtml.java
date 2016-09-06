@@ -10,7 +10,6 @@ import net.javablog.bean.tb_tag;
 import net.javablog.init.Const;
 import net.javablog.service.BlogService;
 import net.javablog.service.MenuService;
-import net.javablog.service.SerisService;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.entity.Record;
@@ -24,8 +23,6 @@ import org.nutz.lang.Files;
 import org.nutz.lang.Lang;
 import org.nutz.lang.random.R;
 import org.nutz.lang.util.NutMap;
-import org.nutz.log.Log;
-import org.nutz.log.Logs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +49,7 @@ public class CreateHtml {
     private static final Logger log = LoggerFactory.getLogger("FTP");
 
     public void createhtml_page(int pageid, String template_name, String htmlfile) {
-        createhtml(template_name, blogService.getpage(pageid), htmlfile );
+        createhtml(template_name, blogService.getpage(pageid), htmlfile);
     }
 
     public void createhtml_seriespage(int id, String templagefullname, String htmlfile) {
@@ -91,7 +88,7 @@ public class CreateHtml {
             propMap.put("site_aboutme_md", dao.fetch("tb_config", Cnd.where("k", "=", "site_aboutme_md")).getString("v"));
             propMap.put("site_tj", dao.fetch("tb_config", Cnd.where("k", "=", "site_tj")).getString("v"));
             propMap.put("site_msgboard", dao.fetch("tb_config", Cnd.where("k", "=", "site_msgboard")).getString("v"));
-            propMap.put("version", R.random(10,99));
+            propMap.put("version", R.random(10, 99));
 
             Template t = cf.getTemplate(templateFileName);
 
@@ -119,7 +116,6 @@ public class CreateHtml {
         }
         return true;
     }
-
 
 
     /**
@@ -237,6 +233,15 @@ public class CreateHtml {
 
     }
 
+    /**
+     * 获取指定月份的分页数量
+     *
+     * @param month yyyyMM
+     * @return
+     */
+    public int getCount_4_byMonth(int month) {
+        return 0;
+    }
 
     /**
      * 每个月份里面的分页数量
