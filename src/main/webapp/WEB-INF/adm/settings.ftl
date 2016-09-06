@@ -232,14 +232,14 @@
                             </div>
                         </div>
                     <#--site_msgboard-->
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right">留言板配置</label>
+                        <#--<div class="form-group">-->
+                            <#--<label class="col-sm-1 control-label no-padding-right">留言板配置</label>-->
 
-                            <div class="col-sm-11">
-                                <textarea class="form-control" id="site_msgboard"
-                                          placeholder="多说,畅言,Disqus">${(obj.site_msgboard)!''}</textarea>
-                            </div>
-                        </div>
+                            <#--<div class="col-sm-11">-->
+                                <#--<textarea class="form-control" id="site_msgboard"-->
+                                          <#--placeholder="多说,畅言,Disqus">${(obj.site_msgboard)!''}</textarea>-->
+                            <#--</div>-->
+                        <#--</div>-->
 
 
                     <#--site_aboutme-->
@@ -341,7 +341,7 @@
             var ftp_user = $("#ftp_user").val();
             var ftp_pwd = $("#ftp_pwd").val();
             if (!ftp_ip || !ftp_user || !ftp_pwd) {
-                layer.msg("逗我呢?还没填完呢", {icon: 5});
+                layer.msg("还没填完呢", {icon: 5});
                 return;
             }
 
@@ -401,8 +401,8 @@
             var site_aboutme = testEditor.getHTML();
             var site_aboutme_md = testEditor.getMarkdown();
             var site_tj = $("#site_tj").val();
-            var site_msgboard = $("#site_msgboard").val();
-            if (!site_name || !site_createtime || !site_aboutme || !site_tj || !site_msgboard) {
+            var site_msgboard = "";
+            if (!site_name || !site_createtime || !site_aboutme || !site_tj ) {
                 layer.msg("还没填完呢", {icon: 5});
                 return;
             }

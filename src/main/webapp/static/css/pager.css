@@ -67,6 +67,7 @@
 #pagination a.page.active {
     background: #00a9db;
     color: white;
+    text-decoration: none;
 }
 
 #pagination span.gap {

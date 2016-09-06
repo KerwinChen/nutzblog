@@ -9,6 +9,10 @@ import org.nutz.lang.Strings;
 public class ConfigService extends BaseService<tb_config> {
 
 
+    public Object get_byName(String k) {
+        return fetch(Cnd.where("k", "=", k)).getV();
+    }
+
     public String getIP() {
         return fetch(Cnd.where("k", "=", "ftp_ip")).getV();
     }

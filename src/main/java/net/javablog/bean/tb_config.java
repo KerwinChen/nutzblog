@@ -53,8 +53,8 @@ public class tb_config extends BasePojo {
     public tb_config(String k, String v) {
         this.v = v;
         this.k = k;
-        this.setCreateTime(new Date());
-        this.setUpdateTime(new Date());
+        this.setCt(new Date());
+        this.setUt(new Date());
     }
 
 

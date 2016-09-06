@@ -112,11 +112,11 @@ public class TagModule {
             }
         }
 
-        tag.setUpdateTime(new Date());
+        tag.setUt(new Date());
         if (tag.get_id() > 0) {
             tagService.update(tag);
         } else {
-            tag.setCreateTime(new Date());
+            tag.setCt(new Date());
             tagService.insert(tag);
         }
         map.put("item", tag);

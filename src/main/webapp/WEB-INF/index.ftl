@@ -146,7 +146,7 @@
                                     </#if>
 
                                     <span class="time">
-                                    ${value.updatetime?string('yyyy-M-d')}
+                                    ${value.ut?string('yyyy-M-d')}
                                     </span>
                                 </div>
 

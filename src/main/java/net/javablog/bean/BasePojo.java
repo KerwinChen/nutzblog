@@ -10,29 +10,27 @@ import java.util.Date;
 public abstract class BasePojo implements Serializable {
 
     @Column("ct")
-    protected Date createTime;
+    protected Date ct;
     @Column("ut")
-    protected Date updateTime;
+    protected Date ut;
 
     public String toString() {
         return String.format("/*%s*/%s", super.toString(), Json.toJson(this, JsonFormat.compact()));
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCt() {
+        return ct;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCt(Date ct) {
+        this.ct = ct;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUt() {
+        return ut;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUt(Date ut) {
+        this.ut = ut;
     }
-
-
 }

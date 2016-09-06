@@ -98,8 +98,8 @@ public class tb_files extends BasePojo {
         t.set_filekey(key);
         t.set_suffix(suffix);
 //        t.set_downurl(Qiniu.getdownload(key));
-        t.setCreateTime(new Date());
-        t.setUpdateTime(new Date());
+        t.setCt(new Date());
+        t.setUt(new Date());
         return t;
     }
 

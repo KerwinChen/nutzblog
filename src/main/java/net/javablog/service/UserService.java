@@ -14,8 +14,8 @@ public class UserService extends BaseService<tb_user> {
         tb_user user = new tb_user();
         user.set_username(name);
         user.set_password(Lang.md5(password));
-        user.setCreateTime(new Date());
-        user.setUpdateTime(new Date());
+        user.setCt(new Date());
+        user.setUt(new Date());
         return dao().insert(user);
     }
 
@@ -38,7 +38,7 @@ public class UserService extends BaseService<tb_user> {
             return;
         }
         user.set_password(Lang.md5(password));
-        user.setUpdateTime(new Date());
+        user.setUt(new Date());
         dao().update(user, "^(password|updateTime)$");
     }
 

@@ -2,7 +2,7 @@ package net.javablog.module;
 
 
 import net.javablog.util.EsUT;
-import net.javablog.util.PagerUT;
+import net.javablog.util.FrontPagerUT;
 import org.nutz.ioc.aop.Aop;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.util.NutMap;
@@ -26,8 +26,8 @@ public class SearchModule {
 
         int allcount = Integer.valueOf(result.get("allcount").toString());
 
-        out.setv("pages", PagerUT.pages(pagesize, allcount, pageno, "/search?q=" + q + "&pageno=%s", 3));
-        out.setv("pages_min", PagerUT.pages(pagesize, allcount, pageno, "/search?q=" + q + "&pageno=%s", 0));
+        out.setv("pages", FrontPagerUT.pages(pagesize, allcount, pageno, "/search?q=" + q + "&pageno=%s", 3));
+        out.setv("pages_min", FrontPagerUT.pages(pagesize, allcount, pageno, "/search?q=" + q + "&pageno=%s", 0));
         out.setv("datas", result.get("datas"));
         out.setv("allcount", result.get("allcount"));
         out.setv("q", q);

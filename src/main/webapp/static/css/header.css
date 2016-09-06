@@ -71,7 +71,16 @@ footer {
     bottom: 0px;
     width: 100%;
 }
+footer  a{
+    color: #7E7E7E;
+}
+
+footer  a:hover{
+    color: #CECECE;
+}
+
 
 footer #column-main #copyright {
     margin-bottom: 40px;
 }
+

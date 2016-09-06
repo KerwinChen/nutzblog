@@ -42,12 +42,12 @@ public class WBlogModule {
         tbin.set_username(user.get_username());
         tbin.set_tags(tbin.get_tags().trim());
 
-        tbin.setUpdateTime(new Date());
+        tbin.setUt(new Date());
         if (tbin.get_id() == 0) {
-            tbin.setCreateTime(new Date());
+            tbin.setCt(new Date());
             blogService.insert(tbin);
         } else {
-            tbin.setCreateTime(blogService.fetch(tbin.get_id()).getCreateTime());
+            tbin.setCt(blogService.fetch(tbin.get_id()).getCt());
             blogService.update(tbin);
         }
 
@@ -64,8 +64,8 @@ public class WBlogModule {
                     t.set_intro("");
                     t.set_name(tag1);
                     t.set_pname("未分组");
-                    t.setUpdateTime(new Date());
-                    t.setCreateTime(new Date());
+                    t.setUt(new Date());
+                    t.setCt(new Date());
                     tagService.insert(t);
                 }
             }

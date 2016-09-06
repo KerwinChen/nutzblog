@@ -129,7 +129,6 @@
                 <#--正文部分-->
                     <div class="content-body tutorial-content">
                         <h3 id="introduction">摘要</h3>
-
                         <p>${(obj.item._showintro)!""}</p>
                     ${(obj.item._content_html)!""}
                     </div>

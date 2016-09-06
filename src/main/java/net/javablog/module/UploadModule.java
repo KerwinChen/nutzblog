@@ -93,13 +93,13 @@ public class UploadModule {
         if (fieldid > 0) {
             t = fileService.fetch(fieldid);
             t.set_name(file.getMeta().getFileLocalName());
-            t.setUpdateTime(new Date());
+            t.setUt(new Date());
             t.set_suffix(Files.getSuffix(file.getMeta().getFileExtension()));
             fileService.updateIgnoreNull(t);
         } else {
             String uid = R.UU16();
-            t.setCreateTime(new Date());
-            t.setUpdateTime(new Date());
+            t.setCt(new Date());
+            t.setUt(new Date());
             t.set_filekey(uid);
             t.set_suffix(Files.getSuffix(file.getMeta().getFileExtension()));
             t.set_name(file.getMeta().getFileLocalName());

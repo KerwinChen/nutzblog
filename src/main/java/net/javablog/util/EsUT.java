@@ -98,7 +98,7 @@ public class EsUT {
                 m.put("title", item.source.get_title());
                 m.put("tag", item.source.get_tags());
                 m.put("href", "/page" + (item.source.get_index_inseris() == 0 ? "" : "s") + "/" + item.source.getCopy_id() + "/" + item.source.get_titleen() + ".html");
-                m.put("time", "---");
+                m.put("time", Times.format("yyyy-MM-dd", item.source.getUt()));
                 m.put("desc", item.highlight.get("_content_html").size() > 0 ? JsoupBiz.getTextFromTHML(item.highlight.get("_content_html").get(0)) : "");
                 m.put("desc", m.get("desc").toString().replace("[tag1]", "<em>").replace("[/tag1]", "</em>").replace("<!--", "").replace("-->", ""));
                 System.out.println(m.get("title"));

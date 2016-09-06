@@ -53,12 +53,12 @@ public class WSerisModule {
     @At("/adm/seris_mgr/doaddup")
     @Ok("json")
     public String doaddup(@Param("..") tb_seris tb) {
-        tb.setUpdateTime(new Date());
+        tb.setUt(new Date());
         tb.set_seristitleen(Translates.trans(tb.get_seristitle()));
         if (tb.get_id() > 0) {
             serisService.update(tb);
         } else {
-            tb.setCreateTime(new Date());
+            tb.setCt(new Date());
             serisService.insert(tb);
         }
         return tb.get_id() + "";
@@ -81,7 +81,7 @@ public class WSerisModule {
     public Map doaddup_inlist(@Param("..") final tb_singlepage tbin) {
 
         NutMap map = NutMap.NEW();
-        tbin.setUpdateTime(new Date());
+        tbin.setUt(new Date());
         tbin.set_titleen(Translates.trans(tbin.get_title()));
 
         tb_user user = CurrentUserUtils.getInstance().getUser();
@@ -99,8 +99,8 @@ public class WSerisModule {
                     t.set_intro("");
                     t.set_name(tag1);
                     t.set_pname("未分组");
-                    t.setUpdateTime(new Date());
-                    t.setCreateTime(new Date());
+                    t.setUt(new Date());
+                    t.setCt(new Date());
                     tagService.insert(t);
                 }
             }
@@ -108,10 +108,10 @@ public class WSerisModule {
 
 
         if (tbin.get_id() > 0) {
-            tbin.setUpdateTime(new Date());
+            tbin.setUt(new Date());
             blogService.update(tbin);
         } else {
-            tbin.setCreateTime(new Date());
+            tbin.setCt(new Date());
             tb_singlepage count = blogService.fetch(Cnd.where("_serisid", "=", tbin.get_serisid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inseris", "desc"));
             if (count == null) {
                 tbin.set_index_inseris(1);

@@ -46,12 +46,12 @@ public class WNoteModule {
     @At("/adm/books_mgr/doaddup")
     @Ok("json")
     public String doaddup(@Param("..") tb_book tb) {
-        tb.setUpdateTime(new Date());
+        tb.setUt(new Date());
         tb.set_booktitleen(Translates.trans(tb.get_booktitle()));
         if (tb.get_id() > 0) {
             noteService.update(tb);
         } else {
-            tb.setCreateTime(new Date());
+            tb.setCt(new Date());
             noteService.insert(tb);
         }
         return tb.get_id() + "";

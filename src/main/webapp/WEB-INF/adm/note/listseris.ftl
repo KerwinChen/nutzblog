@@ -67,7 +67,7 @@
     <tr>
         <td>{{value._id}}</td>
         <td>{{value._seristitle}}</td>
-        <td>{{value.updateTime}}</td>
+        <td>{{value.ut}}</td>
         <td>
             <a href="javascript:del({{value._id}});">删除</a>
             <a target="_self"
