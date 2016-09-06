@@ -102,7 +102,7 @@
                                             <a href="/pages/${itemin._id}/${itemin._titleen}.html">${itemin._title}</a>
                                         </h2>
 
-                                        <div class="feedable-date">${itemin.updatetime?string("yyyy-MM-dd")}</div>
+                                        <div class="feedable-date">${itemin.ut?string("yyyy-MM-dd")}</div>
                                         <div class="meta">
                                             <div class="points">
                                                 <span class="icon-upvote-heart-small"></span>
