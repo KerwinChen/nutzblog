@@ -9,11 +9,13 @@ public class Const {
 
     public static final int PAGE_SIZE = 20;
     public static final String HTML_SAVEPATH = System.getProperty("user.home") + File.separatorChar + "site_html" + File.separatorChar;
+    public static final String HTML_SAVEPATH_TEMP = System.getProperty("user.home") + File.separatorChar + "site_html_temp" + File.separatorChar;
     public static final String IMG_SAVEPATH = System.getProperty("user.home") + File.separatorChar + "site_html"+File.separator+"images" + File.separatorChar;
 
     static {
         Files.createDirIfNoExists(IMG_SAVEPATH);
         Files.createDirIfNoExists(HTML_SAVEPATH);
+        Files.createDirIfNoExists(HTML_SAVEPATH_TEMP);
     }
 
     public static String admin = "刀刀";

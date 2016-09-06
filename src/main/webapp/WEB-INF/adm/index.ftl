@@ -41,6 +41,8 @@
                         <a target="_blank" href="/ftp_upload_images_all">上传引用到的所有图片</a>(images文件夹)&nbsp;&nbsp;
                         <a target="_blank" href="/ftp_upload_static">上传static文件夹</a>(传一次即可) <br><br>
 
+                        <a target="_blank" href="/ftp_upload_recent">上传最近两天的博客内容</a>(每天也会定时执行一次) <br><br>
+
                     <#--<a href="">清空FTP所有HTMl文件</a> <br><br>-->
                     <#--<a href="">最后一次编辑的文件</a><br><br>-->
 

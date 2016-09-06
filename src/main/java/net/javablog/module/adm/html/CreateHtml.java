@@ -9,7 +9,9 @@ import net.javablog.bean.tb_singlepage;
 import net.javablog.bean.tb_tag;
 import net.javablog.init.Const;
 import net.javablog.service.BlogService;
+import net.javablog.service.ConfigService;
 import net.javablog.service.MenuService;
+import net.javablog.util.JsoupBiz;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.entity.Record;
@@ -21,15 +23,15 @@ import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Files;
 import org.nutz.lang.Lang;
+import org.nutz.lang.Strings;
+import org.nutz.lang.Times;
 import org.nutz.lang.random.R;
 import org.nutz.lang.util.NutMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @IocBean
 public class CreateHtml {
@@ -39,6 +41,9 @@ public class CreateHtml {
 
     @Inject
     private MenuService menuService;
+
+    @Inject
+    private ConfigService configService;
 
     @Inject
     private Configuration cf;
@@ -150,9 +155,7 @@ public class CreateHtml {
             }
             out = out + page;
         }
-
         return out;
-
     }
 
     /**
@@ -188,12 +191,8 @@ public class CreateHtml {
             } else {
                 page = count_intag / Const.PAGE_SIZE + 1;
             }
-
             out_map.put(key, page);
-
         }
-
-
         return out_map;
 
     }
@@ -234,14 +233,37 @@ public class CreateHtml {
     }
 
     /**
-     * 获取指定月份的分页数量
+     * 获取当前月份的分页数量
      *
-     * @param month yyyyMM
      * @return
      */
-    public int getCount_4_byMonth(int month) {
-        return 0;
+    public int getCount_4_byMonth() {
+
+        String month = Times.format("yyyyMM", new Date());
+        String y = month.substring(0, 4);
+        String m = month.substring(4, 6);
+        if (m.startsWith("0")) {
+            m = month.substring(4, 5);
+        }
+        String sql = "SELECT   count(*) as c    from tb_singlepage  \n" +
+                "where  YEAR(ut)=" + y + " and  MONTH(ut)=" + m + "  and _isdraft=0";
+
+        Sql s = Sqls.create(sql).setCallback(Sqls.callback.integer());
+        dao.execute(s);
+        int allcount = s.getInt();
+
+        if (allcount == 0) {
+            return 1;
+        }
+        if (allcount % Const.PAGE_SIZE == 0) {
+            return allcount / Const.PAGE_SIZE;
+        } else {
+            return allcount / Const.PAGE_SIZE + 1;
+        }
+
+
     }
+
 
     /**
      * 每个月份里面的分页数量
@@ -348,4 +370,133 @@ public class CreateHtml {
     }
 
 
+    /**
+     * @param list
+     * @return
+     */
+    public int getCount_5_byPages(List<tb_singlepage> list) {
+        if (Lang.isEmpty(list)) {
+            return 0;
+        }
+
+        Set<String> tags = new HashSet<>();
+        for (int i = 0; i < list.size(); i++) {
+            tb_singlepage page = list.get(i);
+            String ts = page.get_tags();
+            if (Strings.isBlank(ts)) {
+                continue;
+            }
+            String[] tag_arr = ts.split(",", -1);
+            tags.addAll(Arrays.asList(tag_arr));
+        }
+
+        int out = 0;
+        //每个tag 对应的分页的和
+        for (String t : tags) {
+            int c = getCount_5_byTagName(t);
+            out = out + c;
+        }
+
+        return out;
+
+    }
+
+
+    /**
+     * 根据指定文章， 获取所涉及到的tag，每个tag对应的分页数
+     *
+     * @param list
+     * @return
+     */
+    public Map<String, Integer> getCount_5_byPages_(List<tb_singlepage> list) {
+        if (Lang.isEmpty(list)) {
+            return new HashMap<>();
+        }
+
+        Map out = new HashMap<>();
+        Set<String> tags = new HashSet<>();
+        for (int i = 0; i < list.size(); i++) {
+            tb_singlepage page = list.get(i);
+            String ts = page.get_tags();
+            if (Strings.isBlank(ts)) {
+                continue;
+            }
+            String[] tag_arr = ts.split(",", -1);
+            tags.addAll(Arrays.asList(tag_arr));
+        }
+
+        //每个tag 对应的分页的和
+        for (String t : tags) {
+            String k = String.valueOf(dao.fetch(tb_tag.class, Cnd.where("_name", "=", t)).get_id());
+            int c = getCount_5_byTagName(t);
+            out.put(k, c);
+        }
+
+        return out;
+
+    }
+
+    private int getCount_5_byTagName(String t) {
+
+        SqlExpressionGroup g = Cnd.exps("_tags", "like", "%," + t + "").or("_tags", "like", "%," + t + ",%").or("_tags", "like", "" + t + ",%").or("_tags", "=", t);
+        int allcount = dao.count(tb_singlepage.class, Cnd.NEW().and(g));
+        if (allcount == 0) {
+            return 1;
+        }
+        if (allcount % Const.PAGE_SIZE == 0) {
+            return allcount / Const.PAGE_SIZE;
+        } else {
+            return allcount / Const.PAGE_SIZE + 1;
+        }
+
+    }
+
+    /**
+     * 获取所有文章所关联的所有图片id
+     * config表，tag表，single表 _toppic  _content_html
+     *
+     * @param list
+     * @return
+     */
+    public List<String> getCount_6_allcount(List<tb_singlepage> list) {
+
+        List<String> out = new ArrayList<>();
+        out.add(configService.get_byName("admin_photo").toString());
+        out.add(configService.get_byName("site_logo").toString());
+        out.add(configService.get_byName("site_fav").toString());
+
+        String html_me = configService.get_byName("site_aboutme").toString();
+        findImgByHtml(out, html_me);
+
+        List<tb_tag> tags = dao.query(tb_tag.class, Cnd.where("_img", "!=", ""));
+        if (!Lang.isEmpty(tags)) {
+            for (int i = 0; i < tags.size(); i++) {
+                out.add(tags.get(i).get_img());
+            }
+        }
+
+        if (!Lang.isEmpty(list)) {
+            for (int i = 0; i < list.size(); i++) {
+                out.add(list.get(i).get_toppic());
+                findImgByHtml(out, list.get(i).get_content_html());
+            }
+        }
+        return out;
+    }
+
+    private void findImgByHtml(List<String> out, String html_me) {
+        List<String> imgs = JsoupBiz.getList_Attr(html_me, "img", "src");
+        if (!Lang.isEmpty(imgs)) {
+            for (int i = 0; i < imgs.size(); i++) {
+                String img = imgs.get(i);
+
+                if (img.length() > 6) {
+                    img = img.substring(8);//   /images/
+                    if (img.length() == 32 && !img.startsWith("http") && !img.contains(".")) {
+                        out.add(img);
+                    }
+                }
+            }
+        }
+    }
 }
