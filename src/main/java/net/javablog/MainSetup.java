@@ -13,12 +13,14 @@ import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
 import org.nutz.integration.quartz.NutQuartzCronJobFactory;
 import org.nutz.ioc.Ioc;
+import org.nutz.ioc.impl.NutIoc;
 import org.nutz.lang.Files;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -98,10 +100,12 @@ public class MainSetup implements Setup {
 
 
         //ES 创建索引
-        DruidDataSource ds = ioc.get(DruidDataSource.class);
-        String url = ds.getUrl();
-        String user = ds.getUsername();
-        String pwd = ds.getPassword();
+
+        DataSource ds = ((NutIoc) ioc).get(DataSource.class);
+        DruidDataSource ds_=(DruidDataSource)ds;
+        String url = ds_.getUrl();
+        String user = ds_.getUsername();
+        String pwd = ds_.getPassword();
         RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
 
         //js里已经配置好了

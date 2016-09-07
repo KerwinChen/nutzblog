@@ -21,7 +21,7 @@ var ioc = {
     freemarkerDirectiveFactory: {
         type: "org.nutz.plugins.view.freemarker.FreemarkerDirectiveFactory",
         fields: {
-            freemarker: 'freemarker.properties',
+            freemarker: 'freemarker.properties'
         }
     },
     conf: {
