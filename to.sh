@@ -1,0 +1,7 @@
+
+
+tail -f out.log
+
+
+
+

@@ -1,0 +1,6 @@
+
+tail -f ftp.log
+
+
+
+
