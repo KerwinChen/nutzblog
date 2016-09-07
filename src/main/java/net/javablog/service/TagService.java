@@ -9,7 +9,6 @@ import org.nutz.dao.sql.Sql;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
-import org.nutz.lang.random.R;
 
 import java.util.HashMap;
 import java.util.List;
@@ -60,12 +59,11 @@ public class TagService extends BaseService<tb_tag> {
             if (Strings.isBlank(tag.get_img())) {
                 stringBuffer.append("<a    href=\"/filter/tag/" + tag.get_id() + "/1.html\">" + tag.get_name() + "</a>\n");
             } else {
-                stringBuffer.append("<a class=\"tag-img\" style=\"background-image: url(/images/" + tag.get_img() + "/?v=" + R.UU16() + "" + ");\" href=\"/filter/tag/" + tag.get_id() + "/1.html\">" + tag.get_name() + "</a>\n");
+                stringBuffer.append("<a class=\"tag-img\" style=\"background-image: url(/images/" + tag.get_img() + ");\" href=\"/filter/tag/" + tag.get_id() + "/1.html\">" + tag.get_name() + "</a>\n");
             }
         }
 
         StringBuffer stringBufferOut = new StringBuffer();
-
         stringBufferOut.append("<dl>\n" +
                 "                                <dt>" + pname + "</dt>\n" +
                 "                                <dd>\n" +
