@@ -27,8 +27,9 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <div class="input-group col-md-4 header nav navbar-nav navbar-right">
-                    <form class="navbar-form navbar-right" method="get" action="/search">
-                        <input value="${(obj.q)!''}" id="q" name="q" type="text" class="form-control" placeholder="Search">
+                    <form target="_self" class="navbar-form navbar-right" method="get" action="http://javablog.net/search">
+                        <input value="${(obj.q)!''}" id="q" name="q" type="text" class="form-control"
+                               placeholder="Search">
                         <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">搜索</button>
                         </span>

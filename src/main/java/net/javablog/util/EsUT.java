@@ -16,6 +16,7 @@ import org.apache.lucene.search.Explanation;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.highlight.HighlightBuilder;
+import org.nutz.lang.Strings;
 import org.nutz.lang.Times;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,9 +109,10 @@ public class EsUT {
 
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        finalOut.put("allcount", allcount);
+        finalOut.put("allcount", Strings.isBlank(allcount) ? "0" : allcount);
         finalOut.put("datas", out);
         return finalOut;
     }
