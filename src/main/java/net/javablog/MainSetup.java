@@ -1,11 +1,13 @@
 package net.javablog;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import net.javablog.bean.tb_config;
 import net.javablog.bean.tb_user;
 import net.javablog.init.Const;
 import net.javablog.service.ConfigService;
 import net.javablog.service.UserService;
 import net.javablog.util.FTPUtil;
+import net.javablog.util.RunES_IndexJob;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
@@ -14,7 +16,6 @@ import org.nutz.ioc.Ioc;
 import org.nutz.lang.Files;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
-import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
 
@@ -97,7 +98,11 @@ public class MainSetup implements Setup {
 
 
         //ES 创建索引
-        
+        DruidDataSource ds = ioc.get(DruidDataSource.class);
+        String url = ds.getUrl();
+        String user = ds.getUsername();
+        String pwd = ds.getPassword();
+        RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
 
         //js里已经配置好了
 //        CachedNutDaoExecutor cacheManager = ioc.get(CachedNutDaoExecutor.class);

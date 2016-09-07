@@ -93,6 +93,10 @@ public class RunES_IndexJob {
 
     public static void main(String[] args) {
 
+        String url = "jdbc:mysql://127.0.0.1:3306/nutzblog";
+        String user = "root";
+        String pwd = "root";
+        RunES_IndexJob.repeatRows("tb_singlepage", url,user,pwd);
 
     }
 
