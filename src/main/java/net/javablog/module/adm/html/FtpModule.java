@@ -11,9 +11,6 @@ import net.javablog.util.FTPUtil;
 import net.javablog.util.Threads;
 import org.apache.log4j.Logger;
 import org.nutz.dao.Cnd;
-import org.nutz.dao.Dao;
-import org.nutz.dao.impl.NutDao;
-import org.nutz.dao.impl.SimpleDataSource;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Files;
@@ -267,18 +264,12 @@ public class FtpModule {
 
                 //归档页面中的所有分页    count_archive_pages
                 Files.createDirIfNoExists(Const.HTML_SAVEPATH_TEMP + "filter/month/");
-                Map<Integer, Integer> archives = createHtml.getCount_4_();
-                Iterator it = archives.keySet().iterator();
-                while (it.hasNext()) {
-                    int month = (Integer) it.next();
-                    int pagecount = archives.get(month);
-                    for (int i = 1; i <= pagecount; i++) {
-                        logService.setProcess(all);
-                        Files.createDirIfNoExists(Const.HTML_SAVEPATH_TEMP + "filter/month/" + String.valueOf(month) + "/");
-                        createHtml.createhtml("filter_month.ftl", indexService.getIndexMapdata_filter("month", String.valueOf(month), i), Const.HTML_SAVEPATH_TEMP + "filter/month/" + String.valueOf(month) + "/" + i + ".html");
-                    }
+                for (int i = 1; i <= count_archive_pages; i++) {
+                    logService.setProcess(all);
+                    Files.createDirIfNoExists(Const.HTML_SAVEPATH_TEMP + "filter/month/" + Times.format("yyyyMM", new Date()) + "/");
+                    createHtml.createhtml("filter_month.ftl", indexService.getIndexMapdata_filter("month", Times.format("yyyyMM", new Date()), i), Const.HTML_SAVEPATH_TEMP + "filter/month/" + Times.format("yyyyMM", new Date()) + "/" + i + ".html");
                 }
-
+                
 
                 //标签页面
                 logService.setProcess(all);
