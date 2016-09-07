@@ -6,6 +6,7 @@ import net.javablog.bean.tb_seris;
 import net.javablog.bean.tb_singlepage;
 import net.javablog.init.Const;
 import net.javablog.service.*;
+import net.javablog.util.CurrentUserUtils;
 import net.javablog.util.FTPUtil;
 import net.javablog.util.Threads;
 import org.apache.log4j.Logger;
@@ -20,13 +21,17 @@ import org.nutz.lang.Lang;
 import org.nutz.lang.Times;
 import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.At;
+import org.nutz.mvc.annotation.By;
+import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
+import org.nutz.mvc.filter.CheckSession;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 @IocBean
+@Filters(@By(type = CheckSession.class, args = {CurrentUserUtils.CUR_USER, "/adm/login"}))
 public class FtpModule {
 
     private static Logger log = Logger.getLogger("FTP");

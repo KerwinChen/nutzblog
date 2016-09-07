@@ -11,6 +11,7 @@ import net.javablog.init.Const;
 import net.javablog.service.BlogService;
 import net.javablog.service.ConfigService;
 import net.javablog.service.MenuService;
+import net.javablog.util.CurrentUserUtils;
 import net.javablog.util.JsoupBiz;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Sqls;
@@ -27,6 +28,9 @@ import org.nutz.lang.Strings;
 import org.nutz.lang.Times;
 import org.nutz.lang.random.R;
 import org.nutz.lang.util.NutMap;
+import org.nutz.mvc.annotation.By;
+import org.nutz.mvc.annotation.Filters;
+import org.nutz.mvc.filter.CheckSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +38,7 @@ import java.io.*;
 import java.util.*;
 
 @IocBean
+@Filters(@By(type = CheckSession.class, args = {CurrentUserUtils.CUR_USER, "/adm/login"}))
 public class CreateHtml {
 
     @Inject
