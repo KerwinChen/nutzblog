@@ -6,8 +6,6 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.io.CopyStreamAdapter;
 import org.apache.log4j.Logger;
 import org.nutz.lang.Lang;
-import org.nutz.log.Log;
-import org.nutz.log.Logs;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -221,6 +219,7 @@ public class FTPUtil {
 
 
     private static void testuploadfile() {
+
         String server = "23.95.29.151";
         String user = "dd50";
         String pass = "7947a9";

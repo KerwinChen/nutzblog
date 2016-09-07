@@ -269,7 +269,7 @@ public class FtpModule {
                     Files.createDirIfNoExists(Const.HTML_SAVEPATH_TEMP + "filter/month/" + Times.format("yyyyMM", new Date()) + "/");
                     createHtml.createhtml("filter_month.ftl", indexService.getIndexMapdata_filter("month", Times.format("yyyyMM", new Date()), i), Const.HTML_SAVEPATH_TEMP + "filter/month/" + Times.format("yyyyMM", new Date()) + "/" + i + ".html");
                 }
-                
+
 
                 //标签页面
                 logService.setProcess(all);
@@ -294,7 +294,7 @@ public class FtpModule {
 
                 //我
                 logService.setProcess(all);
-                createHtml.createhtml("me.ftl", NutMap.NEW().setv("site_aboutme", configService.get_site_aboutme()), Const.HTML_SAVEPATH_TEMP + "me.html");
+                createHtml.createhtml("me.ftl", NutMap.NEW().setv("rs", configService.get_site_aboutme()), Const.HTML_SAVEPATH_TEMP + "me.html");
 
 
                 //404

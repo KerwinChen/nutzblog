@@ -328,7 +328,7 @@ public class HtmlModule {
 
                         //我
                         logService.setProcess(all);
-                        createHtml.createhtml("me.ftl", NutMap.NEW().setv("site_aboutme", configService.get_site_aboutme()), Const.HTML_SAVEPATH + "me.html");
+                        createHtml.createhtml("me.ftl", NutMap.NEW().setv("rs", configService.get_site_aboutme()), Const.HTML_SAVEPATH + "me.html");
 
                         //404
                         logService.setProcess(all);
