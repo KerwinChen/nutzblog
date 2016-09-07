@@ -26,10 +26,11 @@
 http://demo.javablog.net 
 
 ### 02 html静态部署方式
-按照01的方式启动好之后，登录后台管理
-http://demo.javablog.net/adm/login  admin/admin
+按照01的方式在自己的电脑上部署.
+启动好之后，登录后台管理
+像这样 http://demo.javablog.net/adm/login  admin/admin
 
-点击链接  一键生成静态站点
+后台支持一键生成静态站点
 
 然后去把 {user.home}/site_html 里的所有文件夹及文件上传到你的FTP空间。 
 后台支持配置你的FTP，让java代码帮你上传。
@@ -39,9 +40,11 @@ http://demo.javablog.net/adm/login  admin/admin
 ### 03 git静态部署方式
 
 跟02一样，先生成好静态网站。
-然后git push你的git账号。 
+然后git push你的git帐号。 
 像这个一样 https://daodaovps.github.io/ 
-具体如何创建git静态网站，自己找找哈。
+
+
+
 
 
 
