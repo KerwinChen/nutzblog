@@ -430,9 +430,13 @@ public class CreateHtml {
 
         //每个tag 对应的分页的和
         for (String t : tags) {
-            String k = String.valueOf(dao.fetch(tb_tag.class, Cnd.where("_name", "=", t)).get_id());
-            int c = getCount_5_byTagName(t);
-            out.put(k, c);
+
+            tb_tag tag = dao.fetch(tb_tag.class, Cnd.where("_name", "=", t));
+            if (tag != null) {
+                String k = String.valueOf(tag.get_id());
+                int c = getCount_5_byTagName(t);
+                out.put(k, c);
+            }
         }
 
         return out;
