@@ -8,7 +8,7 @@
     <meta name="Description" content="${(obj.item._title)!''},${(obj.item._showintro)!''}"/>
 
     <link rel="icon" href="/static/img/favicon.ico?v=${(obj.version)!''}">
-    <title>${(item._title)!''} - ${(obj.site_name)}</title>
+    <title>${(obj.item._title)!''} - ${(obj.site_name)}</title>
 
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/tutorial-page.css?v=${(obj.version)!''}" rel="stylesheet">

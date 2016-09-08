@@ -111,6 +111,8 @@ public class MainSetup implements Setup {
         //异步处理,最新的10篇博客
         FtpModule ftpModule = ((NutIoc) ioc).get(FtpModule.class);
         ftpModule.htmlTask();
+
+
 //        upload_static_images(Const.ftp_ip, Const.ftp_user, Const.ftp_pwd);
 
 

@@ -49,10 +49,14 @@ public class EsUT {
 
     public static void createIndex(String json, String id) {
         try {
-            Index index = new Index.Builder(json).index(indices).type(types).id(id).build();
-            JestResult result = client.execute(index);
-            System.out.println(result.getJsonString());
+            if (client != null) {
+                Index index = new Index.Builder(json).index(indices).type(types).id(id).build();
+                JestResult result = client.execute(index);
+                System.out.println(result.getJsonString());
+            }
         } catch (Exception e) {
+            e.printStackTrace();
+            client = null;
         } finally {
         }
     }
