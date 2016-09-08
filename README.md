@@ -48,6 +48,37 @@ http://demo.javablog.net
 
 
 
+##截图
+
+![](http://ww1.sinaimg.cn/mw1024/006qgpQvgw1f7m7e9z770j30mt0h2n0s.jpg)
+
+![](http://ww3.sinaimg.cn/mw1024/006qgpQvgw1f7m7apdzeaj311c0m0wgw.jpg)
+
+![](http://ww3.sinaimg.cn/mw1024/006qgpQvgw1f7m7apzaxdj31160foq9f.jpg)
+
+![](http://ww2.sinaimg.cn/mw1024/006qgpQvgw1f7m7aqgji6j311h0eu0uc.jpg)
+
+![](http://ww2.sinaimg.cn/mw1024/006qgpQvgw1f7m7ar72r7j311d0ma0vf.jpg)
+
+![](http://ww3.sinaimg.cn/mw1024/006qgpQvgw1f7m7ashpyvj311j0cqjtg.jpg)
+
+![](http://ww2.sinaimg.cn/mw1024/006qgpQvgw1f7m7arvi1nj30wp0bvn2r.jpg)
+
+![](http://ww1.sinaimg.cn/mw1024/006qgpQvgw1f7m7at7ky5j311b0m8tc7.jpg)
+
+![](http://ww2.sinaimg.cn/mw1024/006qgpQvgw1f7m83zxqzhj30dw0iymyr.jpg)
+
+![](http://ww1.sinaimg.cn/mw1024/006qgpQvgw1f7m7au2njcj30r20m3tcg.jpg)
+
+![](http://ww2.sinaimg.cn/mw1024/006qgpQvgw1f7m7aum8izj30sc0n7tbs.jpg)
+
+![](http://ww4.sinaimg.cn/mw1024/006qgpQvgw1f7m7b2g0xcj30r70iaac5.jpg)
+
+![](http://ww2.sinaimg.cn/mw1024/006qgpQvgw1f7m7b2y5mcj30rb0kjgpj.jpg)
+
+![](http://ww3.sinaimg.cn/mw1024/006qgpQvgw1f7m7b3v8ifj30po0mqq7w.jpg)
+
+
 
 
 
