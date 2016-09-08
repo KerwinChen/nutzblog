@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import net.javablog.bean.tb_config;
 import net.javablog.bean.tb_user;
 import net.javablog.init.Const;
+import net.javablog.module.adm.html.FtpModule;
 import net.javablog.service.ConfigService;
 import net.javablog.service.UserService;
 import net.javablog.util.FTPUtil;
@@ -100,20 +101,23 @@ public class MainSetup implements Setup {
 
 
         //ES 创建索引
-
         DataSource ds = ((NutIoc) ioc).get(DataSource.class);
-        DruidDataSource ds_=(DruidDataSource)ds;
+        DruidDataSource ds_ = (DruidDataSource) ds;
         String url = ds_.getUrl();
         String user = ds_.getUsername();
         String pwd = ds_.getPassword();
         RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
 
+        //异步处理,最新的10篇博客
+        FtpModule ftpModule = ((NutIoc) ioc).get(FtpModule.class);
+        ftpModule.htmlTask();
+//        upload_static_images(Const.ftp_ip, Const.ftp_user, Const.ftp_pwd);
+
+
         //js里已经配置好了
 //        CachedNutDaoExecutor cacheManager = ioc.get(CachedNutDaoExecutor.class);
 //        cacheManager.setCachedTableNamePatten("tb_*");//缓存所有的表
 
-
-//        upload_static_images( Const.ftp_ip ,Const.ftp_user,Const.ftp_pwd);
 
 
         //测试一次成功后，就不再运行
