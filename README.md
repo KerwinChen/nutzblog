@@ -23,18 +23,18 @@
 或者打war包后放在你想放的位置 mvn  war:war 
 
 启动后的样子像这样 
-http://demo.javablog.net 
+http://w.javablog.net
 
 ### 02 html静态部署方式
 按照01的方式在自己的电脑上部署.
 启动好之后，登录后台管理
-像这样 http://demo.javablog.net/adm/login  admin/admin
+像这样 http://127.0.0.1:8080/adm/login  admin/admin
 
 后台支持一键生成静态站点
 
 然后去把 {user.home}/site_html 里的所有文件夹及文件上传到你的FTP空间。 
 后台支持配置你的FTP，让java代码帮你上传。
-像这个样子的静态站点 http://html.javablog.net 
+像这个样子的静态站点 http://javablog.net
 搜索功能没有，会跳转到某个网站。
 
 ### 03 git静态部署方式
