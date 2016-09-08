@@ -109,23 +109,16 @@ public class MainSetup implements Setup {
         RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
 
         //异步处理,最新的10篇博客
-        FtpModule ftpModule = ((NutIoc) ioc).get(FtpModule.class);
-        ftpModule.htmlTask();
+//        FtpModule ftpModule = ((NutIoc) ioc).get(FtpModule.class);
+//        ftpModule.htmlTask();
 
 
 //        upload_static_images(Const.ftp_ip, Const.ftp_user, Const.ftp_pwd);
 
 
-        //js里已经配置好了
-//        CachedNutDaoExecutor cacheManager = ioc.get(CachedNutDaoExecutor.class);
-//        cacheManager.setCachedTableNamePatten("tb_*");//缓存所有的表
-
-
-
         //测试一次成功后，就不再运行
-        if (false) {
 
-            // 测试发送邮件
+        // 测试发送邮件
 //            try {
 //                HtmlEmail email = ioc.get(HtmlEmail.class);
 //                email.setSubject("测试NutzBook");
@@ -136,8 +129,6 @@ public class MainSetup implements Setup {
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
-
-        }
 
 
 //          redis测试代码
