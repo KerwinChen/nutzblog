@@ -11,6 +11,7 @@ import net.javablog.util.FTPUtil;
 import net.javablog.util.Threads;
 import org.apache.log4j.Logger;
 import org.nutz.dao.Cnd;
+import org.nutz.dao.pager.Pager;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Files;
@@ -142,7 +143,13 @@ public class FtpModule {
         Threads.run(new Runnable() {
             @Override
             public void run() {
-                List<tb_singlepage> list = configService.dao().query(tb_singlepage.class, Cnd.NEW().and("ut", ">", new Date(Times.now().getTime() - Times.T_1D * 10)));
+//                List<tb_singlepage> list = configService.dao().query(tb_singlepage.class, Cnd.NEW().and("ut", ">", new Date(Times.now().getTime() - Times.T_1D * 10)));
+
+                //定时任务, 每天处理最新的10篇文章, 一天不可能写10篇博客吧?
+                Pager p = new Pager();
+                p.setPageSize(10);
+                p.setPageNumber(1);
+                List<tb_singlepage> list = configService.dao().query(tb_singlepage.class, Cnd.NEW().orderBy("ut", "desc"), p);
                 if (Lang.isEmpty(list)) {
                     return;
                 }

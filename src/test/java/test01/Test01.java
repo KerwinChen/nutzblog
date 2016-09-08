@@ -3,20 +3,19 @@ package test01;
 import org.nutz.lang.Files;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Test01 {
 
 
     public static void main(String[] args) {
 
-        String a = "E:\\a";
-        String b = "E:\\b";
 
-        try {
-            Files.copyDir(new File(a), new File(b));
-        } catch (IOException e) {
-            e.printStackTrace();
+        File f=new File("C:\\Users\\Administrator\\site_html\\pages");
+
+        File []fs=f.listFiles();
+
+        for (int i = 0; i < fs.length; i++) {
+            System.out.println(fs[i].getAbsolutePath());
         }
 
     }
