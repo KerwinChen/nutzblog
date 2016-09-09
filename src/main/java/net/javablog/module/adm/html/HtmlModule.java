@@ -63,7 +63,7 @@ public class HtmlModule {
 
     /**
      * 生成html
-     * <p>
+     * <p/>
      * ？1     single,seris,book
      * ?  2    _id
      *
@@ -103,6 +103,8 @@ public class HtmlModule {
                     String tofile = "/book/" + tbBook.get_id() + "/" + tbBook.get_booktitleen() + ".html";
                     String fromfile = Const.HTML_SAVEPATH + tofile;
                     createHtml.createhtml_menu_note(tbBook.get_id(), "menu_note.ftl", fromfile);
+                    FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
+                    upload_index_first();
                 }
             }).start();
         }
@@ -120,8 +122,19 @@ public class HtmlModule {
 
                     createHtml.createhtml_page(tbin.get_id(), "page.ftl", fromfile);
                     FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
+
+                    upload_index_first();
                 }
             }).start();
+        }
+    }
+
+    private void upload_index_first() {
+        createHtml.createhtml("index.ftl", indexService.getIndexMapdata(1), Const.HTML_SAVEPATH + "index.html");
+        try {
+            Files.copyFile(new File(Const.HTML_SAVEPATH + "index.html"), new File(Const.HTML_SAVEPATH + "index/" + "1.html"));
+            Files.copyFile(new File(Const.HTML_SAVEPATH + "index.html"), new File(Const.HTML_SAVEPATH + "index.htm"));
+        } catch (IOException e) {
         }
     }
 
@@ -156,6 +169,9 @@ public class HtmlModule {
                             createHtml.createhtml_menu_seris(tbSeris.get_id(), "menu_seris.ftl", fromfile);
                             FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
                         }
+
+                        upload_index_first();
+
                     }
                 }
             }).start();
