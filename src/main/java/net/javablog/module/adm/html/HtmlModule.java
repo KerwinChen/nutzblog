@@ -141,7 +141,7 @@ public class HtmlModule {
         }
         FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index.html");
         FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index.htm");
-        FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index/1.htm");
+        FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index/1.html");
     }
 
     private void html_seris(String type, final int id, final String ip, final String user, final String pwd) {
