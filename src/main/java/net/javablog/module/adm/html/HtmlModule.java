@@ -60,6 +60,9 @@ public class HtmlModule {
     @Inject
     private ArchiveService archiveService;
 
+    private String ip;
+    private String user;
+    private String pwd;
 
     /**
      * 生成html
@@ -75,9 +78,9 @@ public class HtmlModule {
     @Ok("redirect:/log")
     public void html(String type, int id) {
 
-        String ip = configService.getIP();
-        String user = configService.getUser();
-        String pwd = configService.getPwd();
+        ip = configService.getIP();
+        user = configService.getUser();
+        pwd = configService.getPwd();
 
         html_single(type, id, ip, user, pwd);
 
@@ -136,6 +139,9 @@ public class HtmlModule {
             Files.copyFile(new File(Const.HTML_SAVEPATH + "index.html"), new File(Const.HTML_SAVEPATH + "index.htm"));
         } catch (IOException e) {
         }
+        FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index.html");
+        FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index.htm");
+        FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index/1.htm");
     }
 
     private void html_seris(String type, final int id, final String ip, final String user, final String pwd) {
