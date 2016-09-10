@@ -147,9 +147,8 @@ public class HtmlModule {
         }
 
         for (int i = 0; i < images.size(); i++) {
-            String from = Const.HTML_SAVEPATH + "/images/" + images.get(i);
-            String to = Const.HTML_SAVEPATH_TEMP + "/images/" + images.get(i);
-            Files.copy(new File(from), new File(to));
+            String img = Const.HTML_SAVEPATH + "/images/" + images.get(i);
+            FTPUtil.uploadSingleFile(ip, user, pwd, img, "/images/" + images.get(i));
         }
     }
 

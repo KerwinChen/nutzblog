@@ -497,6 +497,7 @@ public class CreateHtml {
             for (int i = 0; i < imgs.size(); i++) {
                 String img = imgs.get(i);
 
+                //   /images/169f4cb6aad9482d9fca918e67043bd2
                 if (img.length() > 6) {
                     img = img.substring(8);//   /images/
                     if (img.length() == 32 && !img.startsWith("http") && !img.contains(".")) {
