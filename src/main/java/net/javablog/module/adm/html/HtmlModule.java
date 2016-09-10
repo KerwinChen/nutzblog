@@ -57,10 +57,13 @@ public class HtmlModule {
     @Inject
     private ArchiveService archiveService;
 
+    private String ip;
+    private String user;
+    private String pwd;
 
     /**
      * 生成html
-     * <p>
+     * <p/>
      * ？1     single,seris,book
      * ?  2    _id
      *
@@ -72,9 +75,9 @@ public class HtmlModule {
     @Ok("redirect:/log")
     public void html(String type, int id) {
 
-        String ip = configService.getIP();
-        String user = configService.getUser();
-        String pwd = configService.getPwd();
+        ip = configService.getIP();
+        user = configService.getUser();
+        pwd = configService.getPwd();
 
         html_single(type, id, ip, user, pwd);
 
@@ -100,6 +103,8 @@ public class HtmlModule {
                     String tofile = "/book/" + tbBook.get_id() + "/" + tbBook.get_booktitleen() + ".html";
                     String fromfile = Const.HTML_SAVEPATH + tofile;
                     createHtml.createhtml_menu_note(tbBook.get_id(), "menu_note.ftl", fromfile);
+                    FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
+                    upload_index_first();
                 }
             }).start();
         }
@@ -118,6 +123,8 @@ public class HtmlModule {
                     createHtml.createhtml_page(tbin.get_id(), "page.ftl", fromfile);
                     FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
                     upload_images_bySinglePages(new int[]{tbin.get_id()});
+
+                    upload_index_first();
                 }
             }).start();
         }
@@ -125,11 +132,9 @@ public class HtmlModule {
 
 
     public void upload_images_bySinglePages(int[] pageids) {
-
         if (Lang.isEmpty(pageids)) {
             return;
         }
-
         List<tb_singlepage> listpages = dao.query(tb_singlepage.class, Cnd.where("_id", "in", pageids));
         if (Lang.isEmpty(listpages)) {
             return;
@@ -137,8 +142,8 @@ public class HtmlModule {
         List<String> images = new ArrayList<>();
 
         for (int i = 0; i < listpages.size(); i++) {
-            String html=listpages.get(i).get_content_html();
-            createHtml.findImgByHtml(images,html);
+            String html = listpages.get(i).get_content_html();
+            createHtml.findImgByHtml(images, html);
         }
 
         for (int i = 0; i < images.size(); i++) {
@@ -146,6 +151,18 @@ public class HtmlModule {
             String to = Const.HTML_SAVEPATH_TEMP + "/images/" + images.get(i);
             Files.copy(new File(from), new File(to));
         }
+    }
+
+    private void upload_index_first() {
+        createHtml.createhtml("index.ftl", indexService.getIndexMapdata(1), Const.HTML_SAVEPATH + "index.html");
+        try {
+            Files.copyFile(new File(Const.HTML_SAVEPATH + "index.html"), new File(Const.HTML_SAVEPATH + "index/" + "1.html"));
+            Files.copyFile(new File(Const.HTML_SAVEPATH + "index.html"), new File(Const.HTML_SAVEPATH + "index.htm"));
+        } catch (IOException e) {
+        }
+        FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index.html");
+        FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index.htm");
+        FTPUtil.uploadSingleFile(ip, user, pwd, Const.HTML_SAVEPATH + "index.html", "/index/1.html");
     }
 
     private void html_seris(String type, final int id, final String ip, final String user, final String pwd) {
@@ -180,6 +197,9 @@ public class HtmlModule {
                             createHtml.createhtml_menu_seris(tbSeris.get_id(), "menu_seris.ftl", fromfile);
                             FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
                         }
+
+                        upload_index_first();
+
                     }
                 }
             }).start();
