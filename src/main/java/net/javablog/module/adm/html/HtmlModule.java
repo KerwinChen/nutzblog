@@ -24,10 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @IocBean
@@ -120,8 +117,34 @@ public class HtmlModule {
 
                     createHtml.createhtml_page(tbin.get_id(), "page.ftl", fromfile);
                     FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
+                    upload_images_bySinglePages(new int[]{tbin.get_id()});
                 }
             }).start();
+        }
+    }
+
+
+    public void upload_images_bySinglePages(int[] pageids) {
+
+        if (Lang.isEmpty(pageids)) {
+            return;
+        }
+
+        List<tb_singlepage> listpages = dao.query(tb_singlepage.class, Cnd.where("_id", "in", pageids));
+        if (Lang.isEmpty(listpages)) {
+            return;
+        }
+        List<String> images = new ArrayList<>();
+
+        for (int i = 0; i < listpages.size(); i++) {
+            String html=listpages.get(i).get_content_html();
+            createHtml.findImgByHtml(images,html);
+        }
+
+        for (int i = 0; i < images.size(); i++) {
+            String from = Const.HTML_SAVEPATH + "/images/" + images.get(i);
+            String to = Const.HTML_SAVEPATH_TEMP + "/images/" + images.get(i);
+            Files.copy(new File(from), new File(to));
         }
     }
 
@@ -144,6 +167,7 @@ public class HtmlModule {
                                 createHtml.createhtml_seriespage(tbin.get_id(), "pages.ftl", fromfile);
                                 //上传文件  /tutorial/page/1.html
                                 FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
+                                upload_images_bySinglePages(new int[]{tbin.get_id()});
                             }
                         }
 

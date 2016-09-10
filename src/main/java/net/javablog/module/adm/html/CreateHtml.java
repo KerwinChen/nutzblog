@@ -491,7 +491,7 @@ public class CreateHtml {
         return out;
     }
 
-    private void findImgByHtml(List<String> out, String html_me) {
+    public void findImgByHtml(List<String> out, String html_me) {
         List<String> imgs = JsoupBiz.getList_Attr(html_me, "img", "src");
         if (!Lang.isEmpty(imgs)) {
             for (int i = 0; i < imgs.size(); i++) {
