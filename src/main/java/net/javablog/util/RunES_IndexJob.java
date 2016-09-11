@@ -3,8 +3,6 @@ package net.javablog.util;
 import org.nutz.dao.entity.Record;
 import org.nutz.dao.util.Daos;
 import org.nutz.json.Json;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +11,7 @@ import java.sql.ResultSet;
 
 public class RunES_IndexJob {
 
-    private static final Logger log = LoggerFactory.getLogger(RunES_IndexJob.class);
+    private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FTP");
 
     /**
      * 创建索引
@@ -46,11 +44,11 @@ public class RunES_IndexJob {
         log.info(tbname);
 
         //查询多少条记录，查询多少页。
-        log.info(" dao.count({}),可能时间较长。", tbname);
+        log.info(" dao.count({}),可能时间较长。"+tbname);
         long all = Curd.count(tbname, url, dbuser, dbpwd);
 
         if (all == 0) {
-            log.info("  表 {} , 没有数据,return.", tbname);
+            log.info("  表 {} , 没有数据,return."+tbname);
             return;
         }
 
@@ -69,7 +67,7 @@ public class RunES_IndexJob {
             int begin = 0;//从0开始，表示是第几页
             int i = 0;//从0开始
             while (rec.next()) { //循环输出结果集
-                log.info("第{}个表，第{} pagesize，第{}条记录", tbname, begin, i);
+                log.info("第{}个表，第{} pagesize，第{}条记录" + tbname +";"+ begin+";" +i);
                 i++;
                 Record record = Record.create(rec);
                 createIndex(record);

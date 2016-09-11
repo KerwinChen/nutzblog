@@ -42,6 +42,7 @@
                         <a target="_blank" href="/ftp_upload_static">上传static文件夹</a>(传一次即可) <br><br>
 
                         <a target="_blank" href="/ftp_upload_recent">上传最近的10篇博客</a>(每天也会定时执行一次 14:00 北京) <br><br>
+                        <a target="_blank" href="/esindex">EsIndex</a><br><br>
                     <#--<a target="_blank" href="/ftp_cleanall">清空FTP</a><br><br>-->
 
                     <#--<a href="">清空FTP所有HTMl文件</a> <br><br>-->

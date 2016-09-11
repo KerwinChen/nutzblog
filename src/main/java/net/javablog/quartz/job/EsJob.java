@@ -3,6 +3,7 @@ package net.javablog.quartz.job;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import net.javablog.util.RunES_IndexJob;
+import org.apache.log4j.Logger;
 import org.nutz.dao.Dao;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -14,7 +15,7 @@ import org.quartz.JobExecutionException;
 @IocBean
 public class EsJob implements org.quartz.Job {
 
-    private static final Log log = Logs.get();
+    private static Logger log = Logger.getLogger("FTP");
 
     @Inject
     protected Dao dao;
