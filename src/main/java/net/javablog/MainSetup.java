@@ -9,6 +9,7 @@ import net.javablog.service.ConfigService;
 import net.javablog.service.UserService;
 import net.javablog.util.FTPUtil;
 import net.javablog.util.RunES_IndexJob;
+import net.javablog.util.Threads;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
@@ -91,22 +92,32 @@ public class MainSetup implements Setup {
 
 
         //拷贝static文件夹
-        try {
-            File target_static = new File(Const.HTML_SAVEPATH + "/static");
-            Files.deleteDir(target_static);
-            Files.copyDir(new File(conf.getServletContext().getRealPath("/") + "/static"), target_static);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Threads.run(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    File target_static = new File(Const.HTML_SAVEPATH + "/static");
+                    Files.deleteDir(target_static);
+                    Files.copyDir(new File(conf.getServletContext().getRealPath("/") + "/static"), target_static);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         //ES 创建索引
-        DataSource ds = ((NutIoc) ioc).get(DataSource.class);
-        DruidDataSource ds_ = (DruidDataSource) ds;
-        String url = ds_.getUrl();
-        String user = ds_.getUsername();
-        String pwd = ds_.getPassword();
-        RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
+        Threads.run(new Runnable() {
+            @Override
+            public void run() {
+                DataSource ds = ((NutIoc) ioc).get(DataSource.class);
+                DruidDataSource ds_ = (DruidDataSource) ds;
+                String url = ds_.getUrl();
+                String user = ds_.getUsername();
+                String pwd = ds_.getPassword();
+                RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
+            }
+        });
 
         //异步处理,最新的10篇博客
 //        FtpModule ftpModule = ((NutIoc) ioc).get(FtpModule.class);
