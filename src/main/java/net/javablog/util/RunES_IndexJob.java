@@ -3,6 +3,7 @@ package net.javablog.util;
 import org.nutz.dao.entity.Record;
 import org.nutz.dao.util.Daos;
 import org.nutz.json.Json;
+import org.nutz.lang.Strings;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,6 +21,10 @@ public class RunES_IndexJob {
      */
     public static void createIndex(final Record singlepage) {
         String id = singlepage.getString("_id");
+        if (Strings.isBlank(id)) {
+            return;
+        }
+
         singlepage.put("copy_id", id);
         singlepage.remove("_id");//内部字段，需要删除
         String json = Json.toJson(singlepage);

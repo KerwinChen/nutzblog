@@ -40,8 +40,8 @@ public class EsUT {
     static {
         JestClientFactory factory = new JestClientFactory();
         factory.setHttpClientConfig(new HttpClientConfig
-                .Builder("http://127.0.0.1:9200")
-//                .Builder("http://5.249.159.190:9200")
+//                .Builder("http://127.0.0.1:9200")
+                .Builder("http://23.88.110.58:9200")
                 .gson(new GsonBuilder().setDateFormat(dateStyle).create())
                 .discoveryEnabled(false).build());
         client = (JestHttpClient) factory.getObject();
@@ -56,7 +56,6 @@ public class EsUT {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            client = null;
         } finally {
         }
     }
