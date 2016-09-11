@@ -1,5 +1,6 @@
 package net.javablog.util;
 
+import org.apache.log4j.Logger;
 import org.nutz.dao.entity.Record;
 import org.nutz.dao.util.Daos;
 import org.nutz.json.Json;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 
 public class RunES_IndexJob {
 
-    private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FTP");
+    private static Logger log =  Logger.getLogger("FTP");
 
     /**
      * 创建索引
@@ -24,7 +25,7 @@ public class RunES_IndexJob {
         if (Strings.isBlank(id)) {
             return;
         }
-
+        singlepage.set("_content_text", JsoupBiz.getTextFromTHML(singlepage.getString("_content_html")));
         singlepage.put("copy_id", id);
         singlepage.remove("_id");//内部字段，需要删除
         String json = Json.toJson(singlepage);

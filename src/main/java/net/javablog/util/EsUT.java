@@ -77,11 +77,11 @@ public class EsUT {
         try {
 
             SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder.query(QueryBuilders.multiMatchQuery(q, "_title", "_content_html"))
+            searchSourceBuilder.query(QueryBuilders.multiMatchQuery(q, "_title", "_content_text"))
                     .from(pageno - 1)
                     .size(pagesize)
                     .minScore(0.05F)
-                    .highlight(new HighlightBuilder().numOfFragments(1).fragmentSize(500).order("score").field("_content_html").preTags("[tag1]").postTags("[/tag1]")); //.postTags("<tag1>").postTags("</tag1>"));
+                    .highlight(new HighlightBuilder().numOfFragments(1).fragmentSize(500).order("score").field("_content_text").preTags("[tag1]").postTags("[/tag1]")); //.postTags("<tag1>").postTags("</tag1>"));
 
             Search search = new Search.Builder(searchSourceBuilder.toString())
                     .addIndex(indices)
@@ -103,7 +103,7 @@ public class EsUT {
                 m.put("tag", item.source.get_tags());
                 m.put("href", "/page" + (item.source.get_index_inseris() == 0 ? "" : "s") + "/" + item.source.getCopy_id() + "/" + item.source.get_titleen() + ".html");
                 m.put("time", Times.format("yyyy-MM-dd", item.source.getUt()));
-                m.put("desc",JsoupBiz.getTextFromTHML(item.highlight.get("_content_html").get(0)));
+                m.put("desc",JsoupBiz.getTextFromTHML(item.highlight.get("_content_text").get(0)));
                 m.put("desc", m.get("desc").toString().replace("[tag1]", "<em>").replace("[/tag1]", "</em>").replace("<!--", "").replace("-->", ""));
                 System.out.println(m.get("title"));
                 System.out.println(m.get("href"));
