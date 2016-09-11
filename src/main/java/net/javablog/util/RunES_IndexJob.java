@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 
 public class RunES_IndexJob {
 
-    private static Logger log =  Logger.getLogger("FTP");
+    private static Logger log = Logger.getLogger("FTP");
 
     /**
      * 创建索引
@@ -28,10 +28,14 @@ public class RunES_IndexJob {
         singlepage.set("_content_text", JsoupBiz.getTextFromTHML(singlepage.getString("_content_html")));
         singlepage.put("copy_id", id);
         singlepage.remove("_id");//内部字段，需要删除
+
+        singlepage.remove("_content_html");
+        singlepage.remove("_content_markdown");
+
         String json = Json.toJson(singlepage);
 
-        EsUT.delIndex(Integer.valueOf(id));
-        EsUT.createIndex(json, id);
+//        EsUT.delIndex(Integer.valueOf(id));
+        EsUT.createIndex(json, id);//update
     }
 
 
