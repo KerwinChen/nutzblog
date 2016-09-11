@@ -131,7 +131,6 @@ public class EsUT {
 
     public static void delIndex(int copyid) {
         try {
-
             client.execute(new Delete.Builder(copyid + "")
                     .index(indices)
                     .type(types)
