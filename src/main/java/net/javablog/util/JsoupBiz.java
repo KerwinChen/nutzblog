@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.nutz.lang.Lang;
+import org.nutz.lang.Strings;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
@@ -27,28 +28,18 @@ public class JsoupBiz {
         try {
             out = Jsoup.parse(content).select(path).get(0).attr(attr);
         } catch (Exception e) {
-            log.info("没有值,{},{}"+ path+","+ attr);
+            log.info("没有值,{},{}" + path + "," + attr);
         }
         return out;
     }
 
     public static String getTextFromTHML(String htmlStr) {
-        Document doc = Jsoup.parse(htmlStr);
-        String text = doc.text();
-        // remove extra white space
-        StringBuilder builder = new StringBuilder(text);
-        int index = 0;
-        while(builder.length()>index){
-            char tmp = builder.charAt(index);
-            if(Character.isSpaceChar(tmp) || Character.isWhitespace(tmp)){
-                builder.setCharAt(index, ' ');
-            }
-            index++;
+        if (Strings.isBlank(htmlStr)) {
+            return "";
         }
-        text = builder.toString().replaceAll(" +", " ").trim();
+        String text = Jsoup.parse(htmlStr).text();
         return text;
     }
-
 
     /**
      * 取得path对应节点的上一个兄弟节点
