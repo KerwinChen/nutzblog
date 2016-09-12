@@ -57,7 +57,7 @@ public class WBlogModule {
             Set<String> arr2 = new HashSet<String>(Arrays.asList(arr));
 
             for (String item : arr2) {
-                String tag1 = item;
+                String tag1 = item.trim();
                 if (tagService.count(Cnd.where("_name", "=", tag1.trim())) == 0) {
                     tb_tag t = new tb_tag();
                     t.set_img("");
