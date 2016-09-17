@@ -75,11 +75,11 @@ public class ListBlogModule {
         }
         cnd.desc("_id");
 
-        Sql sql = Sqls.create("select  * from tb_singlepage  $condition").setCondition(cnd);
+        Sql sql = Sqls.create("select  _id,_title,_titleen,_ut,_isdraft from tb_singlepage  $condition").setCondition(cnd);
         List<Record> tbs = blogService.getObjListByPage(sql, pageno);
         out.put("datas", tbs);
 
-        Sql sqlcount = Sqls.create("select count(*) from tb_singlepage $condition").setCondition(cnd);
+        Sql sqlcount = Sqls.create("select count(_id) from tb_singlepage $condition").setCondition(cnd);
         out.put("pages", blogService.getPageHtmlByPage(sqlcount, pageno));
 
         return out;
