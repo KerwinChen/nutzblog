@@ -16,4 +16,6 @@
 *.log*
 /bak
 
+/nutzblog
+
 nutzblog.iml
