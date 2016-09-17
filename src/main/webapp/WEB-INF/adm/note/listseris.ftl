@@ -72,7 +72,6 @@
             <a href="javascript:del({{value._id}});">删除</a>
             <a target="_self"
                href="/adm/books_mgr/showaddup_inlist/?book_id=${obj.book._id}&seris_id={{value._id}}">编辑</a>
-            <a target="_blank" href="/page/{{value._id}}/{{value._titleen}}.html">预览</a>
             <a target="_self" href="/adm/seris_mgr/showlist_in/?_id={{value._id}}&book_id=${obj.book._id}">管理章节中的文章</a>
             <a target="_blank" href="/html/seris/{{value._id}}">[生成html]</a>
         </td>
