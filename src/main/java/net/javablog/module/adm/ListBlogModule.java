@@ -59,7 +59,6 @@ public class ListBlogModule {
     }
 
 
-
     @At("/adm/single_mgr/doshowlist")
     @Ok("json")
     public NutMap doshowlist(@Param("pageno") int pageno, @Param("txt_q") String txt_q) {
@@ -75,7 +74,7 @@ public class ListBlogModule {
         }
         cnd.desc("_id");
 
-        Sql sql = Sqls.create("select  _id,_title,_titleen,_ut,_isdraft from tb_singlepage  $condition").setCondition(cnd);
+        Sql sql = Sqls.create("select  _id,_title,_titleen, _isdraft , ut from tb_singlepage  $condition").setCondition(cnd);
         List<Record> tbs = blogService.getObjListByPage(sql, pageno);
         out.put("datas", tbs);
 
