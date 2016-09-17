@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/static/img/favicon.ico?v=${(obj.version)!''}">
-    <title>文章 ${obj.typevalue!''} - ${(obj.version)!''}</title>
+    <title>文章 ${obj.typevalue!''} - ${(obj.site_name)!''}</title>
 
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/index.css?v=${(obj.version)!''}" rel="stylesheet">
