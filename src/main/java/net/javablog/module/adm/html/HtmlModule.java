@@ -358,12 +358,12 @@ public class HtmlModule {
                             Map<String, Integer> tags = createHtml.getCount_5_();
                             Iterator it2 = tags.keySet().iterator();
                             while (it2.hasNext()) {
-                                String tagname = (String) it2.next();
-                                int pagecount = tags.get(tagname);
+                                String tag_id = (String) it2.next();
+                                int pagecount = tags.get(tag_id);
                                 for (int i = 1; i <= pagecount; i++) {
                                     logService.setProcess(all);
-                                    Files.createDirIfNoExists(Const.HTML_SAVEPATH + "filter/tag/" + tagname + "/");
-                                    createHtml.createhtml("filter_tag.ftl", indexService.getIndexMapdata_filter("tag", tagname, i), Const.HTML_SAVEPATH + "filter/tag/" + tagname + "/" + i + ".html");
+                                    Files.createDirIfNoExists(Const.HTML_SAVEPATH + "filter/tag/" + tag_id + "/");
+                                    createHtml.createhtml("filter_tag.ftl", indexService.getIndexMapdata_filter("tag", tag_id, i), Const.HTML_SAVEPATH + "filter/tag/" + tag_id + "/" + i + ".html");
                                 }
                             }
                         }
