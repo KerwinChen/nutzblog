@@ -152,6 +152,7 @@ public class IndexService {
 
         } else if (type.equals("tag")) {
             typevalue = tagService.getTagNameById(Integer.valueOf(typevalue));
+            typevalue = typevalue.trim();
             SqlExpressionGroup g = Cnd.exps("_tags", "like", "%," + typevalue + "").or("_tags", "like", "%," + typevalue + ",%").or("_tags", "like", "" + typevalue + ",%").or("_tags", "=", typevalue);
             criteria.where().and(g);
 
