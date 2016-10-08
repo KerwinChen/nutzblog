@@ -12,6 +12,8 @@ fi
 git reset --hard HEAD
 git pull
 
+mvn clean 
+mvn compile
 
 sudo nohup mvn jetty:run -Djetty.port=80 > /dev/null 2>&1 &
 
