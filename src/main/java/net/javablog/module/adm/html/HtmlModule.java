@@ -313,7 +313,7 @@ public class HtmlModule {
                         for (int i = 0; i < seris_.size(); i++) {
                             logService.setProcess(all);
                             tb_seris tb = seris_.get(i);
-                            createHtml.createhtml("menu_seris.ftl", menuService.getseris(tb.get_id()), Const.HTML_SAVEPATH + "seris/" + tb.get_id() + tb.get_seristitleen() + ".html");
+                            createHtml.createhtml("menu_seris.ftl", menuService.getseris(tb.get_id()), Const.HTML_SAVEPATH + "seris/" + tb.get_id() + "/" + tb.get_seristitleen() + ".html");
                         }
 
                         //按照图书分页
