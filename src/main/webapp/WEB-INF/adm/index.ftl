@@ -34,7 +34,8 @@
                 <div class="row">
                     <div class="col-xs-12" style="font-size: 16px">
 
-                        <a target="_blank" href="/log">查看日志</a> <br><br>
+                        <a target="_blank" href="/log">查看日志</a>&nbsp;&nbsp;<a target="_self" href="/adm/lastblog">定位最后一次修改的文章</a>
+                        <br><br>
                         <a target="_blank" href="/createhtml_site">一键生成静态网站</a> (保存位置 ${obj.save_html}) <br><br>
 
                         <a target="_blank" href="/ftp_upload_html_all">上传所有的HTML</a>&nbsp;&nbsp;
