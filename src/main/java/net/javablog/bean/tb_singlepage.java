@@ -3,7 +3,6 @@ package net.javablog.bean;
 import org.nutz.dao.entity.annotation.*;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 单文章表
@@ -12,7 +11,7 @@ import java.util.Date;
 //所有的字段都以下划线开头    _
 @Table("tb_singlepage")
 @Comment("根据_serisid字段判断，如果是>0就表示属于系列文章，否则就是单独的文章")
-public class tb_singlepage extends BasePojo  implements Serializable {
+public class tb_singlepage extends BasePojo implements Serializable {
 
     @Id
     @Comment("tb_singlepage  自增id")
@@ -104,7 +103,8 @@ public class tb_singlepage extends BasePojo  implements Serializable {
 
     @Column
     @Comment("是否是草稿")
-    private boolean _isdraft;
+    @Default("true")
+    private boolean _isdraft = true;
 
     public String get_username() {
         return _username;
@@ -245,8 +245,6 @@ public class tb_singlepage extends BasePojo  implements Serializable {
     public void set_tags(String _tags) {
         this._tags = _tags;
     }
-
-
 
 
     public int get_serisid() {
