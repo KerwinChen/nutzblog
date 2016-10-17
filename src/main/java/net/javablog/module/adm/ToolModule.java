@@ -28,7 +28,7 @@ public class ToolModule {
 //        /adm/wblog/?_id=178   blog
 //        /adm/seris_mgr/showaddup_inlist?book_id=0&seris_id=76&single_id=143
 //        /adm/seris_mgr/showaddup_inlist?book_id=1&seris_id=1&single_id=1
-        tb_singlepage tb = dao.fetch(tb_singlepage.class, Cnd.NEW().orderBy("_id", "desc"));
+        tb_singlepage tb = dao.fetch(tb_singlepage.class, Cnd.NEW().orderBy("ut", "desc"));
         if (tb == null) {
             //还没写文章呢 ....
             return new ViewWrapper(new ServerRedirectView("/"), null);
