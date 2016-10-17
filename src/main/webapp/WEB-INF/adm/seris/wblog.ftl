@@ -56,13 +56,14 @@
                     <input type="hidden" id="_index_inseris" value="${(obj.single._index_inseris)!'1'}"/>
                     <a href="/adm/listnote">返回图书列表</a>
                     <a href="/adm/books_mgr/showlist_in/?_id=${obj.b._id}">返回章节列表</a>
-                    <a href="/adm/seris_mgr/showlist_in/?_id=${obj.s._id}">返回系列教程(${obj.s._seristitle})</a>
+                    <a href="/adm/seris_mgr/showlist_in/?_id=${obj.s._id}&book_id=${(obj.b._id)!'0'}">返回系列教程  ${obj.s._seristitle}</a>
                 <#else >
                     <input type="hidden" id="_bookid" value="${(obj.b._id)!'0'}"/>
                     <input type="hidden" id="_serisid" value="${obj.s._id}"/>
                     <input type="hidden" id="_index_inseris" value="${(obj.single._index_inseris)!'1'}"/>
-                    <a href="/adm/seris_mgr/showlist_in/?_id=${obj.s._id}&book_id=${(obj.b._id)!'0'}">返回系列教程  ${obj.s._seristitle}</a>
+                    <a href="/adm/seris_mgr/showlist_in/?_id=${obj.s._id}">返回系列教程  ${obj.s._seristitle}</a>
                 </#if>
+
 
                 </div>
                 <div class="row">
