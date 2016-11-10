@@ -10,6 +10,7 @@ import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
 import net.javablog.util.RunES_IndexJob;
 import net.javablog.util.Translates;
+import net.javablog.util.Util;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.entity.Record;
 import org.nutz.ioc.loader.annotation.Inject;
@@ -82,6 +83,7 @@ public class WSerisModule {
 
         NutMap map = NutMap.NEW();
         tbin.setUt(new Date());
+        tbin.set_content_html(Util.processH2(tbin.get_content_html()));
         tbin.set_titleen(Translates.trans(tbin.get_title()));
 
         tb_user user = CurrentUserUtils.getInstance().getUser();
