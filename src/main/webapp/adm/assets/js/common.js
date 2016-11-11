@@ -12,13 +12,18 @@ $(function () {
 function neweditor(id) {
     return editormd(id, {
         width: "100%",
-        height: 900,
+        autoHeight : false,
         toolbarAutoFixed: false,
-        autoFocus: false,
-        autoHeight: true,
-        watch: true,             //实时预览
-        syncScrolling: "single",
+        //autoFocus: false,
+        //watch: true,             //实时预览
+        //syncScrolling: true,
         saveHTMLToTextarea: true,
+        path: "/adm/assets/js/editor.md/lib/",
+        imageUpload: true,
+        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL: "/adm/upload_editor",
+        htmlDecode: true,
+
         toolbarIcons: function () {
             return [
                 "undo", "redo", "|",
@@ -30,12 +35,7 @@ function neweditor(id) {
                 "help", "info"
             ];
 
-        },
-        path: "/adm/assets/js/editor.md/lib/",
-        imageUpload: true,
-        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-        imageUploadURL: "/adm/upload_editor",
-        htmlDecode: true
+        }
 
     });
 }

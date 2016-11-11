@@ -103,8 +103,73 @@
 
                         <#--内容区域-->
                             <div class="form-group">
-                                <div id="test-editormd" style="z-index: 1800">
-                                    <textarea style="display:none;">${obj.item._content_markdown!""}</textarea>
+                                <div id="test-editormd" >
+                                    <#--<textarea style="display:none;">${obj.item._content_markdown!""}</textarea>-->
+                                    <textarea style="display:none;">### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+                                        ### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+
+</textarea>
                                 </div>
                             </div>
 
@@ -155,8 +220,7 @@
         }
     }
 
-    //编辑器
-    var testEditor = neweditor("test-editormd");
+
     function autosavecontent() {
         savecontent(1);
     }
@@ -216,12 +280,17 @@
             console.log("返回结果" + $.toJSON(rs));
         });
     }
-    setInterval("autosavecontent()", 1000 * 10);
 
 
+
+    //编辑器
+    var testEditor  ;
 
     $(function () {
+        testEditor = neweditor("test-editormd");
+        testEditor.appendMarkdown("");
 
+        setInterval("autosavecontent()", 1000 * 10);
 
         $("#btn_submit").bind("click", function () {
             $("#_isdraft").val("0");
@@ -248,7 +317,6 @@
                         offset: ['8%', ''],
                         content: ['/adm/upload/selectimg', 'no']
                     });
-
                 }
         );
 
