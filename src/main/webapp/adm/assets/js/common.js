@@ -12,11 +12,11 @@ $(function () {
 function neweditor(id) {
     return editormd(id, {
         width: "100%",
-        height: 300,
+        height: 900,
         toolbarAutoFixed: false,
         autoFocus: false,
-        // autoHeight: true,
-        // watch: false,             //实时预览
+        autoHeight: true,
+        watch: true,             //实时预览
         syncScrolling: "single",
         saveHTMLToTextarea: true,
         toolbarIcons: function () {
