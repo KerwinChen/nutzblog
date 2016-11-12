@@ -26,7 +26,7 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="/adm/wblog">Home</a>
+                        <a href="/adm/index">Home</a>
                     </li>
 
                 <#if (obj.b._id) gt 0 && (obj.s._id) gt 0>
