@@ -188,6 +188,12 @@
         savecontent(1);
     }
     function savecontent(auto) {
+        if (auto) {
+            auto = true;
+        } else {
+            auto = false;
+        }
+
         var _title = $("#_title").val();
         var _showintro = $("#_showintro").val();
         var _content_html = testEditor.getHTML();
@@ -220,6 +226,7 @@
         }
 
         var data = {};
+        data.auto = auto;
         data._title = _title;
         data._showintro = _showintro;
         data._content_html = _content_html;
