@@ -227,7 +227,7 @@
 
     $(function () {
         testEditor = neweditor("test-editormd");
-        testEditor.appendMarkdown("");
+//        testEditor.appendMarkdown("");
 
         setInterval("autosavecontent()", 1000 * 10);
 
