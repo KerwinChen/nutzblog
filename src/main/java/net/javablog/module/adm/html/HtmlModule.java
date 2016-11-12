@@ -79,12 +79,15 @@ public class HtmlModule {
         user = configService.getUser();
         pwd = configService.getPwd();
 
-        html_single(type, id, ip, user, pwd);
-
-        html_seris(type, id, ip, user, pwd);
-
-        html_book(type, id, ip, user, pwd);
-
+        if ("single".equals(type)) {
+            html_single(type, id, ip, user, pwd);
+        }
+        if ("seris".equals(type)) {
+            html_seris(type, id, ip, user, pwd);
+        }
+        if ("book".equals(type)) {
+            html_book(type, id, ip, user, pwd);
+        }
 
     }
 
@@ -117,14 +120,26 @@ public class HtmlModule {
                 @Override
                 public void run() {
 
-                    String tofile = "/page/" + tbin.get_id() + "/" + tbin.get_titleen() + ".html";
-                    String fromfile = Const.HTML_SAVEPATH + tofile;
 
-                    createHtml.createhtml_page(tbin.get_id(), "page.ftl", fromfile);
-                    FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
-                    upload_images_bySinglePages(new int[]{tbin.get_id()});
+                    if (tbin.get_serisid() == 0) {
+                        String tofile = "/page/" + tbin.get_id() + "/" + tbin.get_titleen() + ".html";
+                        String fromfile = Const.HTML_SAVEPATH + tofile;
 
-                    upload_index_first();
+                        createHtml.createhtml_page(tbin.get_id(), "page.ftl", fromfile);
+                        FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
+                        upload_images_bySinglePages(new int[]{tbin.get_id()});
+                        upload_index_first();
+                    }
+                    //如果是系列文章下的单文章 ???
+                    else {
+                        String tofile = "/pages/" + tbin.get_id() + "/" + tbin.get_titleen() + ".html";
+                        String fromfile = Const.HTML_SAVEPATH + tofile;
+                        createHtml.createhtml_seriespage(tbin.get_id(), "pages.ftl", fromfile);
+                        //上传文件  /pages/184/the-best-practice-of-writing-interface.html
+                        FTPUtil.uploadSingleFile(ip, user, pwd, fromfile, tofile);
+                        upload_images_bySinglePages(new int[]{tbin.get_id()});
+                    }
+
                 }
             }).start();
         }

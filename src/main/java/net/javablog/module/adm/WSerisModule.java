@@ -10,6 +10,7 @@ import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
 import net.javablog.util.RunES_IndexJob;
 import net.javablog.util.Translates;
+import net.javablog.util.Util;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.entity.Record;
 import org.nutz.ioc.loader.annotation.Inject;
@@ -82,6 +83,7 @@ public class WSerisModule {
 
         NutMap map = NutMap.NEW();
         tbin.setUt(new Date());
+        tbin.set_content_html(Util.processH2(tbin.get_content_html()));
         tbin.set_titleen(Translates.trans(tbin.get_title()));
 
         tb_user user = CurrentUserUtils.getInstance().getUser();
@@ -107,17 +109,18 @@ public class WSerisModule {
         }
 
 
+        tb_singlepage count = blogService.fetch(Cnd.where("_serisid", "=", tbin.get_serisid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inseris", "desc"));
+        if (count == null) {
+            tbin.set_index_inseris(1);
+        } else {
+            tbin.set_index_inseris(count.get_index_inseris() + 1);
+        }
+        
         if (tbin.get_id() > 0) {
             tbin.setUt(new Date());
             blogService.update(tbin);
         } else {
             tbin.setCt(new Date());
-            tb_singlepage count = blogService.fetch(Cnd.where("_serisid", "=", tbin.get_serisid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inseris", "desc"));
-            if (count == null) {
-                tbin.set_index_inseris(1);
-            } else {
-                tbin.set_index_inseris(count.get_index_inseris() + 1);
-            }
             blogService.insert(tbin);
         }
 
