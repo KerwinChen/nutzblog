@@ -1,4 +1,3 @@
-<html lang="en">
 <#include "common/header.ftl">
 <body class="no-skin">
 <#include "common/navbar.ftl">

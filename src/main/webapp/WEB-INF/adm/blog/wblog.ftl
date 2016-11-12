@@ -1,4 +1,4 @@
-<html lang="en">
+
 <#include "../common/header.ftl">
 <#--tools-->
 <script src="/adm/assets/js/jquery.json.min.js"></script>

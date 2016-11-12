@@ -1,4 +1,3 @@
-<html lang="en">
 <#include "../common/header.ftl">
 <#--上传组件-->
 <link href="/adm/assets/js/jquery-file-upload/jquery.fileupload.css" rel="stylesheet">
