@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
         </button>
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="/adm/index" class="navbar-brand">
                 <small>
                     <i class="fa fa-laptop"></i> NutzBlog
                 </small>
