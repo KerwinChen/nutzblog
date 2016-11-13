@@ -30,7 +30,7 @@
                         <a href="/adm/index">Home</a>
                     </li>
                     <li>
-                        <a href="#">博客管理</a>
+                        <a href="/adm/listblog">博客管理</a>
                     </li>
                     <li class="active"><#if obj.item._id &gt; 0 >【修改】<#else>
                         【新文章】</#if>${(obj.item._isdraft)?string("【草稿】","")}</li>
