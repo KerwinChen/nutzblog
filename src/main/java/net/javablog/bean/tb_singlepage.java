@@ -103,7 +103,7 @@ public class tb_singlepage extends BasePojo implements Serializable {
 
     @Column
     @Comment("是否是草稿")
-    @Default("true")
+    @Default("1")
     private boolean _isdraft = true;
 
     public String get_username() {
