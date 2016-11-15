@@ -34,7 +34,7 @@ public class WBlogModule {
 
     @At("/adm/single_mgr/doaddup")
     @Ok("json")
-    public Map doaddup(@Param("..") final tb_singlepage tbin) {
+    public Map doaddup(@Param("..") final tb_singlepage tbin, @Param("auto") final boolean auto) {
 
         HashMap map = new HashMap();
 //        tbin.set_isdraft(false);
@@ -45,7 +45,10 @@ public class WBlogModule {
         tbin.set_username(user.get_username());
         tbin.set_tags(tbin.get_tags().trim());
 
-        tbin.setUt(new Date());
+        if (!auto) {
+            tbin.setUt(new Date());
+        }
+
         if (tbin.get_id() == 0) {
             tbin.setCt(new Date());
             blogService.insert(tbin);

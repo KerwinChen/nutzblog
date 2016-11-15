@@ -1,4 +1,3 @@
-<html lang="en">
 <#include "../common/header.ftl">
 <#--tools-->
 <script src="/adm/assets/js/jquery.json.min.js"></script>
@@ -27,7 +26,7 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="/adm/wblog">Home</a>
+                        <a href="/adm/index">Home</a>
                     </li>
 
                 <#if (obj.b._id) gt 0 && (obj.s._id) gt 0>
@@ -189,6 +188,12 @@
         savecontent(1);
     }
     function savecontent(auto) {
+        if (auto) {
+            auto = true;
+        } else {
+            auto = false;
+        }
+
         var _title = $("#_title").val();
         var _showintro = $("#_showintro").val();
         var _content_html = testEditor.getHTML();
@@ -221,6 +226,7 @@
         }
 
         var data = {};
+        data.auto = auto;
         data._title = _title;
         data._showintro = _showintro;
         data._content_html = _content_html;

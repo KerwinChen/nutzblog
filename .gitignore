@@ -14,8 +14,9 @@
 /performance
 /.idea
 *.log*
+*.class
 /bak
-
+/classes
 /nutzblog
 
 nutzblog.iml

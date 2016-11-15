@@ -5,7 +5,7 @@
 <script src="/adm/assets/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="/adm/assets/js/autosize.min.js"></script>
+<#--<script src="/adm/assets/js/autosize.min.js"></script>-->
 <script src="/adm/assets/js/jquery-typeahead.js"></script>
 <script src="/adm/assets/js/bootstrap-datepicker.min.js"></script>
 

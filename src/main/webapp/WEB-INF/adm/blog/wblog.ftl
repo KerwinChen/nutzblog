@@ -1,4 +1,3 @@
-<html lang="en">
 <#include "../common/header.ftl">
 <#--tools-->
 <script src="/adm/assets/js/jquery.json.min.js"></script>
@@ -28,10 +27,10 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="/adm/wblog">Home</a>
+                        <a href="/adm/index">Home</a>
                     </li>
                     <li>
-                        <a href="#">博客管理</a>
+                        <a href="/adm/listblog">博客管理</a>
                     </li>
                     <li class="active"><#if obj.item._id &gt; 0 >【修改】<#else>
                         【新文章】</#if>${(obj.item._isdraft)?string("【草稿】","")}</li>
@@ -103,73 +102,8 @@
 
                         <#--内容区域-->
                             <div class="form-group">
-                                <div id="test-editormd" >
-                                    <#--<textarea style="display:none;">${obj.item._content_markdown!""}</textarea>-->
-                                    <textarea style="display:none;">### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-                                        ### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-### Settings
-
-```javascript
-var testEditor = editormd("test-editormd", {
-    autoHeight : true
-});
-```
-
-</textarea>
+                                <div id="test-editormd">
+                                    <textarea style="display:none;">${obj.item._content_markdown!""}</textarea>
                                 </div>
                             </div>
 
@@ -225,6 +159,12 @@ var testEditor = editormd("test-editormd", {
         savecontent(1);
     }
     function savecontent(auto) {
+        if (auto) {
+            auto = true;
+        } else {
+            auto = false;
+        }
+
         var _title = $("#_title").val();
         var _showintro = $("#_showintro").val();
         var _content_html = testEditor.getHTML();
@@ -253,6 +193,7 @@ var testEditor = editormd("test-editormd", {
             return;
         }
         var data = {};
+        data.auto = auto;
         data._title = _title;
         data._showintro = _showintro;
         data._content_html = _content_html;
@@ -261,10 +202,9 @@ var testEditor = editormd("test-editormd", {
         data._id = $("#_id").val();
         data._tags = _tags;
         data._titleinlogo = $("#_titleinlogo").val();
-        if(data._id==0)
-        {
-            data._isdraft=1;
-        } else{
+        if (data._id == 0) {
+            data._isdraft = 1;
+        } else {
             data._isdraft = $("#_isdraft").val();
         }
 
@@ -282,13 +222,12 @@ var testEditor = editormd("test-editormd", {
     }
 
 
-
     //编辑器
-    var testEditor  ;
+    var testEditor;
 
     $(function () {
         testEditor = neweditor("test-editormd");
-        testEditor.appendMarkdown("");
+//        testEditor.appendMarkdown("");
 
         setInterval("autosavecontent()", 1000 * 10);
 

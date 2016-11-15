@@ -12,18 +12,18 @@ $(function () {
 function neweditor(id) {
     return editormd(id, {
         width: "100%",
-        autoHeight : false,
-        toolbarAutoFixed: false,
-        //autoFocus: false,
-        //watch: true,             //实时预览
-        //syncScrolling: true,
+        height: 300,
+        toolbarAutoFixed: true,
+        autoFocus: false,
+        autoHeight: true,
+        // watch: false,             //实时预览
+        syncScrolling: "single",
         saveHTMLToTextarea: true,
         path: "/adm/assets/js/editor.md/lib/",
         imageUpload: true,
         imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
         imageUploadURL: "/adm/upload_editor",
         htmlDecode: true,
-
         toolbarIcons: function () {
             return [
                 "undo", "redo", "|",

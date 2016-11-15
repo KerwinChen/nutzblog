@@ -79,10 +79,12 @@ public class WSerisModule {
 
     @At("/adm/seris_mgr/doaddup_inlist")
     @Ok("json")
-    public Map doaddup_inlist(@Param("..") final tb_singlepage tbin) {
+    public Map doaddup_inlist(@Param("..") final tb_singlepage tbin, @Param("auto") final boolean auto) {
 
         NutMap map = NutMap.NEW();
-        tbin.setUt(new Date());
+        if (!auto) {
+            tbin.setUt(new Date());
+        }
         tbin.set_content_html(Util.processH2(tbin.get_content_html()));
         tbin.set_titleen(Translates.trans(tbin.get_title()));
 
@@ -115,7 +117,7 @@ public class WSerisModule {
         } else {
             tbin.set_index_inseris(count.get_index_inseris() + 1);
         }
-        
+
         if (tbin.get_id() > 0) {
             tbin.setUt(new Date());
             blogService.update(tbin);
