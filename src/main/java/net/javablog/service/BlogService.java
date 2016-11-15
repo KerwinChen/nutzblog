@@ -189,7 +189,7 @@ public class BlogService extends BaseService<tb_singlepage> {
                     tb_tag t = tagService.fetch(Cnd.where("_name", "=", arr[i]));
 
                     String imgstr = "";
-                    if (!Strings.isBlank(t.get_img())) {
+                    if (t != null && !Strings.isBlank(t.get_img())) {
                         imgstr = " class=\"tag-img\" style=\"background-image: url(/images/" + t.get_img() + ");\"";
                     }
 
