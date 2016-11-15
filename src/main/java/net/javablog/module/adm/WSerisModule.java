@@ -111,17 +111,19 @@ public class WSerisModule {
         }
 
 
-        tb_singlepage count = blogService.fetch(Cnd.where("_serisid", "=", tbin.get_serisid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inseris", "desc"));
-        if (count == null) {
-            tbin.set_index_inseris(1);
-        } else {
-            tbin.set_index_inseris(count.get_index_inseris() + 1);
-        }
-
         if (tbin.get_id() > 0) {
             tbin.setUt(new Date());
             blogService.update(tbin);
         } else {
+
+            //新增记录才对序号+1
+            tb_singlepage count = blogService.fetch(Cnd.where("_serisid", "=", tbin.get_serisid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inseris", "desc"));
+            if (count == null) {
+                tbin.set_index_inseris(1);
+            } else {
+                tbin.set_index_inseris(count.get_index_inseris() + 1);
+            }
+
             tbin.setCt(new Date());
             blogService.insert(tbin);
         }
