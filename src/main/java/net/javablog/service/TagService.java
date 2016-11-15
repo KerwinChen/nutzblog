@@ -30,7 +30,7 @@ public class TagService extends BaseService<tb_tag> {
             if (!Lang.isEmpty(arr)) {
                 for (int i = 0; i < arr.length; i++) {
                     // 检查是否有图片 .如果有图片.
-                    tb_tag t = fetch(Cnd.where("_name", "=", arr[i]));
+                    tb_tag t = fetch(Cnd.where("_name", "=", arr[i].trim()));
                     if (t == null) {
                         continue;
                     }

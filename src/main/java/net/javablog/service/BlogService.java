@@ -186,7 +186,7 @@ public class BlogService extends BaseService<tb_singlepage> {
                 for (int i = 0; i < arr.length; i++) {
 
                     // 检查是否有图片 .如果有图片.
-                    tb_tag t = tagService.fetch(Cnd.where("_name", "=", arr[i]));
+                    tb_tag t = tagService.fetch(Cnd.where("_name", "=",arr[i].trim()));
                     if (t == null) {
                         continue;
                     }
