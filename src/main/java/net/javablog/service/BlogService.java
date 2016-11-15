@@ -187,16 +187,18 @@ public class BlogService extends BaseService<tb_singlepage> {
 
                     // 检查是否有图片 .如果有图片.
                     tb_tag t = tagService.fetch(Cnd.where("_name", "=", arr[i]));
-
+                    if (t == null) {
+                        continue;
+                    }
                     String imgstr = "";
                     if (t != null && !Strings.isBlank(t.get_img())) {
                         imgstr = " class=\"tag-img\" style=\"background-image: url(/images/" + t.get_img() + ");\"";
                     }
 
                     if (i == arr.length - 1) {
-                        strtag.append(" <a   " + imgstr + "  href=\"/filter/tag/" + tagService.getTagIdByName(arr[i]) + "/1.html\">" + arr[i] + "</a>");
+                        strtag.append(" <a   " + imgstr + "  href=\"/filter/tag/" + t.get_id() + "/1.html\">" + arr[i] + "</a>");
                     } else {
-                        strtag.append(" <a  " + imgstr + " href=\"/filter/tag/" + tagService.getTagIdByName(arr[i]) + "/1.html\">" + arr[i] + "</a> ");
+                        strtag.append(" <a  " + imgstr + " href=\"/filter/tag/" + t.get_id() + "/1.html\">" + arr[i] + "</a> ");
                     }
 
                 }

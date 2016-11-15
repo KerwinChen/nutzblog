@@ -34,9 +34,8 @@ public class TagService extends BaseService<tb_tag> {
                     if (t == null) {
                         continue;
                     }
-
                     String imgstr = "";
-                    if (!Strings.isBlank(t.get_img())) {
+                    if (t != null && !Strings.isBlank(t.get_img())) {
                         imgstr = " class=\"tag-img\" style=\"background-image: url(/images/" + t.get_img() + ");\"";
                     }
 
@@ -56,7 +55,7 @@ public class TagService extends BaseService<tb_tag> {
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < tags.size(); i++) {
             tb_tag tag = tags.get(i);
-            if (Strings.isBlank(tag.get_img())) {
+            if (tag == null || Strings.isBlank(tag.get_img())) {
                 stringBuffer.append("<a    href=\"/filter/tag/" + tag.get_id() + "/1.html\">" + tag.get_name() + "</a>\n");
             } else {
                 stringBuffer.append("<a class=\"tag-img\" style=\"background-image: url(/images/" + tag.get_img() + ");\" href=\"/filter/tag/" + tag.get_id() + "/1.html\">" + tag.get_name() + "</a>\n");
@@ -79,6 +78,9 @@ public class TagService extends BaseService<tb_tag> {
 
     public int getTagIdByName(String _name) {
         tb_tag tag = fetch(Cnd.where("_name", "=", _name));
+        if (tag == null) {
+            return -1;
+        }
         return tag.get_id();
     }
 
