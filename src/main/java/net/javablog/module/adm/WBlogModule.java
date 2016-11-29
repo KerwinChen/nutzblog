@@ -45,15 +45,19 @@ public class WBlogModule {
         tbin.set_username(user.get_username());
         tbin.set_tags(tbin.get_tags().trim());
 
-        if (!auto) {
-            tbin.setUt(new Date());
-        }
+        //如果是手动提交的才做设置为更新。自动更新不算。因为点开编辑页面之后就会被更新。 这种情况不想认为是更新
 
         if (tbin.get_id() == 0) {
             tbin.setCt(new Date());
+            tbin.setUt(new Date());
             blogService.insert(tbin);
         } else {
-            tbin.setCt(blogService.fetch(tbin.get_id()).getCt());
+            tb_singlepage  tbexist=blogService.fetch(tbin.get_id());
+            tbin.setUt(tbexist.getUt());
+            if (!auto) {
+                tbin.setUt(new Date());
+            }
+            tbin.setCt(tbexist.getCt());
             blogService.update(tbin);
         }
 

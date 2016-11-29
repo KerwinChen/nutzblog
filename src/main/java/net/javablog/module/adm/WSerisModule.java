@@ -112,10 +112,14 @@ public class WSerisModule {
 
 
         if (tbin.get_id() > 0) {
-            tbin.setUt(new Date());
+            tb_singlepage  tbexist=blogService.fetch(tbin.get_id());
+            tbin.setUt(tbexist.getUt());
+            if (!auto) {
+                tbin.setUt(new Date());
+            }
+
             blogService.update(tbin);
         } else {
-
             //新增记录才对序号+1
             tb_singlepage count = blogService.fetch(Cnd.where("_serisid", "=", tbin.get_serisid()).and("_id", "!=", tbin.get_id()).orderBy("_index_inseris", "desc"));
             if (count == null) {
@@ -125,6 +129,7 @@ public class WSerisModule {
             }
 
             tbin.setCt(new Date());
+            tbin.setUt(new Date());
             blogService.insert(tbin);
         }
 
