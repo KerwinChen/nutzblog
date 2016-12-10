@@ -35,7 +35,7 @@ public class ArchiveService {
 
         int allcount = blogService.count( Cnd.where("_isdraft", "=", "0"));
 
-        Sql sql = Sqls.create("SELECT  YEAR(ct) as y, MONTH(ct) as m ,count(*) as c from tb_singlepage  where _isdraft=0  and ct is not null GROUP BY y,m ORDER BY y asc   ");
+        Sql sql = Sqls.create("SELECT  YEAR(ut) as y, MONTH(ut) as m ,count(*) as c from tb_singlepage  where _isdraft=0  and ut is not null GROUP BY y,m ORDER BY y asc   ");
         sql.setCallback(Sqls.callback.records());
         blogService.dao().execute(sql);
         List<Record> records = sql.getList(Record.class);
