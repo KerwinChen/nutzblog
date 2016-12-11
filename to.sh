@@ -1,6 +1,6 @@
 
 
-tail -f out.log
+tail -F out.log
 
 
 
