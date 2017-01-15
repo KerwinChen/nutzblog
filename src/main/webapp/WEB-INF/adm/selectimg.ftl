@@ -57,8 +57,6 @@
 </div>
 
 <script src="/adm/assets/js/base64/base64.js"></script>
-<script src="/adm/assets/js/dialog/artDialog.js?skin=chrome"></script>
-<script src="/adm/assets/js/dialog/plugins/iframeTools.js"></script>
 <script src="/adm/assets/js/layer/layer.js"></script>
 <script>
 
