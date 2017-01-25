@@ -16,10 +16,9 @@ mvn clean
 mvn compile
 mvn package
 
-sudo nohup mvn jetty:run -Djetty.port=8080 > /dev/null 2>&1 &
+nohup mvn jetty:run -Djetty.port=8080 > /dev/null 2>&1 &
 
 
-tail -f out.log
-
+tail -F out.log
 
 

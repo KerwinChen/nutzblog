@@ -26,7 +26,7 @@
                     <li><a href="http://javablog.net/tags.html">标签</a></li>
                     <li><a href="http://javablog.net/me.html">ME</a></li>
                 </ul>
-                <form target="_self" method="get" action="http://s.javablog.net/search"
+                <form target="_self" method="get" action="https://s.javablog.net/search"
                       class="navbar-form navbar-right">
                     <input value="${(obj.q)!''}" id="q" name="q" type="text" class="form-control"
                            placeholder="Search">
