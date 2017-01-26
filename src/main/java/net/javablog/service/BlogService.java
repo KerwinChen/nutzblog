@@ -275,7 +275,7 @@ public class BlogService extends BaseService<tb_singlepage> {
         out.put("username", Const.admin);
         out.put("userphoto", Const.admin_photo);
 
-        log.info("{}", Json.toJson(out));
+
         return out;
     }
 

@@ -22,6 +22,7 @@ import org.nutz.dao.sql.Sql;
 import org.nutz.dao.util.cri.SqlExpressionGroup;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.json.Json;
 import org.nutz.lang.Files;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
@@ -100,6 +101,8 @@ public class CreateHtml {
             propMap.put("site_msgboard", dao.fetch("tb_config", Cnd.where("k", "=", "site_msgboard")).getString("v"));
             propMap.put("version", R.random(10, 99));
 
+            log.info("propMap {}", Json.toJson(propMap));
+            
             cf.setDefaultEncoding("UTF-8");
             Template t = cf.getTemplate(templateFileName,"UTF-8");
             t.setEncoding("UTF-8");
