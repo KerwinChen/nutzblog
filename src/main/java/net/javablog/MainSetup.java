@@ -1,7 +1,6 @@
 package net.javablog;
 
 import net.javablog.bean.tb_config;
-import net.javablog.bean.tb_singlepage;
 import net.javablog.bean.tb_user;
 import net.javablog.init.Const;
 import net.javablog.service.ConfigService;
@@ -13,7 +12,6 @@ import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
 import org.nutz.integration.quartz.NutQuartzCronJobFactory;
 import org.nutz.ioc.Ioc;
-import org.nutz.json.Json;
 import org.nutz.lang.Files;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
@@ -103,10 +101,7 @@ public class MainSetup implements Setup {
         });
 
 
-        tb_singlepage tb = dao.fetch(tb_singlepage.class);
-        log.info(Json.toJson(tb));
 
-        Threads.sleep();
 
         //ES 创建索引
 //        Threads.run(new Runnable() {

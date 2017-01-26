@@ -128,7 +128,7 @@
 
                         <!--  分享按钮 -->
                         <div class="share">
-                        <#include "/common/share.ftl">
+                        <#include "/common/share_baidu.ftl">
                         </div>
 
                     <#--评论区域-->

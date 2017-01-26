@@ -82,7 +82,7 @@
                         </div>
                         <!-- 三个按钮 -->
                         <div class="share">
-                        <#include "/common/share.ftl">
+                        <#include "/common/share_baidu.ftl">
                         </div>
                     </div>
                 <#--头像+分享   结束-->
