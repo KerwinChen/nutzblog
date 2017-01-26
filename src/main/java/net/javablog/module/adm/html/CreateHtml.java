@@ -113,7 +113,7 @@ public class CreateHtml {
             log.info("Freemarker生成文件：" + afile.getCanonicalPath());
             out.flush();
             out.close();
-            
+
             afile.setWritable(true);
             afile.setReadable(true);
             afile.setExecutable(true);
