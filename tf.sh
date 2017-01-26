@@ -1,5 +1,5 @@
 
-tail -f ftp.log
+tail -F ftp.log
 
 
 
