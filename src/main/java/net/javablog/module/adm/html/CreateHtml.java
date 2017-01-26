@@ -101,7 +101,7 @@ public class CreateHtml {
             propMap.put("version", R.random(10, 99));
 
             cf.setDefaultEncoding("UTF-8");
-            Template t = cf.getTemplate(templateFileName);
+            Template t = cf.getTemplate(templateFileName,"UTF-8");
             t.setEncoding("UTF-8");
 
             File afile = new File(htmlFile);
