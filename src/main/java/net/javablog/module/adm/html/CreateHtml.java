@@ -22,7 +22,6 @@ import org.nutz.dao.sql.Sql;
 import org.nutz.dao.util.cri.SqlExpressionGroup;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
-import org.nutz.json.Json;
 import org.nutz.lang.Files;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
@@ -101,15 +100,16 @@ public class CreateHtml {
             propMap.put("site_msgboard", dao.fetch("tb_config", Cnd.where("k", "=", "site_msgboard")).getString("v"));
             propMap.put("version", R.random(10, 99));
 
+            cf.setDefaultEncoding("UTF-8");
             Template t = cf.getTemplate(templateFileName);
-
+            t.setEncoding("UTF-8");
+            
             File afile = new File(htmlFile);
             Files.createDirIfNoExists(afile.getParentFile());//生成目标文件的所在文件夹
 
             Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(afile)));
             NutMap datas = NutMap.NEW();
             datas.put("obj", propMap);
-            log.info("{}", Json.toJson(out));
             t.process(datas, out);
             log.info("Freemarker生成文件：" + afile.getCanonicalPath());
             out.flush();
