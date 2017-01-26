@@ -22,7 +22,6 @@ import org.nutz.dao.sql.Sql;
 import org.nutz.dao.util.cri.SqlExpressionGroup;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
-import org.nutz.json.Json;
 import org.nutz.lang.Files;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
@@ -110,12 +109,11 @@ public class CreateHtml {
             NutMap datas = NutMap.NEW();
             datas.put("obj", propMap);
 
-            log.info("json {}", Json.toJson(propMap));
             t.process(datas, out);
             log.info("Freemarker生成文件：" + afile.getCanonicalPath());
             out.flush();
             out.close();
-
+            
             afile.setWritable(true);
             afile.setReadable(true);
             afile.setExecutable(true);

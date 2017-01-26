@@ -10,9 +10,12 @@ import org.nutz.dao.Cnd;
 import org.nutz.dao.entity.Record;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.json.Json;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +25,8 @@ import java.util.Map;
 @IocBean(fields = "dao")
 public class BlogService extends BaseService<tb_singlepage> {
 
+
+    private static final Logger log= LoggerFactory.getLogger(BlogService.class);
 
     @Inject
     private TagService tagService;
@@ -270,6 +275,7 @@ public class BlogService extends BaseService<tb_singlepage> {
         out.put("username", Const.admin);
         out.put("userphoto", Const.admin_photo);
 
+        log.info("{}", Json.toJson(out));
         return out;
     }
 
