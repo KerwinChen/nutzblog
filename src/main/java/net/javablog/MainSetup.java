@@ -105,7 +105,7 @@ public class MainSetup implements Setup {
 
         tb_singlepage tb = dao.fetch(tb_singlepage.class);
         log.info(Json.toJson(tb));
-        
+
         Threads.sleep();
 
         //ES 创建索引
