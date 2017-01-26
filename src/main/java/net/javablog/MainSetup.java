@@ -1,28 +1,25 @@
 package net.javablog;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import net.javablog.bean.tb_config;
+import net.javablog.bean.tb_singlepage;
 import net.javablog.bean.tb_user;
 import net.javablog.init.Const;
-import net.javablog.module.adm.html.FtpModule;
 import net.javablog.service.ConfigService;
 import net.javablog.service.UserService;
 import net.javablog.util.FTPUtil;
-import net.javablog.util.RunES_IndexJob;
 import net.javablog.util.Threads;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
 import org.nutz.integration.quartz.NutQuartzCronJobFactory;
 import org.nutz.ioc.Ioc;
-import org.nutz.ioc.impl.NutIoc;
+import org.nutz.json.Json;
 import org.nutz.lang.Files;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
 
-import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -105,6 +102,11 @@ public class MainSetup implements Setup {
             }
         });
 
+
+        tb_singlepage tb = dao.fetch(tb_singlepage.class);
+        log.info(Json.toJson(tb));
+        
+        Threads.sleep();
 
         //ES 创建索引
 //        Threads.run(new Runnable() {

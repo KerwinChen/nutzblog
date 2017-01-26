@@ -11,4 +11,13 @@ public class Threads {
         pool.execute(run);
     }
 
+    public static void sleep() {
+
+        try {
+            Thread.sleep(1000*10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

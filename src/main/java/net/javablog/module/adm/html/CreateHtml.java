@@ -103,7 +103,7 @@ public class CreateHtml {
             cf.setDefaultEncoding("UTF-8");
             Template t = cf.getTemplate(templateFileName);
             t.setEncoding("UTF-8");
-            
+
             File afile = new File(htmlFile);
             Files.createDirIfNoExists(afile.getParentFile());//生成目标文件的所在文件夹
 
