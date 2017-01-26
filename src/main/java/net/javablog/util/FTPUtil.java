@@ -4,8 +4,9 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.io.CopyStreamAdapter;
-import org.apache.log4j.Logger;
 import org.nutz.lang.Lang;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +15,7 @@ import java.io.InputStream;
 
 public class FTPUtil {
 
-    private static Logger log = Logger.getLogger("FTP");
+    private static Logger log = LoggerFactory.getLogger("FTP");
 
 //    private static int defaultTimeoutSecond = 300;
 //    private static int connectTimeoutSecond = 300;
