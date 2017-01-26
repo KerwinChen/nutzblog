@@ -102,7 +102,7 @@ public class CreateHtml {
             propMap.put("version", R.random(10, 99));
 
             log.info("propMap {}", Json.toJson(propMap));
-            
+
             cf.setDefaultEncoding("UTF-8");
             Template t = cf.getTemplate(templateFileName,"UTF-8");
             t.setEncoding("UTF-8");
@@ -110,14 +110,14 @@ public class CreateHtml {
             File afile = new File(htmlFile);
             Files.createDirIfNoExists(afile.getParentFile());//生成目标文件的所在文件夹
 
-            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(afile)));
+            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(afile),"UTF-8"));
             NutMap datas = NutMap.NEW();
             datas.put("obj", propMap);
             t.process(datas, out);
             log.info("Freemarker生成文件：" + afile.getCanonicalPath());
             out.flush();
             out.close();
-
+            
             afile.setWritable(true);
             afile.setReadable(true);
             afile.setExecutable(true);
