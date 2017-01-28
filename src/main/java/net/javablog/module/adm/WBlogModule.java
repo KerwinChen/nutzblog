@@ -3,6 +3,7 @@ package net.javablog.module.adm;
 import net.javablog.bean.tb_singlepage;
 import net.javablog.bean.tb_tag;
 import net.javablog.bean.tb_user;
+import net.javablog.module.adm.html.HtmlModule;
 import net.javablog.service.BlogService;
 import net.javablog.service.TagService;
 import net.javablog.util.CurrentUserUtils;
@@ -31,6 +32,9 @@ public class WBlogModule {
 
     @Inject
     private TagService tagService;
+
+    @Inject
+    private HtmlModule htmlModule;
 
     @At("/adm/single_mgr/doaddup")
     @Ok("json")
@@ -88,6 +92,9 @@ public class WBlogModule {
         record.putAll(m);
 
         RunES_IndexJob.createIndex(record);
+
+        htmlModule.html("single",tbin.get_id());
+
         return map;
 
     }

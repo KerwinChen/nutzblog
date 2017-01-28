@@ -4,6 +4,7 @@ import net.javablog.bean.tb_seris;
 import net.javablog.bean.tb_singlepage;
 import net.javablog.bean.tb_tag;
 import net.javablog.bean.tb_user;
+import net.javablog.module.adm.html.HtmlModule;
 import net.javablog.service.BlogService;
 import net.javablog.service.SerisService;
 import net.javablog.service.TagService;
@@ -36,6 +37,9 @@ public class WSerisModule {
 
     @Inject
     private TagService tagService;
+
+    @Inject
+    private HtmlModule htmlModule;
 
     @At("/adm/wseris")
     @Ok("fm:adm.seris.wseris")
@@ -112,7 +116,7 @@ public class WSerisModule {
 
 
         if (tbin.get_id() > 0) {
-            tb_singlepage  tbexist=blogService.fetch(tbin.get_id());
+            tb_singlepage tbexist = blogService.fetch(tbin.get_id());
             tbin.setUt(tbexist.getUt());
             if (!auto) {
                 tbin.setUt(new Date());
@@ -141,6 +145,13 @@ public class WSerisModule {
         record.putAll(rec);
 
         RunES_IndexJob.createIndex(record);
+
+        if (tbin.get_bookid() > 0) {
+            htmlModule.html("book", tbin.get_id());
+        } else {
+            htmlModule.html("seris", tbin.get_id());
+        }
+
         return map;
 
     }
