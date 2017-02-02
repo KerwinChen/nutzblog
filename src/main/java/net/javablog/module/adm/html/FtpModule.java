@@ -190,7 +190,7 @@ public class FtpModule {
                 //生成每个单页
                 final List<tb_singlepage> listpages = list;
                 int listpages_ = listpages == null ? 0 : listpages.size();
-
+                
 
                 //多少个系列
                 List serislist = new ArrayList<>();

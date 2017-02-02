@@ -40,9 +40,9 @@ public class TagService extends BaseService<tb_tag> {
                     }
 
                     if (i == arr.length - 1) {
-                        strtag.append(" <a   " + imgstr + "  href=\"/filter/tag/" + getTagIdByName(arr[i]) + "/1.html\">" + arr[i] + "</a>");
+                        strtag.append(" <a   " + imgstr + "  href=\"/filter/tag/" + getTagIdByName(arr[i].trim()) + "/1.html\">" + arr[i] + "</a>");
                     } else {
-                        strtag.append(" <a  " + imgstr + " href=\"/filter/tag/" + getTagIdByName(arr[i]) + "/1.html\">" + arr[i] + "</a> ");
+                        strtag.append(" <a  " + imgstr + " href=\"/filter/tag/" + getTagIdByName(arr[i].trim()) + "/1.html\">" + arr[i] + "</a> ");
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class TagService extends BaseService<tb_tag> {
     }
 
     public int getTagIdByName(String _name) {
-        tb_tag tag = fetch(Cnd.where("_name", "=", _name));
+        tb_tag tag = fetch(Cnd.where("_name", "=", _name.trim()));
         if (tag == null) {
             return -1;
         }
