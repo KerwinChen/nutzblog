@@ -47,7 +47,7 @@ public class WBlogModule {
         tbin.set_titleen(Translates.trans(tbin.get_title()));
         tb_user user = CurrentUserUtils.getInstance().getUser();
         tbin.set_username(user.get_username());
-        tbin.set_tags(tbin.get_tags().trim());
+        tbin.set_tags(trimstr(tbin.get_tags()));
 
         //如果是手动提交的才做设置为更新。自动更新不算。因为点开编辑页面之后就会被更新。 这种情况不想认为是更新
 
@@ -97,6 +97,14 @@ public class WBlogModule {
 
         return map;
 
+    }
+
+    private String trimstr(String tags) {
+        String[] arr = tags.split(",");
+        for (int i = 0; i < arr.length; i++) {
+            arr[i]=Strings.trim(arr[i]);
+        }
+        return String.join(",",arr);
     }
 
 

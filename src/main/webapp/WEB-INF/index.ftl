@@ -162,8 +162,6 @@
                         <div class="pagination visible-xs-inline-block" id="div_pager_min">
                         ${obj.pages_min}
                         </div>
-
-
                     </div>
 
 

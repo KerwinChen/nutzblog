@@ -38,7 +38,7 @@ public class View {
         try {
             Streams.writeAndClose(resp.getOutputStream(), new FileInputStream(f));
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
