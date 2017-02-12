@@ -38,10 +38,9 @@ public class WBlogModule {
 
     @At("/adm/single_mgr/doaddup")
     @Ok("json")
-    public Map doaddup(@Param("..") final tb_singlepage tbin, @Param("auto") final boolean auto) {
+    public Map doaddup(@Param("..") tb_singlepage tbin, @Param("auto") final boolean auto) {
 
         HashMap map = new HashMap();
-//        tbin.set_isdraft(false);
 
         tbin.set_content_html(Util.processH2(tbin.get_content_html()));
         tbin.set_titleen(Translates.trans(tbin.get_title()));
@@ -54,7 +53,7 @@ public class WBlogModule {
         if (tbin.get_id() == 0) {
             tbin.setCt(new Date());
             tbin.setUt(new Date());
-            blogService.insert(tbin);
+            tbin = blogService.insert(tbin);
         } else {
             tb_singlepage tbexist = blogService.fetch(tbin.get_id());
             tbin.setUt(tbexist.getUt());
