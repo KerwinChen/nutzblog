@@ -1,5 +1,5 @@
 
-javapid=`ps aux|grep jetty:run | grep -v grep | awk '{print $2}' `
+javapid=`ps aux|grep jetty.port=8080 | grep -v grep | awk '{print $2}' `
 
 
 if [ -n "$javapid" ] ; then
