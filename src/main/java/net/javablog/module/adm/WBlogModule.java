@@ -56,10 +56,12 @@ public class WBlogModule {
             tbin.setUt(new Date());
             blogService.insert(tbin);
         } else {
-            tb_singlepage  tbexist=blogService.fetch(tbin.get_id());
+            tb_singlepage tbexist = blogService.fetch(tbin.get_id());
             tbin.setUt(tbexist.getUt());
             if (!auto) {
                 tbin.setUt(new Date());
+            } else {
+                tbin.setUt(tbexist.getUt());
             }
             tbin.setCt(tbexist.getCt());
             blogService.update(tbin);
@@ -93,7 +95,7 @@ public class WBlogModule {
 
         RunES_IndexJob.createIndex(record);
 
-        htmlModule.html("single",tbin.get_id());
+        htmlModule.html("single", tbin.get_id());
 
         return map;
 
@@ -102,9 +104,9 @@ public class WBlogModule {
     private String trimstr(String tags) {
         String[] arr = tags.split(",");
         for (int i = 0; i < arr.length; i++) {
-            arr[i]=Strings.trim(arr[i]);
+            arr[i] = Strings.trim(arr[i]);
         }
-        return String.join(",",arr);
+        return String.join(",", arr);
     }
 
 
