@@ -6,10 +6,7 @@ import net.javablog.bean.tb_user;
 import net.javablog.module.adm.html.HtmlModule;
 import net.javablog.service.BlogService;
 import net.javablog.service.TagService;
-import net.javablog.util.CurrentUserUtils;
-import net.javablog.util.RunES_IndexJob;
-import net.javablog.util.Translates;
-import net.javablog.util.Util;
+import net.javablog.util.*;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.entity.Record;
 import org.nutz.ioc.loader.annotation.Inject;
@@ -47,6 +44,7 @@ public class WBlogModule {
         tb_user user = CurrentUserUtils.getInstance().getUser();
         tbin.set_username(user.get_username());
         tbin.set_tags(trimstr(tbin.get_tags()));
+        tbin.set_content_html(add_ablank(tbin.get_content_html()));
 
         //如果是手动提交的才做设置为更新。自动更新不算。因为点开编辑页面之后就会被更新。 这种情况不想认为是更新
 
@@ -108,6 +106,21 @@ public class WBlogModule {
         return String.join(",", arr);
     }
 
+    private String add_ablank(String _content_html) {
+        if (!Strings.isBlank(_content_html)) {
+            List<String> lista = JsoupBiz.getList_OutHtml(_content_html, "a");
+            if (!Lang.isEmpty(lista)) {
+                for (int i = 0; i < lista.size(); i++) {
+                    String ahtml = lista.get(i);
+                    String href = JsoupBiz.getOne_Attr(ahtml, "a", "href");
+                    String txt = JsoupBiz.getOne_Text(ahtml, "a");
+                    String newhtml = "<a href='" + href + "' target='_blank'>" + txt + "</a>";
+                    _content_html = _content_html.replace(ahtml, newhtml);
+                }
+            }
+        }
+        return _content_html;
+    }
 
     @At("/adm/wblog")
     @Ok("fm:adm.blog.wblog")
