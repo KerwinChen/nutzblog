@@ -101,14 +101,11 @@
 
                         <div class="googlead">
                             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <!-- test -->
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-7848078487754242"
-                                 data-ad-slot="6781446413"
-                                 data-ad-format="auto"></ins>
                             <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                (adsbygoogle = window.adsbygoogle || []).push({
+                                    google_ad_client: "ca-pub-7525484189657971",
+                                    enable_page_level_ads: true
+                                });
                             </script>
                         </div>
 
