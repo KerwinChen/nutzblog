@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/images/${obj.site_fav}?v=${obj.version}">
     <meta name="description" content="${obj.site_name}"/>
-    <meta name="keywords"  content="J2EE, Java, Android, Hibernate, Spring,Hadoop,Hive,Spark,Linux,JavaScript, Maven, jQuery, Java 教程, Hibernate 教程, Spring 教程, Maven 教程, jQuery 教程, Android 教程 ,大数据教程."/>
+    <meta name="keywords"  content="${obj.site_name} ,Java, Android, Hibernate, Spring,Hadoop,Hive,Spark,Linux,JavaScript, Maven, jQuery, Java 教程, Hibernate 教程, Spring 教程, Maven 教程, jQuery 教程, Android 教程 ,大数据教程."/>
     <title>${obj.site_name}</title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/index.css?v=${obj.version}" rel="stylesheet">
@@ -17,7 +17,7 @@
     <script src="/static/js/html5shiv.min.js"></script>
     <script src="/static/js/respond.min.js"></script>
     <![endif]-->
-    
+
 
 </head>
 <body>
