@@ -46,9 +46,10 @@ public class WBlogModule {
         tbin.set_tags(trimstr(tbin.get_tags()));
         tbin.set_content_html(add_ablank(tbin.get_content_html()));
 
+
         //如果是手动提交的才做设置为更新。自动更新不算。因为点开编辑页面之后就会被更新。 这种情况不想认为是更新
 
-        if (tbin.get_id() == 0) {
+        if (tbin.get_id() == 0&& !tbin.is_isdraft()) {
             tbin.setCt(new Date());
             tbin.setUt(new Date());
             tbin = blogService.insert(tbin);
@@ -135,6 +136,7 @@ public class WBlogModule {
             tb = blogService.fetch(id);
         }
         out.put("item", tb);
+        tb.set_isdraft(false);
 
         List<tb_tag> tags = tagService.query();
         out.put("_tags", tags);
