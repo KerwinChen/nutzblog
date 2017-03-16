@@ -47,9 +47,8 @@ public class WBlogModule {
         tbin.set_content_html(add_ablank(tbin.get_content_html()));
 
 
-        //如果是手动提交的才做设置为更新。自动更新不算。因为点开编辑页面之后就会被更新。 这种情况不想认为是更新
-
-        if (tbin.get_id() == 0&& !tbin.is_isdraft()) {
+        // 初始页面不是 草稿.   自动保存会被变成草稿.
+        if (tbin.get_id() == 0) {
             tbin.setCt(new Date());
             tbin.setUt(new Date());
             tbin = blogService.insert(tbin);
