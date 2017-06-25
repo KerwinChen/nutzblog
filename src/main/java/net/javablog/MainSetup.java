@@ -120,7 +120,7 @@ public class MainSetup implements Setup {
                 RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
             }
         });
-        
+
         //异步处理,最新的10篇博客
 //        FtpModule ftpModule = ((NutIoc) ioc).get(FtpModule.class);
 //        ftpModule.htmlTask();
