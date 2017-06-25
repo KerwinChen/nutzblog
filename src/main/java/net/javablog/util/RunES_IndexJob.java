@@ -25,7 +25,7 @@ public class RunES_IndexJob {
         if (Strings.isBlank(id)) {
             return;
         }
-        singlepage.set("_content_text", JsoupBiz.getTextFromTHML(singlepage.getString("_content_html")));
+        singlepage.set("_content_text",JsoupBiz.getTextFromTHML(singlepage.getString("_content_html")));
         singlepage.put("copy_id", id);
         singlepage.remove("_id");//内部字段，需要删除
 
@@ -34,8 +34,10 @@ public class RunES_IndexJob {
 
         String json = Json.toJson(singlepage);
 
-//        EsUT.delIndex(Integer.valueOf(id));
-        EsUT.createIndex(json, id);//update
+        EsUT.delIndex(Integer.valueOf(id));
+        EsUT.createIndex(json, id);//update  ???
+
+
     }
 
 
