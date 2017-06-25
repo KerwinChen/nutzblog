@@ -109,18 +109,18 @@ public class MainSetup implements Setup {
 
 
         //ES 创建索引
-//        Threads.run(new Runnable() {
-//            @Override
-//            public void run() {
-//                DataSource ds = ((NutIoc) ioc).get(DataSource.class);
-//                DruidDataSource ds_ = (DruidDataSource) ds;
-//                String url = ds_.getUrl();
-//                String user = ds_.getUsername();
-//                String pwd = ds_.getPassword();
-//                RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
-//            }
-//        });
-
+        Threads.run(new Runnable() {
+            @Override
+            public void run() {
+                DataSource ds = ((NutIoc) ioc).get(DataSource.class);
+                DruidDataSource ds_ = (DruidDataSource) ds;
+                String url = ds_.getUrl();
+                String user = ds_.getUsername();
+                String pwd = ds_.getPassword();
+                RunES_IndexJob.repeatRows("tb_singlepage", url, user, pwd);
+            }
+        });
+        
         //异步处理,最新的10篇博客
 //        FtpModule ftpModule = ((NutIoc) ioc).get(FtpModule.class);
 //        ftpModule.htmlTask();
