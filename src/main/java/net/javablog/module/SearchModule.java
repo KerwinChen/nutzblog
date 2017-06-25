@@ -25,7 +25,7 @@ public class SearchModule {
         Map result = get(q, pagesize, pageno);
 
         int allcount = Integer.valueOf(result.get("allcount").toString());
-
+        
         out.setv("pages", FrontPagerUT.pages(pagesize, allcount, pageno, "/search?q=" + q + "&pageno=%s", 3));
         out.setv("pages_min", FrontPagerUT.pages(pagesize, allcount, pageno, "/search?q=" + q + "&pageno=%s", 0));
         out.setv("datas", result.get("datas"));
