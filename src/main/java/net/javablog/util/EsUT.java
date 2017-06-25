@@ -81,7 +81,7 @@ public class EsUT {
                     .from(pageno - 1)
                     .size(pagesize)
 //                    .minScore(0.05F)
-                    .highlight(new HighlightBuilder().numOfFragments(1).fragmentSize(500).order("score").field("_content_text").preTags("[tag1]").postTags("[/tag1]")); //.postTags("<tag1>").postTags("</tag1>"));
+                    .highlight(new HighlightBuilder().order("score").field("_content_text").preTags("[tag1]").postTags("[/tag1]")); //.postTags("<tag1>").postTags("</tag1>"));
 
             Search search = new Search.Builder(searchSourceBuilder.toString())
                     .addIndex(indices)
