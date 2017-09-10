@@ -42,6 +42,7 @@ public class EsUT {
         factory.setHttpClientConfig(new HttpClientConfig
 //                .Builder("http://195.154.164.248:9200")
                 .Builder("http://127.0.0.1:9200")
+                .defaultCredentials("elastic", "admin888")
                 .gson(new GsonBuilder().setDateFormat(dateStyle).create())
                 .discoveryEnabled(false).build());
         client = (JestHttpClient) factory.getObject();
