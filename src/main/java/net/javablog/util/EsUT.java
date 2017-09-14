@@ -40,8 +40,9 @@ public class EsUT {
     static {
         JestClientFactory factory = new JestClientFactory();
         factory.setHttpClientConfig(new HttpClientConfig
+//                .Builder("http://195.154.164.248:9200")
                 .Builder("http://127.0.0.1:9200")
-//                .Builder("http://23.88.110.58:9200")
+                .defaultCredentials("elastic", "admin888")
                 .gson(new GsonBuilder().setDateFormat(dateStyle).create())
                 .discoveryEnabled(false).build());
         client = (JestHttpClient) factory.getObject();
@@ -80,8 +81,8 @@ public class EsUT {
             searchSourceBuilder.query(QueryBuilders.multiMatchQuery(q, "_title", "_content_text"))
                     .from(pageno - 1)
                     .size(pagesize)
-                    .minScore(0.05F)
-                    .highlight(new HighlightBuilder().numOfFragments(1).fragmentSize(500).order("score").field("_content_text").preTags("[tag1]").postTags("[/tag1]")); //.postTags("<tag1>").postTags("</tag1>"));
+//                    .minScore(0.05F)
+                    .highlight(new HighlightBuilder().order("score").field("_content_text").preTags("[tag1]").postTags("[/tag1]")); //.postTags("<tag1>").postTags("</tag1>"));
 
             Search search = new Search.Builder(searchSourceBuilder.toString())
                     .addIndex(indices)
@@ -95,7 +96,7 @@ public class EsUT {
             allcount = result.getTotal() + "";
 
 
-            for (int i = 0; i < hits.size(); i++) {
+                for (int i = 0; i < hits.size(); i++) {
                 SearchResult.Hit<tb_singlepage, Explanation> item = hits.get(i);
 
                 Map m = new HashMap();
@@ -103,7 +104,12 @@ public class EsUT {
                 m.put("tag", item.source.get_tags());
                 m.put("href", "/page" + (item.source.get_index_inseris() == 0 ? "" : "s") + "/" + item.source.getCopy_id() + "/" + item.source.get_titleen() + ".html");
                 m.put("time", Times.format("yyyy-MM-dd", item.source.getUt()));
-                m.put("desc",JsoupBiz.getTextFromTHML(item.highlight.get("_content_text").get(0)));
+                if (item.highlight != null) {
+                    m.put("desc", JsoupBiz.getTextFromTHML(item.highlight.get("_content_text").get(0)));
+                } else {
+                    m.put("desc", item.source.get_title());
+                }
+
                 m.put("desc", m.get("desc").toString().replace("[tag1]", "<em>").replace("[/tag1]", "</em>").replace("<!--", "").replace("-->", ""));
                 System.out.println(m.get("title"));
                 System.out.println(m.get("href"));
